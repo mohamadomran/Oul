@@ -1,23 +1,49 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, StatusBar } from 'react-native';
 import type { ConversationScreenProps } from '../types';
-import { COLORS, SPACING, FONT_SIZES } from '../constants';
-import { PhraseButton } from '../components';
-import BottomActionBar from '../components/BottomActionBar';
-import { CONVERSATION_PHRASES } from '../data/conversationData';
+import { COLORS, SPACING, FONT_SIZES, FONTS } from '../constants';
+import { PhraseButton, BottomActionBar, PhraseActionBottomSheet } from '../components';
+import { CONVERSATION_PHRASES } from '../data';
+import AudioService from '../services/AudioService';
+import { shareViaWhatsApp } from '../services/ShareService';
+import type { Phrase } from '../types';
+import type { PhraseActionBottomSheetRef } from '../types/ui.types';
 
 const ConversationScreen: React.FC<ConversationScreenProps> = () => {
+  const bottomSheetRef = useRef<PhraseActionBottomSheetRef>(null);
+  const [selectedPhrase, setSelectedPhrase] = useState<Phrase | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const handlePhrasePress = (phrase: Phrase) => {
+    setSelectedPhrase(phrase);
+    bottomSheetRef.current?.snapToIndex(0);
+  };
+
+  const handlePlay = async () => {
+    if (!selectedPhrase?.audioFile) return;
+
+    try {
+      setIsPlaying(true);
+      await AudioService.play(selectedPhrase.audioFile);
+    } catch (error) {
+      console.error('Error playing audio:', error);
+    } finally {
+      setIsPlaying(false);
+    }
+  };
+
+  const handleShare = async () => {
+    if (!selectedPhrase) return;
+    await shareViaWhatsApp(selectedPhrase.arabicText, selectedPhrase.englishText);
+  };
+
+  const handleClose = () => {
+    setSelectedPhrase(null);
+  };
+
   return (
     <View style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor={COLORS.background} />
-
-      {/* Header */}
-      <View style={styles.header}>
-        <Text style={styles.title}>محادثة</Text>
-        <Text style={styles.subtitle}>
-          Conversation • {CONVERSATION_PHRASES.length} phrases
-        </Text>
-      </View>
 
       {/* Phrase Grid */}
       <ScrollView
@@ -32,12 +58,24 @@ const ConversationScreen: React.FC<ConversationScreenProps> = () => {
               phrase={phrase}
               size="large"
               showEnglish={false}
+              onPress={() => handlePhrasePress(phrase)}
             />
           ))}
         </View>
       </ScrollView>
 
       <BottomActionBar currentScreen="Conversation" />
+
+      <PhraseActionBottomSheet
+        ref={bottomSheetRef}
+        arabicText={selectedPhrase?.arabicText || ''}
+        englishText={selectedPhrase?.englishText || ''}
+        icon={selectedPhrase?.icon || ''}
+        onPlay={handlePlay}
+        onShare={handleShare}
+        onClose={handleClose}
+        isPlaying={isPlaying}
+      />
     </View>
   );
 };
@@ -47,33 +85,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.background,
   },
-  header: {
-    paddingHorizontal: SPACING.lg,
-    paddingTop: SPACING.md,
-    paddingBottom: SPACING.sm,
-    backgroundColor: COLORS.background,
-    borderBottomWidth: 1,
-    borderBottomColor: COLORS.border,
-  },
-  title: {
-    fontSize: FONT_SIZES.xxl,
-    fontWeight: '700',
-    color: COLORS.text,
-    textAlign: 'center',
-    marginBottom: SPACING.xs,
-  },
-  subtitle: {
-    fontSize: FONT_SIZES.md,
-    color: COLORS.textSecondary,
-    textAlign: 'center',
-    fontWeight: '500',
-  },
   scrollView: {
     flex: 1,
   },
   scrollContent: {
     padding: SPACING.lg,
-    paddingBottom: 100, // Space for bottom action bar
+    paddingTop: SPACING.xl, // Extra top padding since header is removed
+    paddingBottom: 180, // Extra space for bottom action bar
   },
   grid: {
     flexDirection: 'row',

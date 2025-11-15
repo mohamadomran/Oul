@@ -9,11 +9,11 @@ import {
   ActivityIndicator,
   Dimensions,
 } from 'react-native';
-import { COLORS, SPACING, FONT_SIZES } from '../constants';
+import { COLORS, SPACING, FONT_SIZES } from '../../constants';
 import type {
   PhraseActionModalProps,
   PhraseActionModalRef,
-} from '../types/ui.types';
+} from '../../types/ui.types';
 
 const PhraseActionModal = forwardRef<
   PhraseActionModalRef,

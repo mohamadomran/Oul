@@ -6,10 +6,10 @@ import {
   ViewStyle,
   TextStyle,
 } from 'react-native';
-import { COLORS } from '../constants/colors';
-import { BUTTON_SIZES, BORDER_RADIUS } from '../constants/sizes';
-import HapticService from '../services/HapticService';
-import type { BigButtonProps } from '../types/ui.types';
+import { COLORS, FONTS } from '../../constants';
+import { BUTTON_SIZES, BORDER_RADIUS } from '../../constants';
+import HapticService from '../../services/HapticService';
+import type { BigButtonProps } from '../../types/ui.types';
 
 const BigButton: React.FC<BigButtonProps> = ({
   title,
@@ -62,13 +62,14 @@ const BigButton: React.FC<BigButtonProps> = ({
   };
 
   const textStyle: TextStyle = {
+    fontFamily: FONTS.bold,
     color: disabled
       ? COLORS.disabledText
       : highContrast
       ? COLORS.highContrastText
       : COLORS.white,
     fontSize: buttonSize.fontSize,
-    fontWeight: '700',
+    fontWeight: '800',
     textAlign: 'center',
     // Improve Arabic text rendering
     lineHeight: buttonSize.fontSize * 1.4,

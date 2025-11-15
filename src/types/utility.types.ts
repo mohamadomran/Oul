@@ -1,5 +1,5 @@
 export interface ShareContext {
-  phrase: any; // Will be typed as Phrase after cleanup
+  phrase: any;
   intensity?: 'light' | 'moderate' | 'severe';
   location?: string;
   includeCategory?: boolean;
@@ -19,6 +19,6 @@ export interface AudioPathMapping {
 }
 
 export interface CacheEntry {
-  sound: any; // Sound type from react-native-sound
+  sound: any;
   lastAccessed: number;
 }

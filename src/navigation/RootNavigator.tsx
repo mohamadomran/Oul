@@ -37,8 +37,7 @@ const RootNavigator: React.FC = () => {
           name="Home"
           component={HomeScreen}
           options={{
-            title: 'قول (Oul)',
-            headerShown: true,
+            headerShown: false,
           }}
         />
 
@@ -46,7 +45,7 @@ const RootNavigator: React.FC = () => {
           name="BasicNeeds"
           component={BasicNeedsScreen}
           options={{
-            title: 'Basic Needs',
+            headerShown: false,
           }}
         />
 
@@ -54,7 +53,7 @@ const RootNavigator: React.FC = () => {
           name="PainLocation"
           component={PainLocationScreen}
           options={{
-            title: 'Pain Location',
+            headerShown: false,
           }}
         />
 
@@ -62,7 +61,7 @@ const RootNavigator: React.FC = () => {
           name="Emotions"
           component={EmotionsScreen}
           options={{
-            title: 'Emotions',
+            headerShown: false,
           }}
         />
 
@@ -70,7 +69,7 @@ const RootNavigator: React.FC = () => {
           name="Conversation"
           component={ConversationScreen}
           options={{
-            title: 'Conversation',
+            headerShown: false,
           }}
         />
 

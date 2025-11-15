@@ -8,8 +8,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { COLORS, SPACING, FONT_SIZES } from '../constants';
-import PhraseButton from '../components/PhraseButton';
-import BottomActionBar from '../components/BottomActionBar';
+import { PhraseButton, BottomActionBar } from '../components';
 import type { Phrase } from '../types/phrase.types';
 
 const FavoritesScreen: React.FC = () => {

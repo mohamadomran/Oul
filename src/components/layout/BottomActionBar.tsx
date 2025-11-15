@@ -8,13 +8,10 @@ import {
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
-import type {
-  RootStackNavigationProp,
-  RootStackParamList,
-} from '../types/navigation.types';
-import { COLORS, SPACING, FONT_SIZES } from '../constants';
-import HapticService from '../services/HapticService';
-import type { BottomActionBarProps } from '../types/ui.types';
+import type { RootStackNavigationProp } from '../../types/navigation.types';
+import { COLORS, SPACING, FONT_SIZES } from '../../constants';
+import HapticService from '../../services/HapticService';
+import type { BottomActionBarProps } from '../../types/ui.types';
 
 const BottomActionBar: React.FC<BottomActionBarProps> = ({
   currentScreen,

@@ -1,5 +1,17 @@
-export { default as BigButton } from './BigButton';
-export { default as PhraseButton } from './PhraseButton';
-export { default as PainIntensitySelector } from './PainIntensitySelector';
-export { default as SectionHeader } from './SectionHeader';
-export { default as PhraseActionModal } from './PhraseActionModal';
+// UI Components
+export { default as BigButton } from './ui/BigButton';
+export { default as PhraseButton } from './ui/PhraseButton';
+export { default as PainIntensitySelector } from './ui/PainIntensitySelector';
+
+// Layout Components
+export { default as BottomActionBar } from './layout/BottomActionBar';
+export { default as SectionHeader } from './layout/SectionHeader';
+export { default as HomeHeader } from './layout/HomeHeader';
+export { default as PhraseDisplayHeader } from './layout/PhraseDisplayHeader';
+
+// Feature Components
+export { default as CategoryGrid } from './features/CategoryGrid';
+export { default as HomeBottomActions } from './features/HomeBottomActions';
+export { default as PhraseActionModal } from './features/PhraseActionModal';
+export { default as PhraseActionButtons } from './features/PhraseActionButtons';
+export { default as PhraseActionBottomSheet } from './features/PhraseActionBottomSheet';

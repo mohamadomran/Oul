@@ -29,33 +29,6 @@ export interface PhraseActionBottomSheetRef {
   close: () => void;
 }
 
-export interface PainIntensitySelectorProps {
-  selectedIntensity?: 'light' | 'moderate' | 'severe';
-  onSelectIntensity: (intensity: 'light' | 'moderate' | 'severe') => void;
-}
-
-export interface SectionHeaderProps {
-  title: string;
-  subtitle?: string;
-}
-
-export interface BottomActionBarProps {
-  children?: ReactNode;
-  style?: ViewStyle;
-  currentScreen?: keyof any; // Will be typed as RootStackParamList
-  showBack?: boolean;
-  showFavorites?: boolean;
-}
-
-export interface PhraseButtonProps {
-  phrase: any; // Will be typed as Phrase after TTS removal
-  onPress?: () => void;
-  size?: ButtonSize;
-  highContrast?: boolean;
-  disabled?: boolean;
-  showEnglish?: boolean;
-}
-
 export interface PhraseActionModalProps {
   arabicText: string;
   englishText: string;
@@ -71,4 +44,31 @@ export interface PhraseActionModalProps {
 export interface PhraseActionModalRef {
   snapToIndex: (index: number) => void;
   close: () => void;
+}
+
+export interface PainIntensitySelectorProps {
+  selectedIntensity?: 'light' | 'moderate' | 'severe';
+  onSelectIntensity: (intensity: 'light' | 'moderate' | 'severe') => void;
+}
+
+export interface SectionHeaderProps {
+  title: string;
+  subtitle?: string;
+}
+
+export interface BottomActionBarProps {
+  children?: ReactNode;
+  style?: ViewStyle;
+  currentScreen?: keyof any;
+  showBack?: boolean;
+  showFavorites?: boolean;
+}
+
+export interface PhraseButtonProps {
+  phrase: any;
+  onPress?: () => void;
+  size?: ButtonSize;
+  highContrast?: boolean;
+  disabled?: boolean;
+  showEnglish?: boolean;
 }

@@ -25,7 +25,7 @@ export const BUTTON_SIZES = {
   large: {
     height: 160,
     minWidth: 160,
-    fontSize: 22, // Arabic text (optimized readability)
+    fontSize: 24, // Arabic text (optimized readability)
     iconSize: 56, // Large emoji icons
     padding: 16,
   },

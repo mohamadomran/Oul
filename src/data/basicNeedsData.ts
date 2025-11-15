@@ -1,7 +1,6 @@
 import { Phrase } from '../types';
 
 export const BASIC_NEEDS_PHRASES: Phrase[] = [
-  // Water & Food
   {
     id: 'bn_water',
     arabicText: 'أحتاج ماء',
@@ -9,7 +8,7 @@ export const BASIC_NEEDS_PHRASES: Phrase[] = [
     category: 'BasicNeeds',
     audioFile: 'basic_needs_water',
     icon: '💧',
-    color: '#4A90E2', // Blue
+    color: '#4A90E2',
     language: 'ar',
   },
   {
@@ -19,7 +18,7 @@ export const BASIC_NEEDS_PHRASES: Phrase[] = [
     category: 'BasicNeeds',
     audioFile: 'basic_needs_food',
     icon: '🍽️',
-    color: '#4A90E2', // Blue
+    color: '#4A90E2',
     language: 'ar',
   },
   {
@@ -29,7 +28,7 @@ export const BASIC_NEEDS_PHRASES: Phrase[] = [
     category: 'BasicNeeds',
     audioFile: 'basic_needs_hot_drink',
     icon: '☕',
-    color: '#4A90E2', // Blue
+    color: '#4A90E2',
     language: 'ar',
   },
   {
@@ -39,11 +38,9 @@ export const BASIC_NEEDS_PHRASES: Phrase[] = [
     category: 'BasicNeeds',
     audioFile: 'basic_needs_cold_drink',
     icon: '🧃',
-    color: '#4A90E2', // Blue
+    color: '#4A90E2',
     language: 'ar',
   },
-
-  // Bathroom & Hygiene
   {
     id: 'bn_bathroom',
     arabicText: 'أحتاج دورة المياه',
@@ -51,7 +48,7 @@ export const BASIC_NEEDS_PHRASES: Phrase[] = [
     category: 'BasicNeeds',
     audioFile: 'basic_needs_bathroom',
     icon: '🚽',
-    color: '#4A90E2', // Blue
+    color: '#4A90E2',
     language: 'ar',
   },
   {
@@ -61,7 +58,7 @@ export const BASIC_NEEDS_PHRASES: Phrase[] = [
     category: 'BasicNeeds',
     audioFile: 'basic_needs_shower',
     icon: '🚿',
-    color: '#4A90E2', // Blue
+    color: '#4A90E2',
     language: 'ar',
   },
   {
@@ -71,11 +68,9 @@ export const BASIC_NEEDS_PHRASES: Phrase[] = [
     category: 'BasicNeeds',
     audioFile: 'basic_needs_clean',
     icon: '🧼',
-    color: '#4A90E2', // Blue
+    color: '#4A90E2',
     language: 'ar',
   },
-
-  // Rest & Comfort
   {
     id: 'bn_tired',
     arabicText: 'أنا متعب',
@@ -83,7 +78,7 @@ export const BASIC_NEEDS_PHRASES: Phrase[] = [
     category: 'BasicNeeds',
     audioFile: 'basic_needs_tired',
     icon: '😴',
-    color: '#4A90E2', // Blue
+    color: '#4A90E2',
     language: 'ar',
   },
   {
@@ -93,7 +88,7 @@ export const BASIC_NEEDS_PHRASES: Phrase[] = [
     category: 'BasicNeeds',
     audioFile: 'basic_needs_sleep',
     icon: '🛏️',
-    color: '#4A90E2', // Blue
+    color: '#4A90E2',
     language: 'ar',
   },
   {
@@ -103,11 +98,9 @@ export const BASIC_NEEDS_PHRASES: Phrase[] = [
     category: 'BasicNeeds',
     audioFile: 'basic_needs_sit',
     icon: '🪑',
-    color: '#4A90E2', // Blue
+    color: '#4A90E2',
     language: 'ar',
   },
-
-  // Temperature
   {
     id: 'bn_hot',
     arabicText: 'أنا حار',
@@ -115,7 +108,7 @@ export const BASIC_NEEDS_PHRASES: Phrase[] = [
     category: 'BasicNeeds',
     audioFile: 'basic_needs_hot',
     icon: '🥵',
-    color: '#4A90E2', // Blue
+    color: '#4A90E2',
     language: 'ar',
   },
   {
@@ -125,11 +118,9 @@ export const BASIC_NEEDS_PHRASES: Phrase[] = [
     category: 'BasicNeeds',
     audioFile: 'basic_needs_cold',
     icon: '🥶',
-    color: '#4A90E2', // Blue
+    color: '#4A90E2',
     language: 'ar',
   },
-
-  // Medicine & Help
   {
     id: 'bn_medicine',
     arabicText: 'أحتاج دوائي',
@@ -137,7 +128,7 @@ export const BASIC_NEEDS_PHRASES: Phrase[] = [
     category: 'BasicNeeds',
     audioFile: 'basic_needs_medicine',
     icon: '💊',
-    color: '#4A90E2', // Blue
+    color: '#4A90E2',
     language: 'ar',
   },
   {
@@ -147,7 +138,7 @@ export const BASIC_NEEDS_PHRASES: Phrase[] = [
     category: 'BasicNeeds',
     audioFile: 'basic_needs_help',
     icon: '🆘',
-    color: '#4A90E2', // Blue
+    color: '#4A90E2',
     language: 'ar',
   },
   {
@@ -157,7 +148,7 @@ export const BASIC_NEEDS_PHRASES: Phrase[] = [
     category: 'BasicNeeds',
     audioFile: 'basic_needs_doctor',
     icon: '👨‍⚕️',
-    color: '#4A90E2', // Blue
+    color: '#4A90E2',
     language: 'ar',
   },
   {
@@ -167,7 +158,7 @@ export const BASIC_NEEDS_PHRASES: Phrase[] = [
     category: 'BasicNeeds',
     audioFile: 'basic_needs_emergency',
     icon: '🚨',
-    color: '#4A90E2', // Blue
+    color: '#4A90E2',
     language: 'ar',
   },
 ];

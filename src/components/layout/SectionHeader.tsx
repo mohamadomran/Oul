@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { COLORS, SPACING, FONT_SIZES } from '../constants';
-import type { SectionHeaderProps } from '../types/ui.types';
+import { COLORS, SPACING, FONT_SIZES, FONTS } from '../../constants';
+import type { SectionHeaderProps } from '../../types/ui.types';
 
 const SectionHeader: React.FC<SectionHeaderProps> = ({ title, subtitle }) => {
   return (
@@ -19,12 +19,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: SPACING.xs,
   },
   title: {
+    fontFamily: FONTS.bold,
     fontSize: FONT_SIZES.lg,
-    fontWeight: '700',
+    fontWeight: '800',
     color: COLORS.text,
     marginBottom: SPACING.xxs,
   },
   subtitle: {
+    fontFamily: FONTS.medium,
     fontSize: FONT_SIZES.sm,
     fontWeight: '500',
     color: COLORS.textSecondary,

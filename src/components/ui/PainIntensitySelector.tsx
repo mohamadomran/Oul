@@ -6,11 +6,11 @@ import {
   StyleSheet,
   ViewStyle,
 } from 'react-native';
-import { COLORS, SPACING, FONT_SIZES } from '../constants';
-import { PainIntensity } from '../types';
-import { PAIN_INTENSITY_OPTIONS } from '../data/painLocationData';
-import HapticService from '../services/HapticService';
-import type { PainIntensitySelectorProps } from '../types/ui.types';
+import { COLORS, SPACING, FONT_SIZES } from '../../constants';
+import { PainIntensity } from '../../types';
+import { PAIN_INTENSITY_OPTIONS } from '../../data';
+import HapticService from '../../services/HapticService';
+import type { PainIntensitySelectorProps } from '../../types/ui.types';
 
 const PainIntensitySelector: React.FC<PainIntensitySelectorProps> = ({
   selectedIntensity,
