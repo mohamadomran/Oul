@@ -4,20 +4,38 @@ import type { ShareContext } from '../types/utility.types';
 
 export const shareViaWhatsApp = async (
   arabicText: string,
-  _englishText?: string,
+  englishText?: string,
 ): Promise<void> => {
   try {
-    const message = arabicText;
+    // Include both Arabic and English text if available
+    let message = arabicText;
+    if (englishText) {
+      message += `\n(${englishText})`;
+    }
+
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `whatsapp://send?text=${encodedMessage}`;
+
+    // Check if WhatsApp is installed
     const canOpen = await Linking.canOpenURL(whatsappUrl);
 
     if (canOpen) {
       await Linking.openURL(whatsappUrl);
+      console.log('[ShareService] WhatsApp opened successfully');
+    } else {
+      Alert.alert(
+        'WhatsApp Not Found',
+        'Please install WhatsApp to share messages',
+        [{ text: 'OK' }]
+      );
     }
   } catch (error) {
     console.error('[ShareService] WhatsApp share error:', error);
-    Alert.alert('Share Error', 'Could not open WhatsApp');
+    Alert.alert(
+      'Share Error',
+      'Could not open WhatsApp. Please make sure WhatsApp is installed.',
+      [{ text: 'OK' }]
+    );
   }
 };
 
