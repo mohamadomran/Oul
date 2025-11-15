@@ -1,9 +1,3 @@
-/**
- * Emotions Category Data
- *
- * 18 common emotional states and feelings
- */
-
 import { Phrase } from '../types';
 
 export const EMOTIONS_PHRASES: Phrase[] = [
@@ -15,7 +9,7 @@ export const EMOTIONS_PHRASES: Phrase[] = [
     category: 'Emotions',
     audioFile: 'emotions_happy',
     icon: '😊',
-    color: '#27AE60',  // Green - happy, positive
+    color: '#27AE60', // Green - happy, positive
     language: 'ar',
   },
   {
@@ -25,7 +19,7 @@ export const EMOTIONS_PHRASES: Phrase[] = [
     category: 'Emotions',
     audioFile: 'emotions_excited',
     icon: '🤗',
-    color: '#F39C12',  // Orange - energetic
+    color: '#F39C12', // Orange - energetic
     language: 'ar',
   },
   {
@@ -35,7 +29,7 @@ export const EMOTIONS_PHRASES: Phrase[] = [
     category: 'Emotions',
     audioFile: 'emotions_grateful',
     icon: '🙏',
-    color: '#9B59B6',  // Purple - spiritual, grateful
+    color: '#9B59B6', // Purple - spiritual, grateful
     language: 'ar',
   },
   {
@@ -45,7 +39,7 @@ export const EMOTIONS_PHRASES: Phrase[] = [
     category: 'Emotions',
     audioFile: 'emotions_proud',
     icon: '😌',
-    color: '#3498DB',  // Blue - calm confidence
+    color: '#3498DB', // Blue - calm confidence
     language: 'ar',
   },
   {
@@ -55,7 +49,7 @@ export const EMOTIONS_PHRASES: Phrase[] = [
     category: 'Emotions',
     audioFile: 'emotions_relaxed',
     icon: '😌',
-    color: '#16A085',  // Teal - peaceful
+    color: '#16A085', // Teal - peaceful
     language: 'ar',
   },
   {
@@ -65,7 +59,7 @@ export const EMOTIONS_PHRASES: Phrase[] = [
     category: 'Emotions',
     audioFile: 'emotions_loved',
     icon: '❤️',
-    color: '#E91E63',  // Pink - love
+    color: '#E91E63', // Pink - love
     language: 'ar',
   },
 
@@ -77,7 +71,7 @@ export const EMOTIONS_PHRASES: Phrase[] = [
     category: 'Emotions',
     audioFile: 'emotions_sad',
     icon: '😢',
-    color: '#5DADE2',  // Light blue - sadness
+    color: '#5DADE2', // Light blue - sadness
     language: 'ar',
   },
   {
@@ -87,7 +81,7 @@ export const EMOTIONS_PHRASES: Phrase[] = [
     category: 'Emotions',
     audioFile: 'emotions_angry',
     icon: '😠',
-    color: '#E74C3C',  // Red - anger
+    color: '#E74C3C', // Red - anger
     language: 'ar',
   },
   {
@@ -97,7 +91,7 @@ export const EMOTIONS_PHRASES: Phrase[] = [
     category: 'Emotions',
     audioFile: 'emotions_frustrated',
     icon: '😤',
-    color: '#E67E22',  // Dark orange - frustration
+    color: '#E67E22', // Dark orange - frustration
     language: 'ar',
   },
   {
@@ -107,7 +101,7 @@ export const EMOTIONS_PHRASES: Phrase[] = [
     category: 'Emotions',
     audioFile: 'emotions_worried',
     icon: '😟',
-    color: '#8E44AD',  // Purple - worry
+    color: '#8E44AD', // Purple - worry
     language: 'ar',
   },
   {
@@ -117,7 +111,7 @@ export const EMOTIONS_PHRASES: Phrase[] = [
     category: 'Emotions',
     audioFile: 'emotions_scared',
     icon: '😨',
-    color: '#C0392B',  // Dark red - fear
+    color: '#C0392B', // Dark red - fear
     language: 'ar',
   },
   {
@@ -127,7 +121,7 @@ export const EMOTIONS_PHRASES: Phrase[] = [
     category: 'Emotions',
     audioFile: 'emotions_lonely',
     icon: '😔',
-    color: '#7F8C8D',  // Gray - loneliness
+    color: '#7F8C8D', // Gray - loneliness
     language: 'ar',
   },
 
@@ -139,7 +133,7 @@ export const EMOTIONS_PHRASES: Phrase[] = [
     category: 'Emotions',
     audioFile: 'emotions_tired',
     icon: '😫',
-    color: '#95A5A6',  // Light gray - tired
+    color: '#95A5A6', // Light gray - tired
     language: 'ar',
   },
   {
@@ -149,7 +143,7 @@ export const EMOTIONS_PHRASES: Phrase[] = [
     category: 'Emotions',
     audioFile: 'emotions_bored',
     icon: '😐',
-    color: '#BDC3C7',  // Silver - bored
+    color: '#BDC3C7', // Silver - bored
     language: 'ar',
   },
   {
@@ -159,7 +153,7 @@ export const EMOTIONS_PHRASES: Phrase[] = [
     category: 'Emotions',
     audioFile: 'emotions_confused',
     icon: '😕',
-    color: '#F4B350',  // Yellow-orange - confused
+    color: '#F4B350', // Yellow-orange - confused
     language: 'ar',
   },
   {
@@ -169,7 +163,7 @@ export const EMOTIONS_PHRASES: Phrase[] = [
     category: 'Emotions',
     audioFile: 'emotions_surprised',
     icon: '😲',
-    color: '#F1C40F',  // Bright yellow - surprised
+    color: '#F1C40F', // Bright yellow - surprised
     language: 'ar',
   },
   {
@@ -179,7 +173,7 @@ export const EMOTIONS_PHRASES: Phrase[] = [
     category: 'Emotions',
     audioFile: 'emotions_uncomfortable',
     icon: '😣',
-    color: '#D35400',  // Brown-orange - uncomfortable
+    color: '#D35400', // Brown-orange - uncomfortable
     language: 'ar',
   },
   {
@@ -189,7 +183,7 @@ export const EMOTIONS_PHRASES: Phrase[] = [
     category: 'Emotions',
     audioFile: 'emotions_overwhelmed',
     icon: '😵',
-    color: '#34495E',  // Dark gray-blue - overwhelmed
+    color: '#34495E', // Dark gray-blue - overwhelmed
     language: 'ar',
   },
 ];

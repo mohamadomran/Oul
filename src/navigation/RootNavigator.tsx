@@ -1,9 +1,3 @@
-/**
- * Root Navigator
- *
- * Main navigation structure for the app
- */
-
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -16,6 +10,7 @@ import {
   ConversationScreen,
   CustomPhrasesScreen,
   SettingsScreen,
+  FavoritesScreen,
 } from '../screens';
 import { COLORS } from '../constants';
 
@@ -35,7 +30,6 @@ const RootNavigator: React.FC = () => {
             fontWeight: 'bold',
             fontSize: 20,
           },
-          headerBackTitleVisible: false,
           animation: 'slide_from_right',
         }}
       >
@@ -93,6 +87,14 @@ const RootNavigator: React.FC = () => {
           component={SettingsScreen}
           options={{
             title: 'Settings',
+          }}
+        />
+
+        <Stack.Screen
+          name="Favorites"
+          component={FavoritesScreen}
+          options={{
+            title: 'Favorites',
           }}
         />
       </Stack.Navigator>

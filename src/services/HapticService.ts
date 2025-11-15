@@ -1,10 +1,6 @@
-/**
- * Haptic Service
- *
- * Provides haptic feedback for user interactions
- */
-
-import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
+import ReactNativeHapticFeedback, {
+  HapticFeedbackTypes,
+} from 'react-native-haptic-feedback';
 import type { HapticType, NotificationHapticType } from '../types';
 
 /**
@@ -13,6 +9,8 @@ import type { HapticType, NotificationHapticType } from '../types';
 const HAPTIC_OPTIONS = {
   enableVibrateFallback: true,
   ignoreAndroidSystemSettings: false,
+  // Add debug logging to troubleshoot issues
+  debug: false,
 };
 
 /**
@@ -53,7 +51,7 @@ class HapticService {
     }
 
     try {
-      let method: string;
+      let method: keyof typeof HapticFeedbackTypes;
 
       switch (type) {
         case 'light':
@@ -70,7 +68,7 @@ class HapticService {
       ReactNativeHapticFeedback.trigger(method, HAPTIC_OPTIONS);
     } catch (error) {
       console.warn('[HapticService] Error triggering haptic:', error);
-      // Don't throw - haptic feedback is not critical
+      // Don't throw - Haptic feedback is not critical
     }
   }
 
@@ -85,7 +83,10 @@ class HapticService {
     }
 
     try {
-      let method: string;
+      let method:
+        | 'notificationSuccess'
+        | 'notificationWarning'
+        | 'notificationError';
 
       switch (type) {
         case 'success':
@@ -101,7 +102,10 @@ class HapticService {
 
       ReactNativeHapticFeedback.trigger(method, HAPTIC_OPTIONS);
     } catch (error) {
-      console.warn('[HapticService] Error triggering notification haptic:', error);
+      console.warn(
+        '[HapticService] Error triggering notification haptic:',
+        error,
+      );
       // Don't throw - haptic feedback is not critical
     }
   }

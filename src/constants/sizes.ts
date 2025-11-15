@@ -1,20 +1,11 @@
-/**
- * Size Constants
- *
- * Consistent spacing, sizing, and typography
- */
-
-/**
- * Spacing scale (generous spacing for accessibility)
- * Based on 8px grid with larger values for easier touch
- */
 export const SPACING = {
+  xxs: 2,
   xs: 4,
-  sm: 12,    // Increased from 8
-  md: 20,    // Increased from 16
-  lg: 32,    // Increased from 24
-  xl: 48,    // Increased from 32
-  xxl: 64,   // Increased from 48
+  sm: 12, // Increased from 8
+  md: 20, // Increased from 16
+  lg: 32, // Increased from 24
+  xl: 48, // Increased from 32
+  xxl: 64, // Increased from 48
 } as const;
 
 /**
@@ -22,20 +13,20 @@ export const SPACING = {
  * All sizes exceed minimum 48x48dp recommendation (WCAG 2.5.5)
  */
 export const BUTTON_SIZES = {
-  // Standard phrase buttons
+  // Standard phrase buttons (increased from 100px to 120px for better accessibility)
   normal: {
-    height: 100,
-    minWidth: 100,
-    fontSize: 18,      // Arabic text
-    iconSize: 36,
-    padding: 12,
+    height: 120,
+    minWidth: 120,
+    fontSize: 20, // Arabic text (increased from 18)
+    iconSize: 40, // Icon size (increased from 36)
+    padding: 14, // Padding (increased from 12)
   },
   // Home screen category buttons (PRIMARY SIZE)
   large: {
     height: 160,
     minWidth: 160,
-    fontSize: 22,      // Arabic text (optimized readability)
-    iconSize: 56,      // Large emoji icons
+    fontSize: 22, // Arabic text (optimized readability)
+    iconSize: 56, // Large emoji icons
     padding: 16,
   },
   // Extra large for critical actions
@@ -81,6 +72,6 @@ export const SCREEN_PADDING = SPACING.md;
  * Grid layout
  */
 export const GRID = {
-  columns: 2,              // For grid layouts (Custom Phrases)
-  gap: SPACING.md,         // Gap between grid items
+  columns: 2, // For grid layouts (Custom Phrases)
+  gap: SPACING.md, // Gap between grid items
 } as const;

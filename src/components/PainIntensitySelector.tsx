@@ -1,10 +1,3 @@
-/**
- * Pain Intensity Selector Component
- *
- * Allows users to select pain intensity level (light, moderate, severe)
- * Displays color-coded options with visual feedback
- */
-
 import React from 'react';
 import {
   View,
@@ -12,17 +5,12 @@ import {
   TouchableOpacity,
   StyleSheet,
   ViewStyle,
-  TextStyle,
 } from 'react-native';
 import { COLORS, SPACING, FONT_SIZES } from '../constants';
 import { PainIntensity } from '../types';
 import { PAIN_INTENSITY_OPTIONS } from '../data/painLocationData';
 import HapticService from '../services/HapticService';
-
-interface PainIntensitySelectorProps {
-  selectedIntensity?: PainIntensity;
-  onSelectIntensity: (intensity: PainIntensity) => void;
-}
+import type { PainIntensitySelectorProps } from '../types/ui.types';
 
 const PainIntensitySelector: React.FC<PainIntensitySelectorProps> = ({
   selectedIntensity,
@@ -39,7 +27,7 @@ const PainIntensitySelector: React.FC<PainIntensitySelectorProps> = ({
       <Text style={styles.sublabel}>Select pain intensity</Text>
 
       <View style={styles.optionsContainer}>
-        {PAIN_INTENSITY_OPTIONS.map((option) => {
+        {PAIN_INTENSITY_OPTIONS.map(option => {
           const isSelected = selectedIntensity === option.level;
 
           const buttonStyle: ViewStyle = {
@@ -62,7 +50,9 @@ const PainIntensitySelector: React.FC<PainIntensitySelectorProps> = ({
             >
               <Text style={styles.optionIcon}>{option.icon}</Text>
               <Text style={styles.optionArabicText}>{option.arabicLabel}</Text>
-              <Text style={styles.optionEnglishText}>{option.englishLabel}</Text>
+              <Text style={styles.optionEnglishText}>
+                {option.englishLabel}
+              </Text>
             </TouchableOpacity>
           );
         })}

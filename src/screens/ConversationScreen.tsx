@@ -1,15 +1,9 @@
-/**
- * Conversation Screen
- *
- * 42 common conversational phrases
- * Grid layout with 2 columns for optimal accessibility
- */
-
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, StatusBar } from 'react-native';
 import type { ConversationScreenProps } from '../types';
 import { COLORS, SPACING, FONT_SIZES } from '../constants';
 import { PhraseButton } from '../components';
+import BottomActionBar from '../components/BottomActionBar';
 import { CONVERSATION_PHRASES } from '../data/conversationData';
 
 const ConversationScreen: React.FC<ConversationScreenProps> = () => {
@@ -20,7 +14,9 @@ const ConversationScreen: React.FC<ConversationScreenProps> = () => {
       {/* Header */}
       <View style={styles.header}>
         <Text style={styles.title}>محادثة</Text>
-        <Text style={styles.subtitle}>Conversation • {CONVERSATION_PHRASES.length} phrases</Text>
+        <Text style={styles.subtitle}>
+          Conversation • {CONVERSATION_PHRASES.length} phrases
+        </Text>
       </View>
 
       {/* Phrase Grid */}
@@ -30,7 +26,7 @@ const ConversationScreen: React.FC<ConversationScreenProps> = () => {
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.grid}>
-          {CONVERSATION_PHRASES.map((phrase) => (
+          {CONVERSATION_PHRASES.map(phrase => (
             <PhraseButton
               key={phrase.id}
               phrase={phrase}
@@ -40,6 +36,8 @@ const ConversationScreen: React.FC<ConversationScreenProps> = () => {
           ))}
         </View>
       </ScrollView>
+
+      <BottomActionBar currentScreen="Conversation" />
     </View>
   );
 };
@@ -75,7 +73,7 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     padding: SPACING.lg,
-    paddingBottom: SPACING.xl,
+    paddingBottom: 100, // Space for bottom action bar
   },
   grid: {
     flexDirection: 'row',

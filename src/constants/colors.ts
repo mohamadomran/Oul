@@ -1,34 +1,28 @@
-/**
- * Color Constants
- *
- * App-wide color palette
- */
-
 export const COLORS = {
   // Primary Colors
-  primary: '#4A90E2',        // Blue
+  primary: '#4A90E2', // Blue
   primaryDark: '#357ABD',
   primaryLight: '#7AB8F5',
 
   // Category Colors (optimized for elderly users)
-  basicNeeds: '#4A90E2',     // Blue - calm, trustworthy
-  pain: '#C9594C',           // Soft coral-red - easier on eyes
-  emotions: '#F39C12',       // Orange - warm, friendly
-  conversation: '#27AE60',   // Green - positive, encouraging
-  custom: '#9B59B6',         // Purple - creative
-  settings: '#34495E',       // Dark gray - neutral
+  basicNeeds: '#4A90E2', // Blue - calm, trustworthy
+  pain: '#C9594C', // Soft coral-red - easier on eyes
+  emotions: '#F39C12', // Orange - warm, friendly
+  conversation: '#27AE60', // Green - positive, encouraging
+  custom: '#9B59B6', // Purple - creative
+  settings: '#34495E', // Dark gray - neutral
 
   // Pain Intensity Colors (softer, easier on eyes)
-  painLight: '#F1C40F',      // Yellow - mild discomfort
-  painModerate: '#E67E22',   // Orange - moderate pain
-  painSevere: '#C9594C',     // Soft coral-red - severe pain
+  painLight: '#F1C40F', // Yellow - mild discomfort
+  painModerate: '#E67E22', // Orange - moderate pain
+  painSevere: '#C9594C', // Soft coral-red - severe pain
 
   // UI Colors
   background: '#FFFFFF',
   surface: '#F5F5F5',
   border: '#E0E0E0',
-  text: '#2C3E50',           // Dark text (WCAG AAA on white)
-  textSecondary: '#5A6C7D',  // Darker for better contrast
+  text: '#2C3E50', // Dark text (WCAG AAA on white)
+  textSecondary: '#5A6C7D', // Darker for better contrast
   textLight: '#95A5A6',
   white: '#FFFFFF',
   black: '#000000',

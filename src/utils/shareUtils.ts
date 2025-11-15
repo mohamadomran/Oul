@@ -15,7 +15,7 @@ import { Linking, Alert } from 'react-native';
  */
 export const shareViaWhatsApp = async (
   arabicText: string,
-  englishText?: string
+  _englishText?: string,
 ): Promise<void> => {
   try {
     // Only send Arabic text
@@ -38,7 +38,7 @@ export const shareViaWhatsApp = async (
       Alert.alert(
         'واتساب غير متاح',
         'تطبيق واتساب غير مثبت على هذا الجهاز.\nWhatsApp is not installed on this device.',
-        [{ text: 'حسناً / OK', style: 'default' }]
+        [{ text: 'حسناً / OK', style: 'default' }],
       );
     }
   } catch (error) {
@@ -46,7 +46,7 @@ export const shareViaWhatsApp = async (
     Alert.alert(
       'خطأ',
       'حدث خطأ أثناء فتح واتساب.\nAn error occurred while opening WhatsApp.',
-      [{ text: 'حسناً / OK', style: 'default' }]
+      [{ text: 'حسناً / OK', style: 'default' }],
     );
   }
 };
@@ -60,7 +60,7 @@ export const shareViaWhatsApp = async (
  */
 export const shareViaSMS = async (
   arabicText: string,
-  englishText?: string
+  englishText?: string,
 ): Promise<void> => {
   try {
     // Compose the message
@@ -81,18 +81,16 @@ export const shareViaSMS = async (
     if (canOpen) {
       await Linking.openURL(smsUrl);
     } else {
-      Alert.alert(
-        'خطأ',
-        'لا يمكن فتح تطبيق الرسائل.\nCannot open SMS app.',
-        [{ text: 'حسناً / OK', style: 'default' }]
-      );
+      Alert.alert('خطأ', 'لا يمكن فتح تطبيق الرسائل.\nCannot open SMS app.', [
+        { text: 'حسناً / OK', style: 'default' },
+      ]);
     }
   } catch (error) {
     console.error('Error sharing via SMS:', error);
     Alert.alert(
       'خطأ',
       'حدث خطأ أثناء فتح تطبيق الرسائل.\nAn error occurred while opening SMS app.',
-      [{ text: 'حسناً / OK', style: 'default' }]
+      [{ text: 'حسناً / OK', style: 'default' }],
     );
   }
 };
@@ -105,10 +103,12 @@ export const shareViaSMS = async (
  */
 export const copyToClipboard = async (
   arabicText: string,
-  englishText?: string
+  englishText?: string,
 ): Promise<void> => {
   try {
-    const { default: Clipboard } = await import('@react-native-clipboard/clipboard');
+    const { default: Clipboard } = await import(
+      '@react-native-clipboard/clipboard'
+    );
 
     // Compose the message
     let message = arabicText;
@@ -121,14 +121,14 @@ export const copyToClipboard = async (
     Alert.alert(
       'تم النسخ',
       'تم نسخ النص إلى الحافظة.\nText copied to clipboard.',
-      [{ text: 'حسناً / OK', style: 'default' }]
+      [{ text: 'حسناً / OK', style: 'default' }],
     );
   } catch (error) {
     console.error('Error copying to clipboard:', error);
     Alert.alert(
       'خطأ',
       'حدث خطأ أثناء النسخ.\nAn error occurred while copying.',
-      [{ text: 'حسناً / OK', style: 'default' }]
+      [{ text: 'حسناً / OK', style: 'default' }],
     );
   }
 };

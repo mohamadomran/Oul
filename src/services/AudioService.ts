@@ -1,11 +1,5 @@
-/**
- * Audio Service
- *
- * Handles playback of pre-recorded audio files (Daniel's voice)
- * For static phrases only. Custom phrases use TTS Service.
- */
-
 import Sound from 'react-native-sound';
+import { Platform } from 'react-native';
 
 /**
  * Audio Service Class
@@ -34,32 +28,85 @@ class AudioService {
   }
 
   /**
+   * Convert audio file reference to actual file path
+   *
+   * @param audioFile - Audio file reference (e.g., 'basic_needs_water')
+   * @returns Actual file path for assets (e.g., 'audio/basic_needs/water.mp3')
+   */
+  private convertAudioPath(audioFile: string): string {
+    // Convert audio file reference to actual path in assets/audio/
+    // Examples:
+    // 'basic_needs_water' → 'audio/basic_needs/water.mp3'
+    // 'conversation_hello' → 'audio/conversation/hello.mp3'
+    // 'emotions_happy' → 'audio/emotions/happy.mp3'
+    // 'pain_head' → 'audio/pain/head.mp3'
+
+    if (audioFile.startsWith('basic_needs_')) {
+      const filename = audioFile.replace('basic_needs_', '');
+      return `audio/basic_needs/${filename}.mp3`;
+    } else if (audioFile.startsWith('conversation_')) {
+      const filename = audioFile.replace('conversation_', '');
+      return `audio/conversation/${filename}.mp3`;
+    } else if (audioFile.startsWith('emotions_')) {
+      const filename = audioFile.replace('emotions_', '');
+      return `audio/emotions/${filename}.mp3`;
+    } else if (audioFile.startsWith('pain_')) {
+      const filename = audioFile.replace('pain_', '');
+      return `audio/pain/${filename}.mp3`;
+    } else {
+      // Fallback - assume it's already a full path
+      console.warn('[AudioService] Unknown audio file pattern:', audioFile);
+      return audioFile.endsWith('.mp3') ? audioFile : `${audioFile}.mp3`;
+    }
+  }
+
+  /**
    * Load audio file
    *
-   * @param audioPath - Path to audio file (e.g., 'hungry_ar.mp3')
+   * @param audioFile - Audio file reference (e.g., 'basic_needs_water')
    * @returns Promise that resolves when audio is loaded
    */
-  private loadAudio(audioPath: string): Promise<Sound> {
+  private loadAudio(audioFile: string): Promise<Sound> {
     return new Promise((resolve, reject) => {
       // Check cache first
-      const cached = this.audioCache.get(audioPath);
+      const cached = this.audioCache.get(audioFile);
       if (cached) {
         resolve(cached);
         return;
       }
 
+      // Convert audio file reference to actual path
+      const filePath = this.convertAudioPath(audioFile);
+
       // Load from assets
-      // Note: Audio files are in android/app/src/main/assets/
-      // Paths should be relative to assets directory (e.g., 'audio/basic_needs/water.mp3')
-      const sound = new Sound(audioPath, Sound.MAIN_BUNDLE, error => {
+      // On Android: use 'asset:' prefix (no trailing slash to avoid double slash)
+      // react-native-sound adds '/' between basePath and filename
+      // On iOS: files in bundle use Sound.MAIN_BUNDLE
+      const basePath = Platform.OS === 'android' ? 'asset:' : Sound.MAIN_BUNDLE;
+
+      const sound = new Sound(filePath, basePath, error => {
         if (error) {
-          console.error('[AudioService] Failed to load audio:', audioPath, error);
+          console.error(
+            '[AudioService] Failed to load audio:',
+            audioFile,
+            'as',
+            filePath,
+            'with basePath:',
+            basePath,
+            error,
+          );
           reject(error);
           return;
         }
 
-        // Cache the loaded audio
-        this.audioCache.set(audioPath, sound);
+        // Cache the loaded audio using the original audioFile as key
+        this.audioCache.set(audioFile, sound);
+        console.log(
+          '[AudioService] Successfully loaded:',
+          audioFile,
+          '→',
+          filePath,
+        );
         resolve(sound);
       });
     });
@@ -68,9 +115,9 @@ class AudioService {
   /**
    * Play audio file
    *
-   * @param audioPath - Path to audio file (e.g., 'hungry_ar.mp3')
+   * @param audioFile - Audio file reference (e.g., 'basic_needs_water')
    */
-  async play(audioPath: string): Promise<void> {
+  async play(audioFile: string): Promise<void> {
     if (!this.initialized) {
       await this.initialize();
     }
@@ -82,7 +129,7 @@ class AudioService {
       }
 
       // Load audio
-      const sound = await this.loadAudio(audioPath);
+      const sound = await this.loadAudio(audioFile);
       this.currentSound = sound;
 
       // Play audio
@@ -99,6 +146,30 @@ class AudioService {
     } catch (error) {
       console.error('[AudioService] Error playing audio:', error);
       throw error;
+    }
+  }
+
+  /**
+   * Play multiple audio files sequentially
+   *
+   * @param audioFiles - Array of audio file references to play in sequence
+   */
+  async playSequence(audioFiles: string[]): Promise<void> {
+    if (!this.initialized) {
+      await this.initialize();
+    }
+
+    for (const audioFile of audioFiles) {
+      try {
+        await this.play(audioFile);
+      } catch (error) {
+        console.error(
+          '[AudioService] Error in sequence playback:',
+          audioFile,
+          error,
+        );
+        // Continue with next file even if one fails
+      }
     }
   }
 
@@ -122,22 +193,24 @@ class AudioService {
   /**
    * Preload audio files for faster playback
    *
-   * @param audioPaths - Array of audio paths to preload
+   * @param audioFiles - Array of audio file references to preload
    */
-  async preloadAudio(audioPaths: string[]): Promise<void> {
+  async preloadAudio(audioFiles: string[]): Promise<void> {
     if (!this.initialized) {
       await this.initialize();
     }
 
     try {
-      const loadPromises = audioPaths
-        .filter(path => !this.audioCache.has(path))
-        .map(path => this.loadAudio(path).catch(err => {
-          console.warn('[AudioService] Failed to preload:', path, err);
-        }));
+      const loadPromises = audioFiles
+        .filter(file => !this.audioCache.has(file))
+        .map(file =>
+          this.loadAudio(file).catch(err => {
+            console.warn('[AudioService] Failed to preload:', file, err);
+          }),
+        );
 
       await Promise.all(loadPromises);
-      console.log('[AudioService] Preloaded', audioPaths.length, 'audio files');
+      console.log('[AudioService] Preloaded', audioFiles.length, 'audio files');
     } catch (error) {
       console.error('[AudioService] Error preloading audio:', error);
     }
@@ -146,11 +219,11 @@ class AudioService {
   /**
    * Release a specific audio file from cache
    */
-  releaseAudio(audioPath: string): void {
-    const sound = this.audioCache.get(audioPath);
+  releaseAudio(audioFile: string): void {
+    const sound = this.audioCache.get(audioFile);
     if (sound) {
       sound.release();
-      this.audioCache.delete(audioPath);
+      this.audioCache.delete(audioFile);
     }
   }
 

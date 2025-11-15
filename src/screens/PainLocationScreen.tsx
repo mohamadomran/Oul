@@ -1,15 +1,3 @@
-/**
- * Pain Location Screen
- *
- * Advanced pain reporting with:
- * - Intensity selection (light, moderate, severe)
- * - 16 body part locations organized by category
- * - 3 emergency phrases for quick access
- * - Dynamic phrase composition with TTS
- *
- * Flow: Select intensity → Select body part → Phrase is composed & spoken
- */
-
 import React, { useState } from 'react';
 import {
   View,
@@ -22,28 +10,21 @@ import {
 } from 'react-native';
 import type { PainLocationScreenProps } from '../types';
 import { COLORS, SPACING, FONT_SIZES } from '../constants';
-import { PhraseButton, PainIntensitySelector, SectionHeader } from '../components';
+import { PhraseButton, SectionHeader } from '../components';
 import {
-  PAIN_BODY_PARTS,
   PAIN_EMERGENCY_PHRASES,
   getBodyPartsByCategory,
   BODY_PART_CATEGORY_ORDER,
 } from '../data/painLocationData';
-import {
-  buildPainPhrase,
-  buildPainPhraseEnglish,
-  getPainIntensityColor,
-} from '../utils/painPhraseBuilder';
-import { PainIntensity, Phrase } from '../types';
-import TTSService from '../services/TTSService';
+import { Phrase } from '../types';
+import AudioService from '../services/AudioService';
 import HapticService from '../services/HapticService';
 
 const PainLocationScreen: React.FC<PainLocationScreenProps> = () => {
-  const [selectedIntensity, setSelectedIntensity] = useState<PainIntensity | undefined>(
-    undefined
+  const [selectedBodyPart, setSelectedBodyPart] = useState<Phrase | undefined>(
+    undefined,
   );
-  const [selectedBodyPart, setSelectedBodyPart] = useState<Phrase | undefined>(undefined);
-  const [isSpeaking, setIsSpeaking] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   // Get body parts grouped by category
   const bodyPartsByCategory = getBodyPartsByCategory();
@@ -53,48 +34,29 @@ const PainLocationScreen: React.FC<PainLocationScreenProps> = () => {
     setSelectedBodyPart(bodyPart);
     await HapticService.trigger('medium');
 
-    // Immediately speak the composed phrase
-    const arabicPhrase = buildPainPhrase(bodyPart.arabicText, selectedIntensity);
-    await speakPhrase(arabicPhrase);
+    // Play body part audio
+    await playPainAudio(bodyPart);
   };
 
-  // Handle intensity selection
-  const handleIntensitySelect = (intensity: PainIntensity) => {
-    setSelectedIntensity(intensity);
-  };
-
-  // Speak composed phrase
-  const speakPhrase = async (phrase: string) => {
-    if (isSpeaking) return;
+  // Play pain audio
+  const playPainAudio = async (bodyPart: Phrase) => {
+    if (isPlaying) return;
 
     try {
-      setIsSpeaking(true);
-      await TTSService.speak(phrase, 'ar');
+      setIsPlaying(true);
+      await AudioService.play(bodyPart.audioFile);
     } catch (error) {
-      console.error('Error speaking phrase:', error);
+      console.error('Error playing pain audio:', error);
     } finally {
-      setIsSpeaking(false);
+      setIsPlaying(false);
     }
   };
 
-  // Handle re-speak button
-  const handleRespeak = async () => {
+  // Handle re-play button
+  const handleReplay = async () => {
     if (!selectedBodyPart) return;
-    const arabicPhrase = buildPainPhrase(selectedBodyPart.arabicText, selectedIntensity);
-    await speakPhrase(arabicPhrase);
+    await playPainAudio(selectedBodyPart);
   };
-
-  // Get the composed phrase text
-  const getComposedPhrase = () => {
-    if (!selectedBodyPart) return null;
-
-    return {
-      arabic: buildPainPhrase(selectedBodyPart.arabicText, selectedIntensity),
-      english: buildPainPhraseEnglish(selectedBodyPart.englishText, selectedIntensity),
-    };
-  };
-
-  const composedPhrase = getComposedPhrase();
 
   return (
     <View style={styles.container}>
@@ -111,16 +73,10 @@ const PainLocationScreen: React.FC<PainLocationScreenProps> = () => {
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
-        {/* Intensity Selector */}
-        <PainIntensitySelector
-          selectedIntensity={selectedIntensity}
-          onSelectIntensity={handleIntensitySelect}
-        />
-
         {/* Emergency Phrases Section */}
         <SectionHeader title="حالات طارئة" subtitle="Emergency Phrases" />
         <View style={styles.emergencyGrid}>
-          {PAIN_EMERGENCY_PHRASES.map((phrase) => (
+          {PAIN_EMERGENCY_PHRASES.map(phrase => (
             <PhraseButton
               key={phrase.id}
               phrase={phrase}
@@ -131,7 +87,7 @@ const PainLocationScreen: React.FC<PainLocationScreenProps> = () => {
         </View>
 
         {/* Body Parts by Category */}
-        {BODY_PART_CATEGORY_ORDER.map((category) => {
+        {BODY_PART_CATEGORY_ORDER.map(category => {
           const parts = bodyPartsByCategory[category];
           if (!parts || parts.length === 0) return null;
 
@@ -139,7 +95,7 @@ const PainLocationScreen: React.FC<PainLocationScreenProps> = () => {
             <View key={category}>
               <SectionHeader title={category} />
               <View style={styles.bodyPartsGrid}>
-                {parts.map((part) => (
+                {parts.map(part => (
                   <PhraseButton
                     key={part.id}
                     phrase={part}
@@ -155,31 +111,28 @@ const PainLocationScreen: React.FC<PainLocationScreenProps> = () => {
       </ScrollView>
 
       {/* Selected Phrase Display */}
-      {composedPhrase && (
-        <View
-          style={[
-            styles.selectedPhraseContainer,
-            {
-              backgroundColor: getPainIntensityColor(selectedIntensity),
-            },
-          ]}
-        >
+      {selectedBodyPart && (
+        <View style={styles.selectedPhraseContainer}>
           <View style={styles.selectedPhraseContent}>
             <View style={styles.phraseTextContainer}>
-              <Text style={styles.selectedPhraseArabic}>{composedPhrase.arabic}</Text>
-              <Text style={styles.selectedPhraseEnglish}>{composedPhrase.english}</Text>
+              <Text style={styles.selectedPhraseArabic}>
+                {selectedBodyPart.arabicText}
+              </Text>
+              <Text style={styles.selectedPhraseEnglish}>
+                {selectedBodyPart.englishText}
+              </Text>
             </View>
 
             <TouchableOpacity
-              style={styles.respeakButton}
-              onPress={handleRespeak}
-              disabled={isSpeaking}
+              style={styles.replayButton}
+              onPress={handleReplay}
+              disabled={isPlaying}
               activeOpacity={0.7}
             >
-              {isSpeaking ? (
+              {isPlaying ? (
                 <ActivityIndicator size="small" color={COLORS.white} />
               ) : (
-                <Text style={styles.respeakIcon}>🔊</Text>
+                <Text style={styles.replayIcon}>🔊</Text>
               )}
             </TouchableOpacity>
           </View>
@@ -220,7 +173,7 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     padding: SPACING.lg,
-    paddingBottom: SPACING.xl,
+    paddingBottom: 120, // Space for selected phrase bar
   },
   emergencyGrid: {
     flexDirection: 'row',
@@ -238,6 +191,7 @@ const styles = StyleSheet.create({
   selectedPhraseContainer: {
     paddingHorizontal: SPACING.lg,
     paddingVertical: SPACING.md,
+    backgroundColor: COLORS.primary,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     shadowColor: COLORS.black,
@@ -267,7 +221,7 @@ const styles = StyleSheet.create({
     color: COLORS.white,
     opacity: 0.9,
   },
-  respeakButton: {
+  replayButton: {
     width: 56,
     height: 56,
     borderRadius: 28,
@@ -277,7 +231,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: COLORS.white,
   },
-  respeakIcon: {
+  replayIcon: {
     fontSize: 28,
   },
 });

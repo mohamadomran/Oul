@@ -1,30 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   TouchableOpacity,
   Text,
   StyleSheet,
   ViewStyle,
   TextStyle,
-  ActivityIndicator,
   View,
 } from 'react-native';
 import { COLORS, CATEGORY_COLORS } from '../constants/colors';
 import { BUTTON_SIZES } from '../constants/sizes';
 import HapticService from '../services/HapticService';
 import AudioService from '../services/AudioService';
-import TTSService from '../services/TTSService';
-import { shareViaWhatsApp } from '../utils/shareUtils';
-import PhraseActionModal from './PhraseActionModal';
-import type { Phrase, CustomPhrase, Language } from '../types/phrase.types';
-
-interface PhraseButtonProps {
-  phrase: Phrase | CustomPhrase;
-  onPress?: () => void;
-  size?: 'normal' | 'large' | 'xlarge';
-  highContrast?: boolean;
-  disabled?: boolean;
-  showEnglish?: boolean;
-}
+import * as ShareService from '../services/ShareService';
+import PhraseActionBottomSheet from './PhraseActionBottomSheet';
+import type {
+  PhraseActionBottomSheetRef,
+  PhraseButtonProps,
+} from '../types/ui.types';
+import type { Phrase } from '../types/phrase.types';
 
 const PhraseButton: React.FC<PhraseButtonProps> = ({
   phrase,
@@ -36,13 +29,21 @@ const PhraseButton: React.FC<PhraseButtonProps> = ({
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+  const bottomSheetRef = useRef<PhraseActionBottomSheetRef | null>(null);
 
   const handlePress = async () => {
     if (disabled) return;
 
     await HapticService.trigger('medium');
-    setShowModal(true);
+    // Add a small delay to ensure the bottom sheet is mounted
+    setTimeout(() => {
+      if (
+        bottomSheetRef.current &&
+        typeof bottomSheetRef.current.snapToIndex === 'function'
+      ) {
+        bottomSheetRef.current.snapToIndex(0);
+      }
+    }, 100);
     onPress?.();
   };
 
@@ -52,14 +53,8 @@ const PhraseButton: React.FC<PhraseButtonProps> = ({
     try {
       setIsPlaying(true);
 
-      // Check if this is a custom phrase (uses TTS) or static phrase (uses audio file)
-      if ('useTTS' in phrase && phrase.useTTS) {
-        // Custom phrase - use TTS
-        await TTSService.speak(phrase.arabicText, phrase.language);
-      } else {
-        // Static phrase - use pre-recorded audio
-        await AudioService.play((phrase as Phrase).audioFile);
-      }
+      // Static phrase - use pre-recorded audio
+      await AudioService.play(phrase.audioFile);
     } catch (error) {
       console.error('Error playing phrase:', error);
     } finally {
@@ -68,23 +63,67 @@ const PhraseButton: React.FC<PhraseButtonProps> = ({
   };
 
   const handleShare = async () => {
-    setShowModal(false);
-    // Small delay to let modal close first
+    if (
+      bottomSheetRef.current &&
+      typeof bottomSheetRef.current.close === 'function'
+    ) {
+      bottomSheetRef.current.close();
+    }
+    // Small delay to let bottom sheet close first
     setTimeout(async () => {
-      await shareViaWhatsApp(phrase.arabicText, phrase.englishText);
+      await ShareService.shareViaWhatsApp({
+        phrase: phrase as Phrase,
+        includeCategory: true,
+        includeTimestamp: false,
+      });
     }, 300);
   };
 
-  const handleCloseModal = () => {
-    setShowModal(false);
+  const handleShareSMS = async () => {
+    if (
+      bottomSheetRef.current &&
+      typeof bottomSheetRef.current.close === 'function'
+    ) {
+      bottomSheetRef.current.close();
+    }
+    setTimeout(async () => {
+      await ShareService.shareViaSMS({
+        phrase: phrase as Phrase,
+        includeCategory: true,
+        includeTimestamp: false,
+      });
+    }, 300);
+  };
+
+  const handleCopy = async () => {
+    if (
+      bottomSheetRef.current &&
+      typeof bottomSheetRef.current.close === 'function'
+    ) {
+      bottomSheetRef.current.close();
+    }
+    setTimeout(async () => {
+      await ShareService.copyToClipboard({
+        phrase: phrase as Phrase,
+        includeCategory: true,
+        includeTimestamp: false,
+      });
+    }, 300);
+  };
+
+  const handleCloseBottomSheet = () => {
+    // The modal's close function already handles calling onClose
+    // No need to call close() here to avoid infinite loop
   };
 
   const buttonSize = BUTTON_SIZES[size];
 
   // Get button color - use phrase.color if available, otherwise category color
-  const buttonColor = 'color' in phrase && phrase.color
-    ? phrase.color
-    : (CATEGORY_COLORS[phrase.category] || COLORS.primary);
+  const buttonColor =
+    'color' in phrase && phrase.color
+      ? phrase.color
+      : ('category' in phrase ? CATEGORY_COLORS[phrase.category] : null) ||
+        COLORS.primary;
 
   const buttonStyle: ViewStyle = {
     backgroundColor: disabled
@@ -107,9 +146,10 @@ const PhraseButton: React.FC<PhraseButtonProps> = ({
       borderWidth: 2,
       borderColor: COLORS.highContrastBorder,
     }),
-    ...(isPressed && !disabled && {
-      opacity: 0.8,
-    }),
+    ...(isPressed &&
+      !disabled && {
+        opacity: 0.8,
+      }),
   };
 
   const arabicTextStyle: TextStyle = {
@@ -151,7 +191,11 @@ const PhraseButton: React.FC<PhraseButtonProps> = ({
         accessibilityLabel={`${phrase.icon} ${phrase.arabicText}`}
         accessibilityRole="button"
         accessibilityState={{ disabled }}
-        accessibilityHint={disabled ? 'Button is disabled' : `Select action for: ${phrase.arabicText}`}
+        accessibilityHint={
+          disabled
+            ? 'Button is disabled'
+            : `Select action for: ${phrase.arabicText}`
+        }
       >
         <View style={styles.content}>
           {phrase.icon && <Text style={iconStyle}>{phrase.icon}</Text>}
@@ -166,14 +210,16 @@ const PhraseButton: React.FC<PhraseButtonProps> = ({
         </View>
       </TouchableOpacity>
 
-      <PhraseActionModal
-        visible={showModal}
+      <PhraseActionBottomSheet
+        ref={bottomSheetRef}
         arabicText={phrase.arabicText}
-        englishText={phrase.englishText}
+        englishText={phrase.englishText || ''}
         icon={phrase.icon}
         onPlay={handlePlayAudio}
         onShare={handleShare}
-        onClose={handleCloseModal}
+        onShareSMS={handleShareSMS}
+        onCopy={handleCopy}
+        onClose={handleCloseBottomSheet}
         isPlaying={isPlaying}
       />
     </>

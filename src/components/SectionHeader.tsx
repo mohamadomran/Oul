@@ -1,18 +1,7 @@
-/**
- * Section Header Component
- *
- * Displays category headers to organize content sections
- * Used in Pain Location screen to group body parts
- */
-
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { COLORS, SPACING, FONT_SIZES } from '../constants';
-
-interface SectionHeaderProps {
-  title: string;
-  subtitle?: string;
-}
+import type { SectionHeaderProps } from '../types/ui.types';
 
 const SectionHeader: React.FC<SectionHeaderProps> = ({ title, subtitle }) => {
   return (

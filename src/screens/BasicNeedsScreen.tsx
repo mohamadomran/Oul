@@ -1,15 +1,9 @@
-/**
- * Basic Needs Screen
- *
- * 16 essential daily need phrases
- * Grid layout with 3 columns for optimal accessibility
- */
-
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, StatusBar } from 'react-native';
 import type { BasicNeedsScreenProps } from '../types';
-import { COLORS, SPACING, FONT_SIZES, GRID } from '../constants';
+import { COLORS, SPACING, FONT_SIZES } from '../constants';
 import { PhraseButton } from '../components';
+import BottomActionBar from '../components/BottomActionBar';
 import { BASIC_NEEDS_PHRASES } from '../data/basicNeedsData';
 
 const BasicNeedsScreen: React.FC<BasicNeedsScreenProps> = () => {
@@ -20,7 +14,9 @@ const BasicNeedsScreen: React.FC<BasicNeedsScreenProps> = () => {
       {/* Header */}
       <View style={styles.header}>
         <Text style={styles.title}>احتياجات أساسية</Text>
-        <Text style={styles.subtitle}>Basic Needs • {BASIC_NEEDS_PHRASES.length} phrases</Text>
+        <Text style={styles.subtitle}>
+          Basic Needs • {BASIC_NEEDS_PHRASES.length} phrases
+        </Text>
       </View>
 
       {/* Phrase Grid */}
@@ -30,7 +26,7 @@ const BasicNeedsScreen: React.FC<BasicNeedsScreenProps> = () => {
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.grid}>
-          {BASIC_NEEDS_PHRASES.map((phrase) => (
+          {BASIC_NEEDS_PHRASES.map(phrase => (
             <PhraseButton
               key={phrase.id}
               phrase={phrase}
@@ -40,6 +36,8 @@ const BasicNeedsScreen: React.FC<BasicNeedsScreenProps> = () => {
           ))}
         </View>
       </ScrollView>
+
+      <BottomActionBar currentScreen="BasicNeeds" />
     </View>
   );
 };
@@ -75,7 +73,7 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     padding: SPACING.lg,
-    paddingBottom: SPACING.xl,
+    paddingBottom: 100, // Space for bottom action bar
   },
   grid: {
     flexDirection: 'row',

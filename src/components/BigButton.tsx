@@ -5,21 +5,11 @@ import {
   StyleSheet,
   ViewStyle,
   TextStyle,
-  View,
 } from 'react-native';
 import { COLORS } from '../constants/colors';
 import { BUTTON_SIZES, BORDER_RADIUS } from '../constants/sizes';
 import HapticService from '../services/HapticService';
-
-interface BigButtonProps {
-  title: string;
-  icon?: string; // Emoji icon
-  color: string;
-  onPress: () => void;
-  size?: 'normal' | 'large' | 'xlarge';
-  highContrast?: boolean;
-  disabled?: boolean;
-}
+import type { BigButtonProps } from '../types/ui.types';
 
 const BigButton: React.FC<BigButtonProps> = ({
   title,
@@ -48,7 +38,7 @@ const BigButton: React.FC<BigButtonProps> = ({
       ? COLORS.highContrastButton
       : color,
     height: buttonSize.height,
-    width: buttonSize.minWidth,   // Fixed width (was minWidth)
+    width: buttonSize.minWidth, // Fixed width (was minWidth)
     borderRadius: BORDER_RADIUS.lg,
     justifyContent: 'center',
     alignItems: 'center',
@@ -65,9 +55,10 @@ const BigButton: React.FC<BigButtonProps> = ({
       borderColor: COLORS.highContrastBorder,
     }),
     // Pressed state overlay
-    ...(isPressed && !disabled && {
-      opacity: 0.8,
-    }),
+    ...(isPressed &&
+      !disabled && {
+        opacity: 0.8,
+      }),
   };
 
   const textStyle: TextStyle = {
@@ -101,7 +92,9 @@ const BigButton: React.FC<BigButtonProps> = ({
       accessibilityLabel={`${icon ? icon + ' ' : ''}${title}`}
       accessibilityRole="button"
       accessibilityState={{ disabled }}
-      accessibilityHint={disabled ? 'Button is disabled' : `Navigate to ${title}`}
+      accessibilityHint={
+        disabled ? 'Button is disabled' : `Navigate to ${title}`
+      }
     >
       {icon && <Text style={iconStyle}>{icon}</Text>}
       <Text style={textStyle} numberOfLines={2} adjustsFontSizeToFit>

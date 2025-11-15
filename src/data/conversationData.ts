@@ -1,9 +1,3 @@
-/**
- * Conversation Category Data
- *
- * 42 common conversational phrases for daily communication
- */
-
 import { Phrase } from '../types';
 
 export const CONVERSATION_PHRASES: Phrase[] = [

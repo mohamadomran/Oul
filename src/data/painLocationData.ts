@@ -1,43 +1,64 @@
-/**
- * Pain Location Data
- *
- * Body parts, intensity levels, and emergency phrases for pain reporting
- */
-
 import { Phrase, PainIntensity } from '../types';
-
-/**
- * Pain intensity options with colors and labels
- */
-export interface PainIntensityOption {
-  level: PainIntensity;
-  arabicLabel: string;
-  englishLabel: string;
-  color: string;
-  icon: string;
-}
+import type { PainIntensityOption } from '../types/utility.types';
 
 export const PAIN_INTENSITY_OPTIONS: PainIntensityOption[] = [
   {
     level: 'light',
     arabicLabel: 'خفيف',
     englishLabel: 'Light',
-    color: '#F1C40F',  // Yellow
+    color: '#F1C40F', // Yellow
     icon: '😐',
   },
   {
     level: 'moderate',
     arabicLabel: 'متوسط',
     englishLabel: 'Moderate',
-    color: '#E67E22',  // Orange
+    color: '#E67E22', // Orange
     icon: '😣',
   },
   {
     level: 'severe',
     arabicLabel: 'قوي',
     englishLabel: 'Severe',
-    color: '#C9594C',  // Coral-red
+    color: '#C9594C', // Coral-red
     icon: '😖',
+  },
+];
+
+/**
+ * Pain intensity phrases with audio files
+ * Used for playing intensity audio before body part audio
+ */
+export const PAIN_INTENSITY_PHRASES: Phrase[] = [
+  {
+    id: 'pain_intensity_light',
+    arabicText: 'خفيف',
+    englishText: 'Light',
+    category: 'Pain',
+    audioFile: 'pain_intensity_light',
+    icon: '😐',
+    color: '#F1C40F',
+    language: 'ar',
+  },
+  {
+    id: 'pain_intensity_moderate',
+    arabicText: 'متوسط',
+    englishText: 'Moderate',
+    category: 'Pain',
+    audioFile: 'pain_intensity_moderate',
+    icon: '😣',
+    color: '#E67E22',
+    language: 'ar',
+  },
+  {
+    id: 'pain_intensity_severe',
+    arabicText: 'قوي',
+    englishText: 'Severe',
+    category: 'Pain',
+    audioFile: 'pain_intensity_severe',
+    icon: '😖',
+    color: '#C9594C',
+    language: 'ar',
   },
 ];
 
@@ -227,7 +248,7 @@ export const PAIN_BODY_PARTS: Phrase[] = [
     category: 'Pain',
     audioFile: 'pain_no_pain',
     icon: '✅',
-    color: '#27AE60',  // Green for "no pain"
+    color: '#27AE60', // Green for "no pain"
     language: 'ar',
     subcategory: 'General',
   },
@@ -244,7 +265,7 @@ export const PAIN_EMERGENCY_PHRASES: Phrase[] = [
     category: 'Pain',
     audioFile: 'pain_emergency_severe',
     icon: '😫',
-    color: '#C0392B',  // Dark red for emergency
+    color: '#C0392B', // Dark red for emergency
     language: 'ar',
     subcategory: 'Emergency',
   },
@@ -255,7 +276,7 @@ export const PAIN_EMERGENCY_PHRASES: Phrase[] = [
     category: 'Pain',
     audioFile: 'pain_emergency_medicine',
     icon: '💉',
-    color: '#E74C3C',  // Red
+    color: '#E74C3C', // Red
     language: 'ar',
     subcategory: 'Emergency',
   },
@@ -266,7 +287,7 @@ export const PAIN_EMERGENCY_PHRASES: Phrase[] = [
     category: 'Pain',
     audioFile: 'pain_emergency_doctor',
     icon: '⚕️',
-    color: '#E74C3C',  // Red
+    color: '#E74C3C', // Red
     language: 'ar',
     subcategory: 'Emergency',
   },
@@ -278,7 +299,7 @@ export const PAIN_EMERGENCY_PHRASES: Phrase[] = [
 export const getBodyPartsByCategory = (): Record<string, Phrase[]> => {
   const grouped: Record<string, Phrase[]> = {};
 
-  PAIN_BODY_PARTS.forEach((part) => {
+  PAIN_BODY_PARTS.forEach(part => {
     const category = part.subcategory || 'Other';
     if (!grouped[category]) {
       grouped[category] = [];

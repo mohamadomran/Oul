@@ -18,6 +18,7 @@ export type RootStackParamList = {
   Conversation: undefined;
   CustomPhrases: undefined;
   Settings: undefined;
+  Favorites: undefined;
 };
 
 /**
@@ -30,6 +31,7 @@ export type EmotionsScreenProps = NativeStackScreenProps<RootStackParamList, 'Em
 export type ConversationScreenProps = NativeStackScreenProps<RootStackParamList, 'Conversation'>;
 export type CustomPhrasesScreenProps = NativeStackScreenProps<RootStackParamList, 'CustomPhrases'>;
 export type SettingsScreenProps = NativeStackScreenProps<RootStackParamList, 'Settings'>;
+export type FavoritesScreenProps = NativeStackScreenProps<RootStackParamList, 'Favorites'>;
 
 /**
  * Navigation prop type helper

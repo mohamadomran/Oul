@@ -1,15 +1,9 @@
-/**
- * Emotions Screen
- *
- * 18 common emotional states and feelings
- * Grid layout with 2 columns for optimal accessibility
- */
-
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, StatusBar } from 'react-native';
 import type { EmotionsScreenProps } from '../types';
 import { COLORS, SPACING, FONT_SIZES } from '../constants';
 import { PhraseButton } from '../components';
+import BottomActionBar from '../components/BottomActionBar';
 import { EMOTIONS_PHRASES } from '../data/emotionsData';
 
 const EmotionsScreen: React.FC<EmotionsScreenProps> = () => {
@@ -20,7 +14,9 @@ const EmotionsScreen: React.FC<EmotionsScreenProps> = () => {
       {/* Header */}
       <View style={styles.header}>
         <Text style={styles.title}>مشاعر</Text>
-        <Text style={styles.subtitle}>Emotions • {EMOTIONS_PHRASES.length} phrases</Text>
+        <Text style={styles.subtitle}>
+          Emotions • {EMOTIONS_PHRASES.length} phrases
+        </Text>
       </View>
 
       {/* Phrase Grid */}
@@ -30,7 +26,7 @@ const EmotionsScreen: React.FC<EmotionsScreenProps> = () => {
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.grid}>
-          {EMOTIONS_PHRASES.map((phrase) => (
+          {EMOTIONS_PHRASES.map(phrase => (
             <PhraseButton
               key={phrase.id}
               phrase={phrase}
@@ -40,6 +36,8 @@ const EmotionsScreen: React.FC<EmotionsScreenProps> = () => {
           ))}
         </View>
       </ScrollView>
+
+      <BottomActionBar currentScreen="Emotions" />
     </View>
   );
 };
@@ -75,7 +73,7 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     padding: SPACING.lg,
-    paddingBottom: SPACING.xl,
+    paddingBottom: 100, // Space for bottom action bar
   },
   grid: {
     flexDirection: 'row',
