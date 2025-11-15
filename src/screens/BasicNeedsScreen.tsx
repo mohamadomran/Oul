@@ -8,11 +8,14 @@ import AudioService from '../services/AudioService';
 import { shareViaWhatsApp } from '../services/ShareService';
 import type { Phrase } from '../types';
 import type { PhraseActionBottomSheetRef } from '../types/ui.types';
+import { useButtonSize, useHighContrast } from '../contexts/SettingsContext';
 
 const BasicNeedsScreen: React.FC<BasicNeedsScreenProps> = () => {
   const bottomSheetRef = useRef<PhraseActionBottomSheetRef>(null);
   const [selectedPhrase, setSelectedPhrase] = useState<Phrase | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const buttonSize = useButtonSize();
+  const highContrast = useHighContrast();
 
   const handlePhrasePress = (phrase: Phrase) => {
     setSelectedPhrase(phrase);
@@ -56,8 +59,8 @@ const BasicNeedsScreen: React.FC<BasicNeedsScreenProps> = () => {
             <PhraseButton
               key={phrase.id}
               phrase={phrase}
-              size="large"
-              showEnglish={false}
+              size={buttonSize}
+              highContrast={highContrast}
               onPress={() => handlePhrasePress(phrase)}
             />
           ))}

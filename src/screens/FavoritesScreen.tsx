@@ -10,10 +10,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { COLORS, SPACING, FONT_SIZES } from '../constants';
 import { PhraseButton, BottomActionBar } from '../components';
 import type { Phrase } from '../types/phrase.types';
+import { useButtonSize, useHighContrast } from '../contexts/SettingsContext';
 
 const FavoritesScreen: React.FC = () => {
   const [favorites, setFavorites] = useState<Phrase[]>([]);
   const [loading, setLoading] = useState(true);
+  const buttonSize = useButtonSize();
+  const highContrast = useHighContrast();
 
   useEffect(() => {
     loadFavorites();
@@ -74,8 +77,8 @@ const FavoritesScreen: React.FC = () => {
               <PhraseButton
                 key={phrase.id}
                 phrase={phrase}
-                size="large"
-                showEnglish
+                size={buttonSize}
+                highContrast={highContrast}
               />
             ))}
           </View>

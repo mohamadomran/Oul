@@ -4,9 +4,12 @@ import { useNavigation } from '@react-navigation/native';
 import type { RootStackNavigationProp } from '../../types/navigation.types';
 import { COLORS, SPACING } from '../../constants';
 import { BigButton } from '../index';
+import { useButtonSize, useHighContrast } from '../../contexts/SettingsContext';
 
 const CategoryGrid: React.FC = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
+  const buttonSize = useButtonSize();
+  const highContrast = useHighContrast();
 
   return (
     <View style={styles.gridContainer}>
@@ -16,14 +19,16 @@ const CategoryGrid: React.FC = () => {
           icon="🍽️"
           color={COLORS.basicNeeds}
           onPress={() => navigation.navigate('BasicNeeds')}
-          size="large"
+          size={buttonSize}
+          highContrast={highContrast}
         />
         <BigButton
           title="ألم"
           icon="🩹"
           color={COLORS.pain}
           onPress={() => navigation.navigate('PainLocation')}
-          size="large"
+          size={buttonSize}
+          highContrast={highContrast}
         />
       </View>
 
@@ -33,14 +38,16 @@ const CategoryGrid: React.FC = () => {
           icon="😊"
           color={COLORS.emotions}
           onPress={() => navigation.navigate('Emotions')}
-          size="large"
+          size={buttonSize}
+          highContrast={highContrast}
         />
         <BigButton
           title="محادثة"
           icon="💬"
           color={COLORS.conversation}
           onPress={() => navigation.navigate('Conversation')}
-          size="large"
+          size={buttonSize}
+          highContrast={highContrast}
         />
       </View>
     </View>

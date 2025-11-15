@@ -26,5 +26,3 @@ export interface PainReport {
   intensity?: PainIntensity;
   timestamp: number;
 }
-
-export type ButtonSize = 'normal' | 'large' | 'xlarge';

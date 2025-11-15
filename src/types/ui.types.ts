@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import type { ViewStyle } from 'react-native';
-import type { ButtonSize } from './phrase.types';
+import type { ButtonSize } from './settings.types';
 
 export interface BigButtonProps {
   title: string;
@@ -70,5 +70,4 @@ export interface PhraseButtonProps {
   size?: ButtonSize;
   highContrast?: boolean;
   disabled?: boolean;
-  showEnglish?: boolean;
 }
