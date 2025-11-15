@@ -1,0 +1,179 @@
+/**
+ * Basic Needs Category Data
+ *
+ * 16 essential phrases for daily needs
+ */
+
+import { Phrase } from '../types';
+
+export const BASIC_NEEDS_PHRASES: Phrase[] = [
+  // Water & Food
+  {
+    id: 'bn_water',
+    arabicText: 'أحتاج ماء',
+    englishText: 'I need water',
+    category: 'BasicNeeds',
+    audioFile: 'basic_needs_water',
+    icon: '💧',
+    color: '#4A90E2',  // Blue
+    language: 'ar',
+  },
+  {
+    id: 'bn_food',
+    arabicText: 'أحتاج طعام',
+    englishText: 'I need food',
+    category: 'BasicNeeds',
+    audioFile: 'basic_needs_food',
+    icon: '🍽️',
+    color: '#4A90E2',  // Blue
+    language: 'ar',
+  },
+  {
+    id: 'bn_hot_drink',
+    arabicText: 'أريد شاي أو قهوة',
+    englishText: 'I want tea or coffee',
+    category: 'BasicNeeds',
+    audioFile: 'basic_needs_hot_drink',
+    icon: '☕',
+    color: '#4A90E2',  // Blue
+    language: 'ar',
+  },
+  {
+    id: 'bn_cold_drink',
+    arabicText: 'أريد عصير',
+    englishText: 'I want juice',
+    category: 'BasicNeeds',
+    audioFile: 'basic_needs_cold_drink',
+    icon: '🧃',
+    color: '#4A90E2',  // Blue
+    language: 'ar',
+  },
+
+  // Bathroom & Hygiene
+  {
+    id: 'bn_bathroom',
+    arabicText: 'أحتاج دورة المياه',
+    englishText: 'I need the bathroom',
+    category: 'BasicNeeds',
+    audioFile: 'basic_needs_bathroom',
+    icon: '🚽',
+    color: '#4A90E2',  // Blue
+    language: 'ar',
+  },
+  {
+    id: 'bn_shower',
+    arabicText: 'أريد الاستحمام',
+    englishText: 'I want to shower',
+    category: 'BasicNeeds',
+    audioFile: 'basic_needs_shower',
+    icon: '🚿',
+    color: '#4A90E2',  // Blue
+    language: 'ar',
+  },
+  {
+    id: 'bn_clean',
+    arabicText: 'أحتاج التنظيف',
+    englishText: 'I need to be cleaned',
+    category: 'BasicNeeds',
+    audioFile: 'basic_needs_clean',
+    icon: '🧼',
+    color: '#4A90E2',  // Blue
+    language: 'ar',
+  },
+
+  // Rest & Comfort
+  {
+    id: 'bn_tired',
+    arabicText: 'أنا متعب',
+    englishText: 'I am tired',
+    category: 'BasicNeeds',
+    audioFile: 'basic_needs_tired',
+    icon: '😴',
+    color: '#4A90E2',  // Blue
+    language: 'ar',
+  },
+  {
+    id: 'bn_sleep',
+    arabicText: 'أريد النوم',
+    englishText: 'I want to sleep',
+    category: 'BasicNeeds',
+    audioFile: 'basic_needs_sleep',
+    icon: '🛏️',
+    color: '#4A90E2',  // Blue
+    language: 'ar',
+  },
+  {
+    id: 'bn_sit',
+    arabicText: 'أريد الجلوس',
+    englishText: 'I want to sit',
+    category: 'BasicNeeds',
+    audioFile: 'basic_needs_sit',
+    icon: '🪑',
+    color: '#4A90E2',  // Blue
+    language: 'ar',
+  },
+
+  // Temperature
+  {
+    id: 'bn_hot',
+    arabicText: 'أنا حار',
+    englishText: 'I am hot',
+    category: 'BasicNeeds',
+    audioFile: 'basic_needs_hot',
+    icon: '🥵',
+    color: '#4A90E2',  // Blue
+    language: 'ar',
+  },
+  {
+    id: 'bn_cold',
+    arabicText: 'أنا بارد',
+    englishText: 'I am cold',
+    category: 'BasicNeeds',
+    audioFile: 'basic_needs_cold',
+    icon: '🥶',
+    color: '#4A90E2',  // Blue
+    language: 'ar',
+  },
+
+  // Medicine & Help
+  {
+    id: 'bn_medicine',
+    arabicText: 'أحتاج دوائي',
+    englishText: 'I need my medicine',
+    category: 'BasicNeeds',
+    audioFile: 'basic_needs_medicine',
+    icon: '💊',
+    color: '#4A90E2',  // Blue
+    language: 'ar',
+  },
+  {
+    id: 'bn_help',
+    arabicText: 'أحتاج مساعدة',
+    englishText: 'I need help',
+    category: 'BasicNeeds',
+    audioFile: 'basic_needs_help',
+    icon: '🆘',
+    color: '#4A90E2',  // Blue
+    language: 'ar',
+  },
+  {
+    id: 'bn_doctor',
+    arabicText: 'أحتاج الطبيب',
+    englishText: 'I need the doctor',
+    category: 'BasicNeeds',
+    audioFile: 'basic_needs_doctor',
+    icon: '👨‍⚕️',
+    color: '#4A90E2',  // Blue
+    language: 'ar',
+  },
+  {
+    id: 'bn_emergency',
+    arabicText: 'حالة طارئة',
+    englishText: 'Emergency',
+    category: 'BasicNeeds',
+    audioFile: 'basic_needs_emergency',
+    icon: '🚨',
+    color: '#4A90E2',  // Blue
+    language: 'ar',
+  },
+];
