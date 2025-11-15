@@ -1,97 +1,228 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# قول (Oul) - Communication App
 
-# Getting Started
+**Arabic:** قول
+**English:** Say / Speak
+**Purpose:** Empowering individuals with speech difficulties to communicate with dignity
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+---
 
-## Step 1: Start Metro
+## 🎯 About
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+قول (Oul) is an Android communication app designed for individuals with speech difficulties (post-stroke, ALS, etc.). It enables users to express their needs quickly through large, accessible buttons that play pre-recorded audio phrases.
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+**Target User:** Elderly individual recovering from speech loss
+**Platform:** Android only
+**Voice:** Daniel (ElevenLabs) - warm, authoritative, clear
 
-```sh
-# Using npm
-npm start
+---
 
-# OR using Yarn
+## ⚡ Quick Start
+
+```bash
+# Install dependencies
+yarn install
+
+# Run app (fresh start - recommended)
+yarn fresh:android
+```
+
+**First time?** Make sure you have Android Studio and an emulator/device set up.
+
+---
+
+## 📚 Documentation
+
+- **[PRD.md](./PRD.md)** - Product requirements document
+- **[VOICE_CONFIG_SUMMARY.md](./VOICE_CONFIG_SUMMARY.md)** - Voice configuration (Daniel)
+
+---
+
+## 🚀 Common Commands
+
+```bash
+# Daily development
+yarn fresh:android          # Clean cache + run (most common)
+
+# Normal run
+yarn start                  # Terminal 1: Metro bundler
+yarn android                # Terminal 2: Run app
+
+# Clean caches (when things break)
+yarn clean:cache            # Quick clean (~5s)
+yarn clean:all              # Full clean + reinstall (~3min)
+yarn reset                  # Nuclear option (~4min)
+
+# Testing & linting
+yarn test                   # Run tests
+yarn lint                   # Lint code
+```
+
+**All essential commands are listed above**
+
+---
+
+## 📱 Features
+
+### **Communication Categories**
+
+- **Basic Needs** (16 phrases) ✅ - Food, water, bathroom, etc.
+- **Pain Location** (22 phrases) ✅ - Body parts + intensity selector
+- **Emotions** (18 phrases) ✅ - Thank you, happy, frustrated, etc.
+- **Conversation** (42 phrases) ✅ - Yes, no, greetings, questions
+
+### **Customization**
+
+- **Custom Phrases** ✅ - User can add unlimited custom phrases
+- **Settings** ✅ - Speech rate, haptic feedback, high contrast mode
+
+### **Accessibility**
+
+- Large buttons (120x120px minimum) ✅
+- High contrast mode ✅
+- Haptic feedback ✅
+- Clear typography (20px+ Arabic) ✅
+- WCAG 2.1 AA compliance ✅
+
+---
+
+## 🏗️ Project Structure
+
+```
+src/
+├── components/         # Reusable UI components
+├── screens/            # App screens (7 screens)
+├── services/           # Business logic (Audio, TTS, Storage, Haptics)
+├── types/              # TypeScript definitions
+├── constants/          # Colors, sizes, design system
+├── navigation/         # React Navigation setup
+├── data/               # Static phrase data
+├── hooks/              # Custom React hooks
+└── utils/              # Helper functions
+```
+
+**All components and services are fully implemented and functional**
+
+---
+
+## 🎨 Tech Stack
+
+- **Framework:** React Native 0.82.1
+- **Language:** TypeScript 5.8.3
+- **Navigation:** React Navigation 7
+- **Audio:** react-native-sound (pre-recorded) + react-native-tts (custom)
+- **Storage:** AsyncStorage
+- **Haptics:** react-native-haptic-feedback
+
+---
+
+## 🎙️ Voice
+
+**Selected Voice:** Daniel (ElevenLabs)
+**Characteristics:** Authoritative yet warm, clear, perfect for medical context
+
+**Settings:**
+
+- Stability: 0.35 (natural, not robotic)
+- Style: 0.1 (friendly warmth)
+- Speaker Boost: true (maximum clarity)
+
+**Status:** ✅ All 188 audio files generated with Daniel voice
+
+**See [VOICE_CONFIG_SUMMARY.md](./VOICE_CONFIG_SUMMARY.md) for details**
+
+---
+
+## 🎯 Development Status
+
+### ✅ Completed
+
+- [x] Project structure and TypeScript types
+- [x] Core services (Audio, TTS, Storage, Haptics)
+- [x] Navigation setup and routing
+- [x] All 7 screens implemented
+- [x] All 5 UI components implemented
+- [x] Static phrase data (4 categories, 98 phrases)
+- [x] Audio files generated (188 files with Daniel voice)
+- [x] Accessibility features (WCAG 2.1 AA compliance)
+- [x] Design system and theming
+- [x] Development scripts and tooling
+
+### 🎯 Ready
+
+- [ ] Device testing with target user
+- [ ] Performance optimization
+- [ ] Production deployment
+
+---
+
+## 🛠️ Troubleshooting
+
+### **App won't build?**
+
+```bash
+yarn fresh:android
+```
+
+### **Metro stuck?**
+
+```bash
+yarn clean:cache
 yarn start
 ```
 
-## Step 2: Build and run your app
+### **Nothing works?**
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
-
-```sh
-# Using npm
-npm run android
-
-# OR using Yarn
-yarn android
+```bash
+yarn reset
 ```
 
-### iOS
+**All common issues are covered above**
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+---
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+## 📦 Dependencies
 
-```sh
-bundle install
-```
+All dependencies are managed via Yarn. See `package.json` for complete list.
 
-Then, and every time you update your native dependencies, run:
+**Key dependencies:**
 
-```sh
-bundle exec pod install
-```
+- Navigation, Audio, TTS, Storage, Haptics
+- All installed and configured
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+---
 
-```sh
-# Using npm
-npm run ios
+## 🤝 Contributing
 
-# OR using Yarn
-yarn ios
-```
+This is a personal project for a family member. Not open for external contributions.
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+---
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+## 📄 License
 
-## Step 3: Modify your app
+Private project - All rights reserved
 
-Now that you have successfully run the app, let's make changes!
+---
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+## 📞 Support
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+**Having issues?**
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+1. Try `yarn fresh:android` (most common fix)
+2. Try `yarn clean:cache` then `yarn start`
+3. Try `yarn reset` (nuclear option)
+4. Check [PRD.md](./PRD.md) for requirements
 
-## Congratulations! :tada:
+---
 
-You've successfully run and modified your React Native App. :partying_face:
+## 🎯 Next Steps
 
-### Now what?
+1. Test on device with target user
+2. Performance optimization and battery usage
+3. User feedback and refinements
+4. Production build and deployment
+5. Family training and support
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+---
 
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+**قول (Oul)** - Communication with Dignity
+_Built with ❤️ using React Native_
