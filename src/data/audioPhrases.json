@@ -1,0 +1,1250 @@
+{
+  "audioPhrases": {
+    "basic_needs": [
+      {
+        "id": "bn_water",
+        "arabicText": "أَحْتَاجُ مَاء",
+        "englishText": "I need water",
+        "audioFile": "water.mp3",
+        "icon": {
+          "library": "Ionicons",
+          "name": "water",
+          "fallback": "💧"
+        },
+        "color": "#4A90E2"
+      },
+      {
+        "id": "bn_food",
+        "arabicText": "أَحْتَاجُ طَعَام",
+        "englishText": "I need food",
+        "audioFile": "food.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "food",
+          "fallback": "🍽️"
+        },
+        "color": "#4A90E2"
+      },
+      {
+        "id": "bn_hot_drink_coffee",
+        "arabicText": "بِدِّي فِنْجَان قَهْوَة",
+        "englishText": "I want coffee",
+        "audioFile": "hot_drink_coffee.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "coffee",
+          "fallback": "☕"
+        },
+        "color": "#4A90E2"
+      },
+      {
+        "id": "bn_hot_drink_tea",
+        "arabicText": "بِدِّي كُوب شَاي",
+        "englishText": "I want a cup of tea",
+        "audioFile": "hot_drink_tea.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "tea",
+          "fallback": "☕"
+        },
+        "color": "#4A90E2"
+      },
+      {
+        "id": "bn_cold_drink_juice",
+        "arabicText": "بِدِّي كُوب عَصِير",
+        "englishText": "I want a cup of juice",
+        "audioFile": "cold_drink_juice.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "cup",
+          "fallback": "🧃"
+        },
+        "color": "#4A90E2"
+      },
+      {
+        "id": "bn_bathroom",
+        "arabicText": "بِدِّي رُوح عَ الحَمَّام",
+        "englishText": "I need to go to the bathroom",
+        "audioFile": "bathroom.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "toilet",
+          "fallback": "🚽"
+        },
+        "color": "#4A90E2"
+      },
+      {
+        "id": "bn_shower",
+        "arabicText": "بِدِّي اسْتَحِمّ",
+        "englishText": "I want to shower",
+        "audioFile": "shower.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "shower",
+          "fallback": "🚿"
+        },
+        "color": "#4A90E2"
+      },
+      {
+        "id": "bn_clean",
+        "arabicText": "بِدِّي نَضَافَة",
+        "englishText": "I need to be cleaned",
+        "audioFile": "clean.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "soap",
+          "fallback": "🧼"
+        },
+        "color": "#4A90E2"
+      },
+      {
+        "id": "bn_tired",
+        "arabicText": "أَنَا تَعْبَان",
+        "englishText": "I am tired",
+        "audioFile": "tired.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "sleep",
+          "fallback": "😴"
+        },
+        "color": "#4A90E2"
+      },
+      {
+        "id": "bn_sleep",
+        "arabicText": "بِدِّي نَام",
+        "englishText": "I want to sleep",
+        "audioFile": "sleep.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "bed",
+          "fallback": "🛏️"
+        },
+        "color": "#4A90E2"
+      },
+      {
+        "id": "bn_sit",
+        "arabicText": "بِدِّي اقْعُد",
+        "englishText": "I want to sit",
+        "audioFile": "sit.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "seat",
+          "fallback": "🪑"
+        },
+        "color": "#4A90E2"
+      },
+      {
+        "id": "bn_hot",
+        "arabicText": "أَنَا مْشَوَّب",
+        "englishText": "I am hot",
+        "audioFile": "hot.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "thermometer-high",
+          "fallback": "🥵"
+        },
+        "color": "#4A90E2"
+      },
+      {
+        "id": "bn_cold",
+        "arabicText": "أَنَا بَرْدَان",
+        "englishText": "I am cold",
+        "audioFile": "cold.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "snowflake",
+          "fallback": "🥶"
+        },
+        "color": "#4A90E2"
+      },
+      {
+        "id": "bn_medicine",
+        "arabicText": "بِدِّي الدَّوَا",
+        "englishText": "I need my medicine",
+        "audioFile": "medicine.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "pill",
+          "fallback": "💊"
+        },
+        "color": "#4A90E2"
+      },
+      {
+        "id": "bn_help",
+        "arabicText": "سَاعِدْنِي",
+        "englishText": "I need help",
+        "audioFile": "help.mp3",
+        "icon": {
+          "library": "MaterialIcons",
+          "name": "sos",
+          "fallback": "🆘"
+        },
+        "color": "#4A90E2"
+      },
+      {
+        "id": "bn_doctor",
+        "arabicText": "بِدِّي دُكْتُور",
+        "englishText": "I need to go to the doctor",
+        "audioFile": "doctor.mp3",
+        "icon": {
+          "library": "FontAwesome5",
+          "name": "user-md",
+          "fallback": "👨‍⚕️"
+        },
+        "color": "#4A90E2"
+      },
+      {
+        "id": "bn_emergency",
+        "arabicText": "حَالَة طَارِئَة",
+        "englishText": "Emergency",
+        "audioFile": "emergency.mp3",
+        "icon": {
+          "library": "MaterialIcons",
+          "name": "emergency",
+          "fallback": "🚨"
+        },
+        "color": "#E74C3C"
+      }
+    ],
+    "emotions": [
+      {
+        "id": "em_alhamdulillah",
+        "arabicText": "الْحَمْدُ لِلَّه",
+        "englishText": "Praise be to God (Alhamdulillah)",
+        "audioFile": "alhamdulillah.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "hands-pray",
+          "fallback": "🤲"
+        },
+        "color": "#27AE60"
+      },
+      {
+        "id": "em_happy",
+        "arabicText": "أَنَا مَبْسُوط",
+        "englishText": "I am happy",
+        "audioFile": "happy.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "emoticon-happy",
+          "fallback": "😊"
+        },
+        "color": "#27AE60"
+      },
+      {
+        "id": "em_excited",
+        "arabicText": "أَنَا مُتَحَمِّس",
+        "englishText": "I am excited",
+        "audioFile": "excited.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "emoticon-excited",
+          "fallback": "🤗"
+        },
+        "color": "#F39C12"
+      },
+      {
+        "id": "em_grateful",
+        "arabicText": "أَنَا مُمْتَنّ",
+        "englishText": "I am grateful",
+        "audioFile": "grateful.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "hand-heart",
+          "fallback": "🙏"
+        },
+        "color": "#9B59B6"
+      },
+      {
+        "id": "em_relaxed",
+        "arabicText": "أَنَا مُرْتَاح",
+        "englishText": "I am relaxed",
+        "audioFile": "relaxed.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "emoticon-cool",
+          "fallback": "😌"
+        },
+        "color": "#16A085"
+      },
+      {
+        "id": "em_loved",
+        "arabicText": "بِحِسّ بِالحُبّ",
+        "englishText": "I feel loved",
+        "audioFile": "loved.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "heart",
+          "fallback": "❤️"
+        },
+        "color": "#E91E63"
+      },
+      {
+        "id": "em_sad",
+        "arabicText": "أَنَا زَعْلَان",
+        "englishText": "I am sad",
+        "audioFile": "sad.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "emoticon-sad",
+          "fallback": "😢"
+        },
+        "color": "#5DADE2"
+      },
+      {
+        "id": "em_angry",
+        "arabicText": "أَنَا عَصَبِي",
+        "englishText": "I am angry",
+        "audioFile": "angry.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "emoticon-angry",
+          "fallback": "😠"
+        },
+        "color": "#E74C3C"
+      },
+      {
+        "id": "em_frustrated",
+        "arabicText": "أَنَا مُحْبَط",
+        "englishText": "I am frustrated",
+        "audioFile": "frustrated.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "emoticon-frown",
+          "fallback": "😤"
+        },
+        "color": "#E67E22"
+      },
+      {
+        "id": "em_worried",
+        "arabicText": "أَنَا قَلْقَان",
+        "englishText": "I am worried",
+        "audioFile": "worried.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "emoticon-confused",
+          "fallback": "😟"
+        },
+        "color": "#8E44AD"
+      },
+      {
+        "id": "em_lonely",
+        "arabicText": "بِحِسّ بِالوَحْدَة",
+        "englishText": "I feel lonely",
+        "audioFile": "lonely.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "emoticon-sad-outline",
+          "fallback": "😔"
+        },
+        "color": "#7F8C8D"
+      },
+      {
+        "id": "em_tired",
+        "arabicText": "أَنَا تَعْبَان",
+        "englishText": "I am tired",
+        "audioFile": "tired.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "emoticon-dead",
+          "fallback": "😫"
+        },
+        "color": "#95A5A6"
+      },
+      {
+        "id": "em_bored",
+        "arabicText": "عِنْدِي مَلَل",
+        "englishText": "I am bored",
+        "audioFile": "bored.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "emoticon-neutral",
+          "fallback": "😐"
+        },
+        "color": "#BDC3C7"
+      },
+      {
+        "id": "em_confused",
+        "arabicText": "أَنَا مِرْتَبِك",
+        "englishText": "I am confused",
+        "audioFile": "confused.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "emoticon-confused-outline",
+          "fallback": "😕"
+        },
+        "color": "#F4B350"
+      },
+      {
+        "id": "em_surprised",
+        "arabicText": "أَنَا مِتْفَاجِئ",
+        "englishText": "I am surprised",
+        "audioFile": "surprised.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "emoticon-excited-outline",
+          "fallback": "😲"
+        },
+        "color": "#F1C40F"
+      },
+      {
+        "id": "em_uncomfortable",
+        "arabicText": "بِحِسّ بِعَدَم الرَّاحَة",
+        "englishText": "I feel uncomfortable",
+        "audioFile": "uncomfortable.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "emoticon-sick",
+          "fallback": "😣"
+        },
+        "color": "#D35400"
+      },
+      {
+        "id": "em_overwhelmed",
+        "arabicText": "بِحِسّ بِالإرْهَاق",
+        "englishText": "I feel overwhelmed",
+        "audioFile": "overwhelmed.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "emoticon-cry",
+          "fallback": "😵"
+        },
+        "color": "#34495E"
+      }
+    ],
+    "conversation": [
+      {
+        "id": "conv_bismillah",
+        "arabicText": "بِسْم اللَّه",
+        "englishText": "In the name of God (Bismillah)",
+        "audioFile": "bismillah.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "mosque",
+          "fallback": "🕌"
+        },
+        "color": "#16A085"
+      },
+      {
+        "id": "conv_inshallah",
+        "arabicText": "إنْ شَاء اللَّه",
+        "englishText": "God willing (Inshallah)",
+        "audioFile": "inshallah.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "hands-pray",
+          "fallback": "🤲"
+        },
+        "color": "#27AE60"
+      },
+      {
+        "id": "conv_ya_rab",
+        "arabicText": "يَا رَبّ",
+        "englishText": "O Lord / I hope so",
+        "audioFile": "ya_rab.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "hand-heart",
+          "fallback": "🙏"
+        },
+        "color": "#9B59B6"
+      },
+      {
+        "id": "conv_mashallah",
+        "arabicText": "مَا شَاء اللَّه",
+        "englishText": "What God willed (Mashallah)",
+        "audioFile": "mashallah.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "star-four-points",
+          "fallback": "✨"
+        },
+        "color": "#F39C12"
+      },
+      {
+        "id": "conv_hello",
+        "arabicText": "مَرْحَبَا",
+        "englishText": "Hello",
+        "audioFile": "hello.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "hand-wave",
+          "fallback": "👋"
+        },
+        "color": "#27AE60"
+      },
+      {
+        "id": "conv_good_morning",
+        "arabicText": "صَبَاح الخَيْر",
+        "englishText": "Good morning",
+        "audioFile": "good_morning.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "weather-sunset-up",
+          "fallback": "🌅"
+        },
+        "color": "#F39C12"
+      },
+      {
+        "id": "conv_good_evening",
+        "arabicText": "مَسَاء الخَيْر",
+        "englishText": "Good evening",
+        "audioFile": "good_evening.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "weather-sunset-down",
+          "fallback": "🌆"
+        },
+        "color": "#9B59B6"
+      },
+      {
+        "id": "conv_goodbye",
+        "arabicText": "مَع السَّلَامَة",
+        "englishText": "Goodbye",
+        "audioFile": "goodbye.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "hand-wave-outline",
+          "fallback": "👋"
+        },
+        "color": "#3498DB"
+      },
+      {
+        "id": "conv_goodnight",
+        "arabicText": "تِصْبَح عَلَى خَيْر",
+        "englishText": "Good night",
+        "audioFile": "goodnight.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "weather-night",
+          "fallback": "🌙"
+        },
+        "color": "#34495E"
+      },
+      {
+        "id": "conv_yes",
+        "arabicText": "إيه",
+        "englishText": "Yes",
+        "audioFile": "yes.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "check-circle",
+          "fallback": "✅"
+        },
+        "color": "#27AE60"
+      },
+      {
+        "id": "conv_no",
+        "arabicText": "لَا",
+        "englishText": "No",
+        "audioFile": "no.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "close-circle",
+          "fallback": "❌"
+        },
+        "color": "#E74C3C"
+      },
+      {
+        "id": "conv_maybe",
+        "arabicText": "مُمْكِن",
+        "englishText": "Maybe",
+        "audioFile": "maybe.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "help-circle",
+          "fallback": "🤔"
+        },
+        "color": "#F39C12"
+      },
+      {
+        "id": "conv_dont_know",
+        "arabicText": "مَا بَعْرِف",
+        "englishText": "I don't know",
+        "audioFile": "dont_know.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "account-question",
+          "fallback": "🤷"
+        },
+        "color": "#95A5A6"
+      },
+      {
+        "id": "conv_please",
+        "arabicText": "مِن فَضْلَك",
+        "englishText": "Please",
+        "audioFile": "please.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "hand-heart",
+          "fallback": "🙏"
+        },
+        "color": "#9B59B6"
+      },
+      {
+        "id": "conv_thank_you",
+        "arabicText": "شُكْرًا",
+        "englishText": "Thank you",
+        "audioFile": "thank_you.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "hand-heart",
+          "fallback": "🙏"
+        },
+        "color": "#27AE60"
+      },
+      {
+        "id": "conv_sorry",
+        "arabicText": "آسِف",
+        "englishText": "Sorry",
+        "audioFile": "sorry.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "emoticon-sad",
+          "fallback": "😞"
+        },
+        "color": "#5DADE2"
+      },
+      {
+        "id": "conv_excuse_me",
+        "arabicText": "عَفْوًا",
+        "englishText": "Excuse me",
+        "audioFile": "excuse_me.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "hand-front-right",
+          "fallback": "🙋"
+        },
+        "color": "#3498DB"
+      },
+      {
+        "id": "conv_what",
+        "arabicText": "شُو؟",
+        "englishText": "What?",
+        "audioFile": "what.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "help-circle-outline",
+          "fallback": "❓"
+        },
+        "color": "#F1C40F"
+      },
+      {
+        "id": "conv_where",
+        "arabicText": "وَيْن؟",
+        "englishText": "Where?",
+        "audioFile": "where.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "map-marker-question",
+          "fallback": "📍"
+        },
+        "color": "#E67E22"
+      },
+      {
+        "id": "conv_when",
+        "arabicText": "إيمْتَى؟",
+        "englishText": "When?",
+        "audioFile": "when.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "clock-outline",
+          "fallback": "⏰"
+        },
+        "color": "#3498DB"
+      },
+      {
+        "id": "conv_who",
+        "arabicText": "مِين؟",
+        "englishText": "Who?",
+        "audioFile": "who.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "account-question-outline",
+          "fallback": "👤"
+        },
+        "color": "#9B59B6"
+      },
+      {
+        "id": "conv_why",
+        "arabicText": "لَيْش؟",
+        "englishText": "Why?",
+        "audioFile": "why.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "head-question",
+          "fallback": "🤔"
+        },
+        "color": "#F39C12"
+      },
+      {
+        "id": "conv_how",
+        "arabicText": "كِيف؟",
+        "englishText": "How?",
+        "audioFile": "how.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "comment-question-outline",
+          "fallback": "❔"
+        },
+        "color": "#F4B350"
+      },
+      {
+        "id": "conv_wait",
+        "arabicText": "اسْتَنَّى",
+        "englishText": "Wait",
+        "audioFile": "wait.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "hand-back-right",
+          "fallback": "✋"
+        },
+        "color": "#E67E22"
+      },
+      {
+        "id": "conv_come",
+        "arabicText": "تَعَا",
+        "englishText": "Come",
+        "audioFile": "come.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "hand-wave",
+          "fallback": "👋"
+        },
+        "color": "#27AE60"
+      },
+      {
+        "id": "conv_go",
+        "arabicText": "رُوح",
+        "englishText": "Go",
+        "audioFile": "go.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "walk",
+          "fallback": "🚶"
+        },
+        "color": "#3498DB"
+      },
+      {
+        "id": "conv_stop",
+        "arabicText": "وَقِّف",
+        "englishText": "Stop",
+        "audioFile": "stop.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "stop-circle",
+          "fallback": "🛑"
+        },
+        "color": "#E74C3C"
+      },
+      {
+        "id": "conv_continue",
+        "arabicText": "كَمِّل",
+        "englishText": "Continue",
+        "audioFile": "continue.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "play-circle",
+          "fallback": "▶️"
+        },
+        "color": "#27AE60"
+      },
+      {
+        "id": "conv_understand",
+        "arabicText": "فَهِمْت",
+        "englishText": "I understand",
+        "audioFile": "understand.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "check-bold",
+          "fallback": "👍"
+        },
+        "color": "#27AE60"
+      },
+      {
+        "id": "conv_dont_understand",
+        "arabicText": "مَا فَهِمْت",
+        "englishText": "I don't understand",
+        "audioFile": "dont_understand.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "emoticon-confused",
+          "fallback": "😕"
+        },
+        "color": "#F4B350"
+      },
+      {
+        "id": "conv_repeat",
+        "arabicText": "عِيد مَرَّة تَانْيَة",
+        "englishText": "Please repeat",
+        "audioFile": "repeat.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "refresh",
+          "fallback": "🔁"
+        },
+        "color": "#3498DB"
+      },
+      {
+        "id": "conv_louder",
+        "arabicText": "أَعْلَى صَوْت",
+        "englishText": "Louder please",
+        "audioFile": "louder.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "volume-high",
+          "fallback": "📢"
+        },
+        "color": "#E67E22"
+      },
+      {
+        "id": "conv_agree",
+        "arabicText": "مُوَافِق",
+        "englishText": "I agree",
+        "audioFile": "agree.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "check-circle",
+          "fallback": "✅"
+        },
+        "color": "#27AE60"
+      },
+      {
+        "id": "conv_disagree",
+        "arabicText": "مِش مُوَافِق",
+        "englishText": "I disagree",
+        "audioFile": "disagree.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "close-circle",
+          "fallback": "❌"
+        },
+        "color": "#E74C3C"
+      },
+      {
+        "id": "conv_want",
+        "arabicText": "بِدِّي",
+        "englishText": "I want",
+        "audioFile": "want.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "hand-pointing-right",
+          "fallback": "👉"
+        },
+        "color": "#F39C12"
+      },
+      {
+        "id": "conv_dont_want",
+        "arabicText": "مَا بِدِّي",
+        "englishText": "I don't want",
+        "audioFile": "dont_want.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "hand-back-left",
+          "fallback": "🙅"
+        },
+        "color": "#E74C3C"
+      },
+      {
+        "id": "conv_like",
+        "arabicText": "بِحِبّ",
+        "englishText": "I like",
+        "audioFile": "like.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "heart",
+          "fallback": "❤️"
+        },
+        "color": "#E91E63"
+      },
+      {
+        "id": "conv_dont_like",
+        "arabicText": "مَا بِحِبّ",
+        "englishText": "I don't like",
+        "audioFile": "dont_like.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "thumb-down",
+          "fallback": "👎"
+        },
+        "color": "#7F8C8D"
+      },
+      {
+        "id": "conv_now",
+        "arabicText": "هَلَّأ",
+        "englishText": "Now",
+        "audioFile": "now.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "clock-fast",
+          "fallback": "⏰"
+        },
+        "color": "#F39C12"
+      },
+      {
+        "id": "conv_later",
+        "arabicText": "بَعْدَيْن",
+        "englishText": "Later",
+        "audioFile": "later.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "clock-time-eight",
+          "fallback": "⏳"
+        },
+        "color": "#3498DB"
+      },
+      {
+        "id": "conv_today",
+        "arabicText": "اليَوْم",
+        "englishText": "Today",
+        "audioFile": "today.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "calendar-today",
+          "fallback": "📅"
+        },
+        "color": "#27AE60"
+      },
+      {
+        "id": "conv_tomorrow",
+        "arabicText": "بُكْرَة",
+        "englishText": "Tomorrow",
+        "audioFile": "tomorrow.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "calendar-arrow-right",
+          "fallback": "📅"
+        },
+        "color": "#9B59B6"
+      },
+      {
+        "id": "conv_good",
+        "arabicText": "مْنِيح",
+        "englishText": "Good",
+        "audioFile": "good.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "thumb-up",
+          "fallback": "👍"
+        },
+        "color": "#27AE60"
+      },
+      {
+        "id": "conv_bad",
+        "arabicText": "مِش مْنِيح",
+        "englishText": "Bad",
+        "audioFile": "bad.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "thumb-down",
+          "fallback": "👎"
+        },
+        "color": "#E74C3C"
+      },
+      {
+        "id": "conv_okay",
+        "arabicText": "تَمَام",
+        "englishText": "Okay",
+        "audioFile": "okay.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "hand-okay",
+          "fallback": "👌"
+        },
+        "color": "#3498DB"
+      },
+      {
+        "id": "conv_finished",
+        "arabicText": "خَلَص",
+        "englishText": "Finished",
+        "audioFile": "finished.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "check-all",
+          "fallback": "✔️"
+        },
+        "color": "#27AE60"
+      }
+    ],
+    "pain": [
+      {
+        "id": "pain_head",
+        "arabicText": "رَاسِي بِيُوجَعْنِي",
+        "englishText": "My head hurts",
+        "audioFile": "head.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "head",
+          "fallback": "🧠"
+        },
+        "color": "#C9594C"
+      },
+      {
+        "id": "pain_chest",
+        "arabicText": "صَدْرِي بِيُوجَعْنِي",
+        "englishText": "My chest hurts",
+        "audioFile": "chest.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "heart-pulse",
+          "fallback": "💔"
+        },
+        "color": "#C9594C"
+      },
+      {
+        "id": "pain_stomach",
+        "arabicText": "مَعْدِتِي بِتُوجَعْنِي",
+        "englishText": "My stomach hurts",
+        "audioFile": "stomach.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "stomach",
+          "fallback": "🤢"
+        },
+        "color": "#C9594C"
+      },
+      {
+        "id": "pain_back",
+        "arabicText": "ظَهْرِي بِيُوجَعْنِي",
+        "englishText": "My back hurts",
+        "audioFile": "back.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "human-handsup",
+          "fallback": "🫃"
+        },
+        "color": "#C9594C"
+      },
+      {
+        "id": "pain_arm",
+        "arabicText": "إيدِي بِتُوجَعْنِي",
+        "englishText": "My arm hurts",
+        "audioFile": "arm.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "arm-flex",
+          "fallback": "💪"
+        },
+        "color": "#C9594C"
+      },
+      {
+        "id": "pain_leg",
+        "arabicText": "رِجْلِي بِتُوجَعْنِي",
+        "englishText": "My leg hurts",
+        "audioFile": "leg.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "human-male",
+          "fallback": "🦵"
+        },
+        "color": "#C9594C"
+      },
+      {
+        "id": "pain_neck",
+        "arabicText": "رَقَبْتِي بِتُوجَعْنِي",
+        "englishText": "My neck hurts",
+        "audioFile": "neck.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "neck",
+          "fallback": "🧣"
+        },
+        "color": "#C9594C"
+      },
+      {
+        "id": "pain_shoulder",
+        "arabicText": "كْتِفِي بِيُوجَعْنِي",
+        "englishText": "My shoulder hurts",
+        "audioFile": "shoulder.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "shoulder",
+          "fallback": "💪"
+        },
+        "color": "#C9594C"
+      },
+      {
+        "id": "pain_tooth",
+        "arabicText": "سِنِّي بِيُوجَعْنِي",
+        "englishText": "My tooth hurts",
+        "audioFile": "tooth.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "tooth",
+          "fallback": "🦷"
+        },
+        "color": "#C9594C"
+      },
+      {
+        "id": "pain_everywhere",
+        "arabicText": "كُلّ جِسْمِي بِيُوجَعْنِي",
+        "englishText": "My whole body hurts",
+        "audioFile": "everywhere.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "human-greeting",
+          "fallback": "🤕"
+        },
+        "color": "#C9594C"
+      },
+      {
+        "id": "pain_severe",
+        "arabicText": "عِنْدِي وَجَع كْتِير",
+        "englishText": "I have a lot of pain",
+        "audioFile": "pain_severe.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "alert-circle",
+          "fallback": "😖"
+        },
+        "color": "#E74C3C"
+      },
+      {
+        "id": "pain_emergency_severe",
+        "arabicText": "طَوَارِئ",
+        "englishText": "Emergency",
+        "audioFile": "emergency_severe.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "ambulance",
+          "fallback": "🚨"
+        },
+        "color": "#E74C3C"
+      }
+    ],
+    "family": [
+      {
+        "id": "fam_how_is_dad",
+        "arabicText": "كِيفُو بَابَا؟",
+        "englishText": "How is dad?",
+        "audioFile": "how_is_dad.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "human-male",
+          "fallback": "👨"
+        },
+        "color": "#3498DB"
+      },
+      {
+        "id": "fam_love_you",
+        "arabicText": "بِحِبَّك",
+        "englishText": "I love you",
+        "audioFile": "love_you.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "heart",
+          "fallback": "❤️"
+        },
+        "color": "#E74C3C"
+      },
+      {
+        "id": "fam_miss_you",
+        "arabicText": "اشتقتلكن",
+        "englishText": "I miss you",
+        "audioFile": "miss_you.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "heart-broken",
+          "fallback": "💙"
+        },
+        "color": "#3498DB"
+      },
+      {
+        "id": "fam_where_is",
+        "arabicText": "وَيْن...؟",
+        "englishText": "Where is...?",
+        "audioFile": "where_is.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "map-marker-question",
+          "fallback": "❓"
+        },
+        "color": "#95A5A6"
+      },
+      {
+        "id": "fam_come_here",
+        "arabicText": "تَعَا لَهُون",
+        "englishText": "Come here",
+        "audioFile": "come_here.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "hand-wave",
+          "fallback": "👋"
+        },
+        "color": "#27AE60"
+      },
+      {
+        "id": "fam_kids",
+        "arabicText": "الأَوْلَاد",
+        "englishText": "The kids",
+        "audioFile": "kids.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "baby-face",
+          "fallback": "👶"
+        },
+        "color": "#F39C12"
+      },
+      {
+        "id": "fam_call_him",
+        "arabicText": "خَبِّرُو",
+        "englishText": "Call him",
+        "audioFile": "call_him.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "phone",
+          "fallback": "📞"
+        },
+        "color": "#9B59B6"
+      },
+      {
+        "id": "fam_call_her",
+        "arabicText": "خَبِّرَا",
+        "englishText": "Call her",
+        "audioFile": "call_her.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "phone-outgoing",
+          "fallback": "📞"
+        },
+        "color": "#9B59B6"
+      },
+      {
+        "id": "fam_god_bless",
+        "arabicText": "اللَّه يِحْمِيك",
+        "englishText": "God protect you",
+        "audioFile": "god_bless.mp3",
+        "icon": {
+          "library": "MaterialCommunityIcons",
+          "name": "shield-account",
+          "fallback": "🤲"
+        },
+        "color": "#16A085"
+      }
+    ]
+  },
+  "metadata": {
+    "totalPhrases": {
+      "basic_needs": 17,
+      "emotions": 17,
+      "conversation": 46,
+      "pain": 12,
+      "family": 9
+    },
+    "audioDirectories": [
+      "basic_needs",
+      "emotions",
+      "conversation",
+      "pain",
+      "family"
+    ],
+    "supportedFormats": [".mp3"],
+    "language": "arabic_lebanese",
+    "dialect": "Lebanese",
+    "encoding": "UTF-8",
+    "tashkeel": true,
+    "iconLibrary": "react-native-vector-icons",
+    "primaryIconSet": "MaterialCommunityIcons",
+    "version": "3.0_with_icons"
+  }
+}
