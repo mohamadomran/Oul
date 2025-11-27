@@ -11,6 +11,7 @@ export interface BigButtonProps {
   size?: ButtonSize;
   highContrast?: boolean;
   disabled?: boolean;
+  width?: number; // Optional responsive width override
 }
 
 export interface PhraseActionBottomSheetProps {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, useWindowDimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import type { RootStackNavigationProp } from '../../types/navigation.types';
 import { COLORS, SPACING } from '../../constants';
@@ -8,12 +8,19 @@ import { useButtonSize, useHighContrast } from '../../contexts/SettingsContext';
 
 const CategoryGrid: React.FC = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
+  const { width: screenWidth } = useWindowDimensions();
   const buttonSize = useButtonSize();
   const highContrast = useHighContrast();
 
+  // Responsive button sizing - 2 buttons per row with gap
+  const horizontalPadding = SPACING.xl * 2; // Account for HomeScreen padding
+  const gap = SPACING.md;
+  const availableWidth = screenWidth - horizontalPadding;
+  const buttonWidth = (availableWidth - gap) / 2;
+
   return (
     <View style={styles.gridContainer}>
-      <View style={styles.buttonRow}>
+      <View style={[styles.buttonRow, { gap }]}>
         <BigButton
           title="احتياجات أساسية"
           icon="🍽️"
@@ -21,6 +28,7 @@ const CategoryGrid: React.FC = () => {
           onPress={() => navigation.navigate('BasicNeeds')}
           size={buttonSize}
           highContrast={highContrast}
+          width={buttonWidth}
         />
         <BigButton
           title="ألم"
@@ -29,10 +37,11 @@ const CategoryGrid: React.FC = () => {
           onPress={() => navigation.navigate('PainLocation')}
           size={buttonSize}
           highContrast={highContrast}
+          width={buttonWidth}
         />
       </View>
 
-      <View style={styles.buttonRow}>
+      <View style={[styles.buttonRow, { gap }]}>
         <BigButton
           title="مشاعر"
           icon="😊"
@@ -40,6 +49,7 @@ const CategoryGrid: React.FC = () => {
           onPress={() => navigation.navigate('Emotions')}
           size={buttonSize}
           highContrast={highContrast}
+          width={buttonWidth}
         />
         <BigButton
           title="محادثة"
@@ -48,6 +58,7 @@ const CategoryGrid: React.FC = () => {
           onPress={() => navigation.navigate('Conversation')}
           size={buttonSize}
           highContrast={highContrast}
+          width={buttonWidth}
         />
       </View>
 
@@ -59,6 +70,7 @@ const CategoryGrid: React.FC = () => {
           onPress={() => navigation.navigate('Family')}
           size={buttonSize}
           highContrast={highContrast}
+          width={buttonWidth}
         />
       </View>
     </View>
@@ -68,15 +80,13 @@ const CategoryGrid: React.FC = () => {
 const styles = StyleSheet.create({
   gridContainer: {
     width: '100%',
-    maxWidth: 500,
-    gap: SPACING.lg,
+    gap: SPACING.md,
   },
   buttonRow: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
-    gap: SPACING.lg,
   },
   buttonRowCentered: {
     flexDirection: 'row',

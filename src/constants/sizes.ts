@@ -11,31 +11,32 @@ export const SPACING = {
 /**
  * Button sizes (optimized for elderly users with reduced dexterity)
  * All sizes exceed minimum 48x48dp recommendation (WCAG 2.5.5)
+ * Heights are compact to fit more content on screen while remaining accessible
  */
 export const BUTTON_SIZES = {
-  // Standard phrase buttons (increased from 100px to 120px for better accessibility)
+  // Compact phrase buttons - fits more on screen
   normal: {
-    height: 120,
-    minWidth: 120,
-    fontSize: 20, // Arabic text (increased from 18)
-    iconSize: 40, // Icon size (increased from 36)
-    padding: 14, // Padding (increased from 12)
+    height: 90, // Reduced from 120 for better fit
+    minWidth: 100,
+    fontSize: 18, // Arabic text
+    iconSize: 32, // Icon size
+    padding: 10,
   },
-  // Home screen category buttons (PRIMARY SIZE)
+  // Standard phrase buttons
   large: {
-    height: 160,
-    minWidth: 160,
-    fontSize: 24, // Arabic text (optimized readability)
-    iconSize: 56, // Large emoji icons
-    padding: 16,
+    height: 110,
+    minWidth: 120,
+    fontSize: 20,
+    iconSize: 40,
+    padding: 12,
   },
   // Extra large for critical actions
   xlarge: {
-    height: 180,
-    minWidth: 180,
-    fontSize: 26,
-    iconSize: 64,
-    padding: 20,
+    height: 130,
+    minWidth: 140,
+    fontSize: 22,
+    iconSize: 48,
+    padding: 14,
   },
 } as const;
 

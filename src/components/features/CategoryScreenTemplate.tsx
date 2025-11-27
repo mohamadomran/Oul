@@ -1,5 +1,11 @@
 import React, { useCallback, useMemo } from 'react';
-import { View, StyleSheet, ScrollView, StatusBar } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  StatusBar,
+  useWindowDimensions,
+} from 'react-native';
 import { COLORS, SPACING } from '../../constants';
 import {
   PhraseButton,
@@ -43,8 +49,16 @@ const CategoryScreenTemplate: React.FC<CategoryScreenTemplateProps> = ({
   category,
   screenName,
 }) => {
+  const { width: screenWidth } = useWindowDimensions();
   const buttonSize = useButtonSize();
   const highContrast = useHighContrast();
+
+  // Responsive grid calculations - always 2 columns minimum
+  const horizontalPadding = SPACING.md * 2; // padding on both sides
+  const gap = SPACING.sm; // smaller gap for better fit
+  const numColumns = 2;
+  const availableWidth = screenWidth - horizontalPadding;
+  const itemWidth = (availableWidth - gap * (numColumns - 1)) / numColumns;
 
   // Custom hooks for audio, sharing, selection, and favorites
   const { isPlaying, playPhrase } = useAudioPlayback(category);
@@ -91,12 +105,15 @@ const CategoryScreenTemplate: React.FC<CategoryScreenTemplateProps> = ({
 
       <ScrollView
         style={styles.scrollView}
-        contentContainerStyle={styles.scrollContent}
+        contentContainerStyle={[
+          styles.scrollContent,
+          { paddingHorizontal: SPACING.md },
+        ]}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.grid}>
+        <View style={[styles.grid, { gap }]}>
           {phrases.map(phrase => (
-            <View key={phrase.id} style={styles.gridItem}>
+            <View key={phrase.id} style={{ width: itemWidth }}>
               <PhraseButton
                 phrase={phrase}
                 size={buttonSize}
@@ -137,18 +154,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollContent: {
-    padding: SPACING.lg,
-    paddingTop: SPACING.xl,
-    paddingBottom: 180,
+    paddingTop: SPACING.md,
+    paddingBottom: 120, // Reduced for better scroll experience
   },
   grid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    gap: SPACING.md,
-  },
-  gridItem: {
-    width: '48%',
   },
 });
 

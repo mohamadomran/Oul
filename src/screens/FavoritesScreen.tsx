@@ -5,6 +5,7 @@ import {
   StyleSheet,
   ScrollView,
   ActivityIndicator,
+  useWindowDimensions,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { COLORS, SPACING, FONT_SIZES } from '../constants';
@@ -27,9 +28,17 @@ import JsonAudioService from '../services/JsonAudioService';
 const FavoritesScreen: React.FC = () => {
   const bottomSheetRef = useRef<PhraseActionBottomSheetRef>(null);
   const [selectedPhrase, setSelectedPhrase] = useState<Phrase | null>(null);
+  const { width: screenWidth } = useWindowDimensions();
 
   const buttonSize = useButtonSize();
   const highContrast = useHighContrast();
+
+  // Responsive grid calculations - always 2 columns minimum
+  const horizontalPadding = SPACING.md * 2;
+  const gap = SPACING.sm;
+  const numColumns = 2;
+  const availableWidth = screenWidth - horizontalPadding;
+  const itemWidth = (availableWidth - gap * (numColumns - 1)) / numColumns;
 
   const { loading, favorites, isFavorite, toggleFavorite } = useFavorites();
   const { sharePhrase } = useSharePhrase();
@@ -114,9 +123,9 @@ const FavoritesScreen: React.FC = () => {
             </Text>
           </View>
         ) : (
-          <View style={styles.grid}>
+          <View style={[styles.grid, { gap }]}>
             {favorites.map(phrase => (
-              <View key={`${phrase.category}-${phrase.id}`} style={styles.gridItem}>
+              <View key={`${phrase.category}-${phrase.id}`} style={{ width: itemWidth }}>
                 <PhraseButton
                   phrase={phrase}
                   size={buttonSize}
@@ -178,16 +187,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   content: {
-    padding: SPACING.xl,
+    paddingHorizontal: SPACING.md,
+    paddingTop: SPACING.md,
   },
   grid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: SPACING.md,
-    justifyContent: 'space-between',
-  },
-  gridItem: {
-    width: '48%',
   },
   loadingContainer: {
     flex: 1,

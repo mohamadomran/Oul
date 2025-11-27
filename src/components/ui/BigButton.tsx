@@ -19,6 +19,7 @@ const BigButton: React.FC<BigButtonProps> = ({
   size = 'normal',
   highContrast = false,
   disabled = false,
+  width,
 }) => {
   const [isPressed, setIsPressed] = useState(false);
 
@@ -38,7 +39,7 @@ const BigButton: React.FC<BigButtonProps> = ({
       ? COLORS.highContrastButton
       : color,
     height: buttonSize.height,
-    width: buttonSize.minWidth, // Fixed width (was minWidth)
+    width: width ?? buttonSize.minWidth, // Use responsive width if provided
     borderRadius: BORDER_RADIUS.lg,
     justifyContent: 'center',
     alignItems: 'center',
