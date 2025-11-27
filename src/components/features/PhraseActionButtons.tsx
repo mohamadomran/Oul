@@ -33,9 +33,10 @@ const PhraseActionButtons: React.FC<PhraseActionButtonsProps> = ({
           onPress={onPlay}
           disabled={isPlaying}
           activeOpacity={0.7}
-          accessibilityLabel="Play audio"
+          accessibilityLabel="تشغيل الصوت - Play audio"
           accessibilityRole="button"
-          accessibilityHint="Plays the audio message"
+          accessibilityHint="يشغل الرسالة الصوتية - Plays the audio message"
+          accessibilityState={{ disabled: isPlaying }}
         >
           {isPlaying ? (
             <ActivityIndicator size="large" color={COLORS.white} />
@@ -49,9 +50,9 @@ const PhraseActionButtons: React.FC<PhraseActionButtonsProps> = ({
           style={[styles.actionButton, styles.shareButton, styles.halfWidth]}
           onPress={onShare}
           activeOpacity={0.7}
-          accessibilityLabel="Share via WhatsApp"
+          accessibilityLabel="إرسال واتساب - Share via WhatsApp"
           accessibilityRole="button"
-          accessibilityHint="Opens WhatsApp to share this message"
+          accessibilityHint="يفتح واتساب لمشاركة الرسالة - Opens WhatsApp to share this message"
         >
           <Text style={styles.actionButtonText}>إرسال واتساب</Text>
         </TouchableOpacity>
@@ -68,9 +69,10 @@ const PhraseActionButtons: React.FC<PhraseActionButtonsProps> = ({
           ]}
           onPress={onToggleFavorite}
           activeOpacity={0.7}
-          accessibilityLabel={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+          accessibilityLabel={isFavorite ? 'إزالة من المفضلة - Remove from favorites' : 'إضافة للمفضلة - Add to favorites'}
           accessibilityRole="button"
           accessibilityState={{ selected: isFavorite }}
+          accessibilityHint={isFavorite ? 'يزيل هذه العبارة من المفضلة - Removes this phrase from favorites' : 'يضيف هذه العبارة للمفضلة - Adds this phrase to favorites'}
         >
           <Text style={styles.favoriteButtonText}>
             {isFavorite ? '⭐ إزالة من المفضلة' : '☆ إضافة للمفضلة'}

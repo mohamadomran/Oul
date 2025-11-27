@@ -102,7 +102,7 @@ const RootNavigator: React.FC = () => {
           name="Favorites"
           component={FavoritesScreen}
           options={{
-            title: 'Favorites',
+            headerShown: false,
           }}
         />
       </Stack.Navigator>

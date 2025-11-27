@@ -3,9 +3,11 @@ import {
   TouchableOpacity,
   Text,
   StyleSheet,
+  View,
   ViewStyle,
   TextStyle,
 } from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import { COLORS, FONTS } from '../../constants';
 import { BUTTON_SIZES, BORDER_RADIUS } from '../../constants';
 import HapticService from '../../services/HapticService';
@@ -14,6 +16,8 @@ import type { BigButtonProps } from '../../types/ui.types';
 const BigButton: React.FC<BigButtonProps> = ({
   title,
   icon,
+  iconName,
+  iconColor,
   color,
   onPress,
   size = 'normal',
@@ -32,6 +36,9 @@ const BigButton: React.FC<BigButtonProps> = ({
 
   const buttonSize = BUTTON_SIZES[size];
 
+  // Determine if background is light (needs border)
+  const isLightBg = color === COLORS.surface || color === COLORS.white || color === COLORS.background;
+
   const buttonStyle: ViewStyle = {
     backgroundColor: disabled
       ? COLORS.disabled
@@ -47,14 +54,12 @@ const BigButton: React.FC<BigButtonProps> = ({
     // Enhanced shadow for depth perception
     shadowColor: COLORS.black,
     shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: disabled ? 0.05 : 0.2,
+    shadowOpacity: disabled ? 0.05 : 0.15,
     shadowRadius: 8,
-    elevation: disabled ? 1 : 6,
-    // High contrast border
-    ...(highContrast && {
-      borderWidth: 2,
-      borderColor: COLORS.highContrastBorder,
-    }),
+    elevation: disabled ? 1 : 4,
+    // Border for light backgrounds or high contrast
+    borderWidth: highContrast ? 2 : isLightBg ? 1 : 0,
+    borderColor: highContrast ? COLORS.highContrastBorder : COLORS.border,
     // Pressed state overlay
     ...(isPressed &&
       !disabled && {
@@ -68,6 +73,8 @@ const BigButton: React.FC<BigButtonProps> = ({
       ? COLORS.disabledText
       : highContrast
       ? COLORS.highContrastText
+      : isLightBg
+      ? COLORS.text
       : COLORS.white,
     fontSize: buttonSize.fontSize,
     fontWeight: '800',
@@ -83,6 +90,30 @@ const BigButton: React.FC<BigButtonProps> = ({
     textAlign: 'center',
   };
 
+  // Determine the icon color for vector icons
+  const vectorIconColor = disabled
+    ? COLORS.disabledText
+    : iconColor || COLORS.white;
+
+  // Render icon (vector icon takes priority over emoji)
+  const renderIcon = () => {
+    if (iconName) {
+      return (
+        <View style={styles.iconContainer}>
+          <Ionicons
+            name={iconName}
+            size={buttonSize.iconSize}
+            color={vectorIconColor}
+          />
+        </View>
+      );
+    }
+    if (icon) {
+      return <Text style={iconStyle}>{icon}</Text>;
+    }
+    return null;
+  };
+
   return (
     <TouchableOpacity
       style={[styles.button, buttonStyle]}
@@ -95,10 +126,10 @@ const BigButton: React.FC<BigButtonProps> = ({
       accessibilityRole="button"
       accessibilityState={{ disabled }}
       accessibilityHint={
-        disabled ? 'Button is disabled' : `Navigate to ${title}`
+        disabled ? 'الزر معطل - Button is disabled' : `انتقل إلى ${title} - Navigate to ${title}`
       }
     >
-      {icon && <Text style={iconStyle}>{icon}</Text>}
+      {renderIcon()}
       <Text style={textStyle} numberOfLines={2} adjustsFontSizeToFit>
         {title}
       </Text>
@@ -109,6 +140,11 @@ const BigButton: React.FC<BigButtonProps> = ({
 const styles = StyleSheet.create({
   button: {
     // Base styles are dynamic
+  },
+  iconContainer: {
+    marginBottom: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 

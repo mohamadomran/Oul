@@ -12,13 +12,7 @@ const AudioPlaybackIndicator: React.FC<AudioPlaybackIndicatorProps> = ({
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const pulseAnim = useRef(new Animated.Value(1)).current;
 
-  console.log('[AudioPlaybackIndicator] isPlaying:', isPlaying);
-
   useEffect(() => {
-    console.log(
-      '[AudioPlaybackIndicator] useEffect triggered with isPlaying:',
-      isPlaying,
-    );
     if (isPlaying) {
       // Fade in
       Animated.timing(fadeAnim, {

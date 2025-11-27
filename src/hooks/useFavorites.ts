@@ -32,7 +32,6 @@ interface UseFavoritesResult {
 export function useFavorites(): UseFavoritesResult {
   const [loading, setLoading] = useState(true);
   const [favorites, setFavorites] = useState<Phrase[]>([]);
-  const [, forceUpdate] = useState(0);
 
   // Load favorites on mount
   useEffect(() => {
@@ -44,9 +43,8 @@ export function useFavorites(): UseFavoritesResult {
 
     loadFavorites();
 
-    // Subscribe to changes
+    // Subscribe to changes - updateFavorites calls setFavorites which triggers re-render
     const unsubscribe = FavoritesService.subscribe(() => {
-      forceUpdate(n => n + 1);
       updateFavorites();
     });
 

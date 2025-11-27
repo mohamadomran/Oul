@@ -21,12 +21,20 @@ interface AudioPhrasesData {
  */
 const typedAudioData = audioPhrasesData as unknown as AudioPhrasesData;
 
+export interface AudioError {
+  type: 'load' | 'playback' | 'not_found';
+  message: string;
+  phraseId?: string;
+  category?: string;
+}
+
 class JsonAudioService {
   private initialized: boolean = false;
   private currentSound: Sound | null = null;
   private isPlayingState: boolean = false;
   private playbackStateListeners: Set<(isPlaying: boolean) => void> =
     new Set();
+  private errorListeners: Set<(error: AudioError) => void> = new Set();
 
   async initialize(): Promise<void> {
     if (this.initialized) {
@@ -64,12 +72,26 @@ class JsonAudioService {
 
       const categoryPhrases = typedAudioData.audioPhrases[category];
       if (!categoryPhrases) {
-        throw new Error(`Category ${category} not found`);
+        const error: AudioError = {
+          type: 'not_found',
+          message: `Category ${category} not found`,
+          category,
+          phraseId,
+        };
+        this.notifyError(error);
+        throw new Error(error.message);
       }
 
       const phrase = categoryPhrases.find((p: Phrase) => p.id === phraseId);
       if (!phrase) {
-        throw new Error(`Phrase ${phraseId} not found in category ${category}`);
+        const error: AudioError = {
+          type: 'not_found',
+          message: `Phrase ${phraseId} not found in category ${category}`,
+          category,
+          phraseId,
+        };
+        this.notifyError(error);
+        throw new Error(error.message);
       }
 
       const audioPath = this.getAudioPath(category, phrase.audioFile);
@@ -78,6 +100,12 @@ class JsonAudioService {
       this.currentSound = new Sound(audioPath, Sound.MAIN_BUNDLE, error => {
         if (error) {
           console.error('[JsonAudioService] Failed to load sound:', error);
+          this.notifyError({
+            type: 'load',
+            message: 'Failed to load audio file',
+            category,
+            phraseId,
+          });
           this.setPlayingState(false);
           return;
         }
@@ -90,6 +118,12 @@ class JsonAudioService {
         this.currentSound?.play(success => {
           if (!success) {
             console.error('[JsonAudioService] Playback failed');
+            this.notifyError({
+              type: 'playback',
+              message: 'Audio playback failed',
+              category,
+              phraseId,
+            });
           }
           this.setPlayingState(false);
         });
@@ -138,6 +172,23 @@ class JsonAudioService {
     return () => {
       this.playbackStateListeners.delete(listener);
     };
+  }
+
+  onError(listener: (error: AudioError) => void): () => void {
+    this.errorListeners.add(listener);
+    return () => {
+      this.errorListeners.delete(listener);
+    };
+  }
+
+  private notifyError(error: AudioError): void {
+    this.errorListeners.forEach(listener => {
+      try {
+        listener(error);
+      } catch (e) {
+        console.error('[JsonAudioService] Error in error listener:', e);
+      }
+    });
   }
 
   /**

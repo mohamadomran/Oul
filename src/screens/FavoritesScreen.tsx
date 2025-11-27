@@ -1,13 +1,14 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useCallback, useMemo } from 'react';
 import {
   View,
   Text,
   StyleSheet,
-  ScrollView,
+  FlatList,
   ActivityIndicator,
   useWindowDimensions,
+  StatusBar,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import type { ListRenderItemInfo } from 'react-native';
 import { COLORS, SPACING, FONT_SIZES } from '../constants';
 import {
   PhraseButton,
@@ -15,7 +16,7 @@ import {
   PhraseActionBottomSheet,
   AudioPlaybackIndicator,
 } from '../components';
-import type { Phrase } from '../types/phrase.types';
+import type { Phrase, PhraseCategory } from '../types/phrase.types';
 import type { PhraseActionBottomSheetRef } from '../types/ui.types';
 import { useButtonSize, useHighContrast } from '../contexts/SettingsContext';
 import {
@@ -25,6 +26,18 @@ import {
 } from '../hooks';
 import JsonAudioService from '../services/JsonAudioService';
 
+/**
+ * Map category to its color for icons
+ */
+const CATEGORY_COLOR_MAP: Record<PhraseCategory, string> = {
+  basic_needs: COLORS.basicNeeds,
+  pain: COLORS.pain,
+  emotions: COLORS.emotions,
+  conversation: COLORS.conversation,
+  family: COLORS.family,
+  custom: COLORS.custom,
+};
+
 const FavoritesScreen: React.FC = () => {
   const bottomSheetRef = useRef<PhraseActionBottomSheetRef>(null);
   const [selectedPhrase, setSelectedPhrase] = useState<Phrase | null>(null);
@@ -33,7 +46,7 @@ const FavoritesScreen: React.FC = () => {
   const buttonSize = useButtonSize();
   const highContrast = useHighContrast();
 
-  // Responsive grid calculations - always 2 columns minimum
+  // Responsive grid calculations - always 2 columns
   const horizontalPadding = SPACING.md * 2;
   const gap = SPACING.sm;
   const numColumns = 2;
@@ -42,20 +55,18 @@ const FavoritesScreen: React.FC = () => {
 
   const { loading, favorites, isFavorite, toggleFavorite } = useFavorites();
   const { sharePhrase } = useSharePhrase();
-  // Use basic_needs as default category for audio - actual category stored in phrase
   const { isPlaying } = useAudioPlayback('basic_needs');
 
-  const handlePhrasePress = (phrase: Phrase) => {
+  const handlePhrasePress = useCallback((phrase: Phrase) => {
     setSelectedPhrase(phrase);
     bottomSheetRef.current?.snapToIndex(0);
-  };
+  }, []);
 
-  const handlePlay = async () => {
+  const handlePlay = useCallback(async () => {
     if (!selectedPhrase || !selectedPhrase.category) return;
     try {
-      // Get the category from the phrase (added by useFavorites hook)
       const category = selectedPhrase.category;
-      if (category === 'custom') return; // Skip custom phrases for now
+      if (category === 'custom') return;
 
       await JsonAudioService.play(
         category as Exclude<typeof category, 'custom'>,
@@ -64,79 +75,109 @@ const FavoritesScreen: React.FC = () => {
     } catch (error) {
       console.error('[FavoritesScreen] Error playing audio:', error);
     }
-  };
+  }, [selectedPhrase]);
 
-  const handleShare = async () => {
+  const handleShare = useCallback(async () => {
     if (!selectedPhrase) return;
     await sharePhrase(selectedPhrase.arabicText, selectedPhrase.englishText);
-  };
+  }, [selectedPhrase, sharePhrase]);
 
-  const handleToggleFavorite = async () => {
+  const handleToggleFavorite = useCallback(async () => {
     if (!selectedPhrase || !selectedPhrase.category) return;
     await toggleFavorite(selectedPhrase.category, selectedPhrase.id);
-  };
+  }, [selectedPhrase, toggleFavorite]);
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setSelectedPhrase(null);
-  };
+  }, []);
 
-  const isSelectedFavorite =
-    selectedPhrase && selectedPhrase.category
-      ? isFavorite(selectedPhrase.category, selectedPhrase.id)
-      : false;
+  const isSelectedFavorite = useMemo(
+    () =>
+      selectedPhrase && selectedPhrase.category
+        ? isFavorite(selectedPhrase.category, selectedPhrase.id)
+        : false,
+    [selectedPhrase, isFavorite],
+  );
+
+  // Render item for FlatList
+  const renderItem = useCallback(
+    ({ item: phrase }: ListRenderItemInfo<Phrase>) => {
+      const categoryColor = phrase.category
+        ? CATEGORY_COLOR_MAP[phrase.category]
+        : COLORS.primary;
+
+      return (
+        <View style={{ width: itemWidth, marginBottom: gap }}>
+          <PhraseButton
+            phrase={phrase}
+            size={buttonSize}
+            highContrast={highContrast}
+            categoryColor={categoryColor}
+            onPress={() => handlePhrasePress(phrase)}
+          />
+        </View>
+      );
+    },
+    [itemWidth, gap, buttonSize, highContrast, handlePhrasePress],
+  );
+
+  const keyExtractor = useCallback(
+    (item: Phrase) => `${item.category}-${item.id}`,
+    [],
+  );
+
+  // Empty state component
+  const EmptyState = useMemo(
+    () => (
+      <View style={styles.emptyState}>
+        <Text style={styles.emptyIcon}>⭐</Text>
+        <Text style={styles.emptyTitle}>لا توجد عبارات مفضلة</Text>
+        <Text style={styles.emptySubtitle}>
+          No favorites yet{'\n'}
+          Tap the star button when viewing a phrase to add it here
+        </Text>
+      </View>
+    ),
+    [],
+  );
 
   if (loading) {
     return (
-      <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
+      <View style={styles.container}>
         <View style={styles.loadingContainer}>
           <ActivityIndicator size="large" color={COLORS.primary} />
         </View>
-      </SafeAreaView>
+      </View>
     );
   }
 
   return (
-    <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
-      <View style={styles.header}>
-        <Text style={styles.title}>المفضلة</Text>
-        <Text style={styles.subtitle}>
-          Favorites • {favorites.length} phrase
-          {favorites.length !== 1 ? 's' : ''}
-        </Text>
-      </View>
+    <View style={[styles.container, highContrast && styles.containerHighContrast]}>
+      <StatusBar
+        barStyle="dark-content"
+        backgroundColor={COLORS.background}
+      />
 
-      <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={[
-          styles.content,
-          { paddingBottom: 100 },
-        ]}
-        showsVerticalScrollIndicator={false}
-      >
-        {favorites.length === 0 ? (
-          <View style={styles.emptyState}>
-            <Text style={styles.emptyIcon}>⭐</Text>
-            <Text style={styles.emptyTitle}>لا توجد عبارات مفضلة</Text>
-            <Text style={styles.emptySubtitle}>
-              No favorites yet{'\n'}
-              Tap the star button when viewing a phrase to add it here
-            </Text>
-          </View>
-        ) : (
-          <View style={[styles.grid, { gap }]}>
-            {favorites.map(phrase => (
-              <View key={`${phrase.category}-${phrase.id}`} style={{ width: itemWidth }}>
-                <PhraseButton
-                  phrase={phrase}
-                  size={buttonSize}
-                  highContrast={highContrast}
-                  onPress={() => handlePhrasePress(phrase)}
-                />
-              </View>
-            ))}
-          </View>
-        )}
-      </ScrollView>
+      {favorites.length === 0 ? (
+        EmptyState
+      ) : (
+        <FlatList
+          data={favorites}
+          renderItem={renderItem}
+          keyExtractor={keyExtractor}
+          numColumns={numColumns}
+          style={styles.flatList}
+          contentContainerStyle={styles.flatListContent}
+          columnWrapperStyle={styles.columnWrapper}
+          showsVerticalScrollIndicator={false}
+          removeClippedSubviews={true}
+          maxToRenderPerBatch={10}
+          windowSize={5}
+          initialNumToRender={8}
+          accessibilityRole="list"
+          accessibilityLabel="قائمة المفضلة - Favorites list"
+        />
+      )}
 
       <BottomActionBar currentScreen="Favorites" />
 
@@ -154,7 +195,7 @@ const FavoritesScreen: React.FC = () => {
       />
 
       <AudioPlaybackIndicator isPlaying={isPlaying} />
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -163,36 +204,19 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.background,
   },
-  header: {
-    padding: SPACING.xl,
-    paddingBottom: SPACING.lg,
-    backgroundColor: COLORS.surface,
-    borderBottomWidth: 2,
-    borderBottomColor: COLORS.border,
+  containerHighContrast: {
+    backgroundColor: COLORS.highContrastBackground,
   },
-  title: {
-    fontSize: FONT_SIZES.xxxl,
-    fontWeight: '800',
-    color: COLORS.text,
-    textAlign: 'center',
-    marginBottom: SPACING.xs,
-  },
-  subtitle: {
-    fontSize: FONT_SIZES.lg,
-    fontWeight: '500',
-    color: COLORS.textSecondary,
-    textAlign: 'center',
-  },
-  scrollView: {
+  flatList: {
     flex: 1,
   },
-  content: {
-    paddingHorizontal: SPACING.md,
+  flatListContent: {
     paddingTop: SPACING.md,
+    paddingBottom: 160,
+    paddingHorizontal: SPACING.md,
   },
-  grid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+  columnWrapper: {
+    justifyContent: 'space-between',
   },
   loadingContainer: {
     flex: 1,

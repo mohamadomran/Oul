@@ -1,15 +1,4 @@
-// Audio service interface - currently using JsonAudioService
-// export interface AudioServiceInterface {
-//   initialize(): Promise<void>;
-//   play(audioFile: string): Promise<void>;
-//   playSequence(audioFiles: string[]): Promise<void>;
-//   stop(): Promise<void>;
-//   preloadAudio(audioFiles: string[]): Promise<void>;
-//   releaseAudio(audioFile: string): void;
-//   releaseAll(): void;
-//   isAvailable(): boolean;
-//   getCacheSize(): number;
-// }
+import type { AppSettings } from './settings.types';
 
 export interface HapticServiceInterface {
   trigger(type: 'light' | 'medium' | 'heavy'): Promise<void>;
@@ -19,9 +8,9 @@ export interface HapticServiceInterface {
 }
 
 export interface StorageServiceInterface {
-  getSettings(): Promise<any>;
-  saveSettings(settings: any): Promise<void>;
-  updateSetting<K extends keyof any>(key: K, value: any[K]): Promise<void>;
+  getSettings(): Promise<AppSettings>;
+  saveSettings(settings: AppSettings): Promise<void>;
+  updateSetting<K extends keyof AppSettings>(key: K, value: AppSettings[K]): Promise<void>;
   clearAll(): Promise<void>;
 }
 

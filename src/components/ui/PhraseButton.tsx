@@ -18,6 +18,7 @@ const PhraseButton: React.FC<PhraseButtonProps> = ({
   size = 'normal',
   highContrast = false,
   disabled = false,
+  categoryColor,
 }) => {
   const handlePress = useCallback(async () => {
     if (disabled) return;
@@ -27,7 +28,10 @@ const PhraseButton: React.FC<PhraseButtonProps> = ({
   }, [disabled, onPress]);
 
   const buttonSize = BUTTON_SIZES[size];
-  const buttonColor = phrase.color
+  // Get the icon color - use passed categoryColor, or fall back to phrase color/category
+  const iconColorValue = categoryColor
+    ? categoryColor
+    : phrase.color
     ? phrase.color
     : (phrase.category &&
         CATEGORY_COLORS[phrase.category as keyof typeof CATEGORY_COLORS]) ||
@@ -38,7 +42,7 @@ const PhraseButton: React.FC<PhraseButtonProps> = ({
       ? COLORS.disabled
       : highContrast
       ? COLORS.highContrastButton
-      : buttonColor,
+      : COLORS.surface, // Light background
     height: buttonSize.height,
     width: '100%', // Full width of grid container
     borderRadius: 12,
@@ -46,14 +50,13 @@ const PhraseButton: React.FC<PhraseButtonProps> = ({
     alignItems: 'center',
     padding: buttonSize.padding,
     shadowColor: COLORS.black,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: disabled ? 0.05 : 0.2,
-    shadowRadius: 8,
-    elevation: disabled ? 1 : 6,
-    ...(highContrast && {
-      borderWidth: 2,
-      borderColor: COLORS.highContrastBorder,
-    }),
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: disabled ? 0.05 : 0.1,
+    shadowRadius: 4,
+    elevation: disabled ? 1 : 3,
+    // Border for definition
+    borderWidth: highContrast ? 2 : 1,
+    borderColor: highContrast ? COLORS.highContrastBorder : COLORS.border,
   };
 
   const textStyle: TextStyle = {
@@ -62,18 +65,18 @@ const PhraseButton: React.FC<PhraseButtonProps> = ({
       ? COLORS.disabledText
       : highContrast
       ? COLORS.highContrastText
-      : COLORS.white,
+      : COLORS.text, // Dark text on light background
     fontSize: buttonSize.fontSize,
     fontWeight: '800',
     textAlign: 'center',
     lineHeight: buttonSize.fontSize * 1.4,
   };
 
+  // Use category color for icons - keep colored even in high contrast mode
+  // for better visual distinction between categories
   const iconColor = disabled
     ? COLORS.disabledText
-    : highContrast
-    ? COLORS.highContrastText
-    : COLORS.white;
+    : iconColorValue;
 
   // Get icon accessibility label
   const iconLabel = typeof phrase.icon === 'string'
@@ -88,11 +91,11 @@ const PhraseButton: React.FC<PhraseButtonProps> = ({
       activeOpacity={1}
       accessibilityLabel={`${iconLabel ? iconLabel + ' ' : ''}${
         phrase.arabicText
-      }`}
+      }${phrase.englishText ? ' - ' + phrase.englishText : ''}`}
       accessibilityRole="button"
       accessibilityState={{ disabled }}
       accessibilityHint={
-        disabled ? 'Button is disabled' : `Play ${phrase.arabicText}`
+        disabled ? 'الزر معطل - Button is disabled' : `تشغيل ${phrase.arabicText} - Play ${phrase.englishText || phrase.arabicText}`
       }
     >
       {phrase.icon && (

@@ -39,12 +39,12 @@ export const COLORS = {
   error: '#E74C3C',
   info: '#3498DB',
 
-  // High Contrast Mode (for accessibility)
-  highContrastBackground: '#000000',
-  highContrastButton: '#1A1A1A',
-  highContrastText: '#FFFFFF',
-  highContrastBorder: '#FFFFFF',
-  highContrastPressed: 'rgba(255, 255, 255, 0.2)',
+  // High Contrast Mode (for accessibility - white background, black text)
+  highContrastBackground: '#FFFFFF',
+  highContrastButton: '#F0F0F0',
+  highContrastText: '#000000',
+  highContrastBorder: '#000000',
+  highContrastPressed: 'rgba(0, 0, 0, 0.15)',
 
   // Transparent overlays
   overlay: 'rgba(0, 0, 0, 0.5)',

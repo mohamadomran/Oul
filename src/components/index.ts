@@ -9,6 +9,10 @@ export { default as BottomActionBar } from './layout/BottomActionBar';
 export { default as SectionHeader } from './layout/SectionHeader';
 export { default as HomeHeader } from './layout/HomeHeader';
 export { default as PhraseDisplayHeader } from './layout/PhraseDisplayHeader';
+export { default as CategoryHeader } from './layout/CategoryHeader';
+export { CATEGORY_INFO } from './layout/CategoryHeader';
+export type { CategoryInfo } from './layout/CategoryHeader';
+export { default as HeaderBar } from './layout/HeaderBar';
 
 // Feature Components
 export { default as CategoryGrid } from './features/CategoryGrid';

@@ -16,27 +16,27 @@ export const SPACING = {
 export const BUTTON_SIZES = {
   // Compact phrase buttons - fits more on screen
   normal: {
-    height: 90, // Reduced from 120 for better fit
+    height: 110, // Increased for better touch targets
     minWidth: 100,
     fontSize: 18, // Arabic text
-    iconSize: 32, // Icon size
-    padding: 10,
+    iconSize: 36, // Icon size
+    padding: 12,
   },
   // Standard phrase buttons
   large: {
-    height: 110,
+    height: 130,
     minWidth: 120,
     fontSize: 20,
-    iconSize: 40,
-    padding: 12,
+    iconSize: 44,
+    padding: 14,
   },
   // Extra large for critical actions
   xlarge: {
-    height: 130,
+    height: 150,
     minWidth: 140,
     fontSize: 22,
-    iconSize: 48,
-    padding: 14,
+    iconSize: 52,
+    padding: 16,
   },
 } as const;
 

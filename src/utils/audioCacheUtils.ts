@@ -1,11 +1,13 @@
-export class AudioCacheManager {
-  private cache: Map<string, any> = new Map();
+import type Sound from 'react-native-sound';
 
-  get(audioFile: string): any | undefined {
+export class AudioCacheManager {
+  private cache: Map<string, Sound> = new Map();
+
+  get(audioFile: string): Sound | undefined {
     return this.cache.get(audioFile);
   }
 
-  set(audioFile: string, track: any): void {
+  set(audioFile: string, track: Sound): void {
     this.cache.set(audioFile, track);
   }
 

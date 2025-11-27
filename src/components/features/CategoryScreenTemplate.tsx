@@ -2,10 +2,12 @@ import React, { useCallback, useMemo } from 'react';
 import {
   View,
   StyleSheet,
-  ScrollView,
+  FlatList,
   StatusBar,
   useWindowDimensions,
 } from 'react-native';
+import type { ListRenderItemInfo } from 'react-native';
+import type { Phrase } from '../../types';
 import { COLORS, SPACING } from '../../constants';
 import {
   PhraseButton,
@@ -40,6 +42,17 @@ interface CategoryScreenTemplateProps {
   /** The screen name for BottomActionBar navigation state */
   screenName: ScreenName;
 }
+
+/**
+ * Map category to its color
+ */
+const CATEGORY_COLOR_MAP: Record<JsonPhraseCategory, string> = {
+  basic_needs: COLORS.basicNeeds,
+  pain: COLORS.pain,
+  emotions: COLORS.emotions,
+  conversation: COLORS.conversation,
+  family: COLORS.family,
+};
 
 /**
  * A reusable template for category screens that display phrase grids.
@@ -99,31 +112,53 @@ const CategoryScreenTemplate: React.FC<CategoryScreenTemplateProps> = ({
     [selectedPhrase, category, isFavorite],
   );
 
-  return (
-    <View style={styles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor={COLORS.background} />
+  // Get the category color for all buttons on this screen
+  const categoryColor = CATEGORY_COLOR_MAP[category];
 
-      <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={[
-          styles.scrollContent,
-          { paddingHorizontal: SPACING.md },
-        ]}
+  // Memoized render function for FlatList items
+  const renderItem = useCallback(
+    ({ item: phrase }: ListRenderItemInfo<Phrase>) => (
+      <View style={{ width: itemWidth, marginBottom: gap }}>
+        <PhraseButton
+          phrase={phrase}
+          size={buttonSize}
+          highContrast={highContrast}
+          categoryColor={categoryColor}
+          onPress={() => handlePhrasePress(phrase)}
+        />
+      </View>
+    ),
+    [itemWidth, gap, buttonSize, highContrast, categoryColor, handlePhrasePress],
+  );
+
+  // Key extractor for FlatList
+  const keyExtractor = useCallback((item: Phrase) => item.id, []);
+
+  return (
+    <View style={[styles.container, highContrast && styles.containerHighContrast]}>
+      <StatusBar
+        barStyle="dark-content"
+        backgroundColor={COLORS.background}
+      />
+
+      <FlatList
+        data={phrases}
+        renderItem={renderItem}
+        keyExtractor={keyExtractor}
+        numColumns={numColumns}
+        style={styles.flatList}
+        contentContainerStyle={styles.flatListContent}
+        columnWrapperStyle={styles.columnWrapper}
         showsVerticalScrollIndicator={false}
-      >
-        <View style={[styles.grid, { gap }]}>
-          {phrases.map(phrase => (
-            <View key={phrase.id} style={{ width: itemWidth }}>
-              <PhraseButton
-                phrase={phrase}
-                size={buttonSize}
-                highContrast={highContrast}
-                onPress={() => handlePhrasePress(phrase)}
-              />
-            </View>
-          ))}
-        </View>
-      </ScrollView>
+        // Performance optimizations
+        removeClippedSubviews={true}
+        maxToRenderPerBatch={10}
+        windowSize={5}
+        initialNumToRender={8}
+        // Accessibility
+        accessibilityRole="list"
+        accessibilityLabel="قائمة العبارات - Phrases list"
+      />
 
       <BottomActionBar currentScreen={screenName} />
 
@@ -150,16 +185,19 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.background,
   },
-  scrollView: {
+  containerHighContrast: {
+    backgroundColor: COLORS.highContrastBackground,
+  },
+  flatList: {
     flex: 1,
   },
-  scrollContent: {
+  flatListContent: {
     paddingTop: SPACING.md,
-    paddingBottom: 120, // Reduced for better scroll experience
+    paddingBottom: 160, // Space for BottomActionBar + safe area
+    paddingHorizontal: SPACING.md,
   },
-  grid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+  columnWrapper: {
+    justifyContent: 'space-between',
   },
 });
 

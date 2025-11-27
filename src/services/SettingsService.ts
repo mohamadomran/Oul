@@ -17,7 +17,6 @@ class SettingsService {
     try {
       await this.loadSettings();
       this.initialized = true;
-      console.log('[SettingsService] Initialized successfully');
     } catch (error) {
       console.error('[SettingsService] Initialization error:', error);
       this.settings = DEFAULT_SETTINGS;
@@ -36,10 +35,8 @@ class SettingsService {
         const parsed = JSON.parse(savedSettings);
         // Merge with defaults to handle new settings added in updates
         this.settings = { ...DEFAULT_SETTINGS, ...parsed };
-        console.log('[SettingsService] Settings loaded:', this.settings);
       } else {
         this.settings = DEFAULT_SETTINGS;
-        console.log('[SettingsService] No saved settings, using defaults');
       }
 
       return this.settings;
@@ -57,7 +54,6 @@ class SettingsService {
     try {
       this.settings = settings;
       await AsyncStorage.setItem(SETTINGS_STORAGE_KEY, JSON.stringify(settings));
-      console.log('[SettingsService] Settings saved successfully');
     } catch (error) {
       console.error('[SettingsService] Error saving settings:', error);
       throw error;
@@ -95,7 +91,6 @@ class SettingsService {
   async resetToDefaults(): Promise<void> {
     try {
       await this.saveSettings(DEFAULT_SETTINGS);
-      console.log('[SettingsService] Settings reset to defaults');
     } catch (error) {
       console.error('[SettingsService] Error resetting settings:', error);
       throw error;
@@ -109,7 +104,6 @@ class SettingsService {
     try {
       await AsyncStorage.removeItem(SETTINGS_STORAGE_KEY);
       this.settings = DEFAULT_SETTINGS;
-      console.log('[SettingsService] Settings cleared');
     } catch (error) {
       console.error('[SettingsService] Error clearing settings:', error);
       throw error;

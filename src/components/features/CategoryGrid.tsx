@@ -23,8 +23,9 @@ const CategoryGrid: React.FC = () => {
       <View style={[styles.buttonRow, { gap }]}>
         <BigButton
           title="احتياجات أساسية"
-          icon="🍽️"
-          color={COLORS.basicNeeds}
+          iconName="restaurant"
+          iconColor={COLORS.basicNeeds}
+          color={COLORS.surface}
           onPress={() => navigation.navigate('BasicNeeds')}
           size={buttonSize}
           highContrast={highContrast}
@@ -32,8 +33,9 @@ const CategoryGrid: React.FC = () => {
         />
         <BigButton
           title="ألم"
-          icon="🩹"
-          color={COLORS.pain}
+          iconName="medkit"
+          iconColor={COLORS.pain}
+          color={COLORS.surface}
           onPress={() => navigation.navigate('PainLocation')}
           size={buttonSize}
           highContrast={highContrast}
@@ -44,8 +46,9 @@ const CategoryGrid: React.FC = () => {
       <View style={[styles.buttonRow, { gap }]}>
         <BigButton
           title="مشاعر"
-          icon="😊"
-          color={COLORS.emotions}
+          iconName="happy"
+          iconColor={COLORS.emotions}
+          color={COLORS.surface}
           onPress={() => navigation.navigate('Emotions')}
           size={buttonSize}
           highContrast={highContrast}
@@ -53,8 +56,9 @@ const CategoryGrid: React.FC = () => {
         />
         <BigButton
           title="محادثة"
-          icon="💬"
-          color={COLORS.conversation}
+          iconName="chatbubbles"
+          iconColor={COLORS.conversation}
+          color={COLORS.surface}
           onPress={() => navigation.navigate('Conversation')}
           size={buttonSize}
           highContrast={highContrast}
@@ -65,8 +69,9 @@ const CategoryGrid: React.FC = () => {
       <View style={styles.buttonRowCentered}>
         <BigButton
           title="عائلة"
-          icon="❤️"
-          color={COLORS.family}
+          iconName="heart"
+          iconColor={COLORS.family}
+          color={COLORS.surface}
           onPress={() => navigation.navigate('Family')}
           size={buttonSize}
           highContrast={highContrast}

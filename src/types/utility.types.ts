@@ -1,5 +1,8 @@
+import type { Phrase } from './phrase.types';
+import type Sound from 'react-native-sound';
+
 export interface ShareContext {
-  phrase: any;
+  phrase: Phrase;
   intensity?: 'light' | 'moderate' | 'severe';
   location?: string;
   includeCategory?: boolean;
@@ -19,6 +22,6 @@ export interface AudioPathMapping {
 }
 
 export interface CacheEntry {
-  sound: any;
+  sound: Sound;
   lastAccessed: number;
 }

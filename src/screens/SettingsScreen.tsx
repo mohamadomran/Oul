@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { View, ScrollView, StyleSheet, Alert, StatusBar, TouchableOpacity, Text } from 'react-native';
+import { View, ScrollView, StyleSheet, Alert, StatusBar } from 'react-native';
 import type { SettingsScreenProps } from '../types';
-import { COLORS, SPACING, FONT_SIZES, FONTS } from '../constants';
+import { COLORS, SPACING } from '../constants';
 import type { FontSize, ButtonSize, ShareMethod } from '../types/settings.types';
 import JsonAudioService from '../services/JsonAudioService';
-import HapticService from '../services/HapticService';
-import { useSettings } from '../contexts/SettingsContext';
+import { useSettings, useHighContrast } from '../contexts/SettingsContext';
+import { HeaderBar } from '../components';
 import {
   SettingSection,
   SettingToggle,
@@ -13,14 +13,10 @@ import {
   SettingButton,
 } from '../components/settings';
 
-const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
+const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation: _navigation }) => {
   const { settings, updateSetting, resetToDefaults } = useSettings();
+  const highContrast = useHighContrast();
   const [loading, setLoading] = useState(false);
-
-  const handleBack = async () => {
-    await HapticService.trigger('light');
-    navigation.goBack();
-  };
 
   const handleResetToDefaults = () => {
     Alert.alert(
@@ -59,21 +55,17 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor={COLORS.background} />
+    <View style={[styles.container, highContrast && styles.containerHighContrast]}>
+      <StatusBar
+        barStyle="dark-content"
+        backgroundColor={COLORS.background}
+      />
 
-      {/* Custom Header with Back Button */}
-      <View style={styles.header}>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={handleBack}
-          activeOpacity={0.7}
-        >
-          <Text style={styles.backButtonText}>← رجوع</Text>
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>الإعدادات</Text>
-        <View style={styles.headerSpacer} />
-      </View>
+      <HeaderBar
+        title="الإعدادات"
+        subtitle="Settings"
+        showBack={true}
+      />
 
       <ScrollView
         style={styles.scrollView}
@@ -176,35 +168,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.background,
   },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: SPACING.lg,
-    paddingTop: SPACING.lg,
-    paddingBottom: SPACING.md,
-    backgroundColor: COLORS.background,
-  },
-  backButton: {
-    paddingVertical: SPACING.sm,
-    paddingHorizontal: SPACING.md,
-    minWidth: 80,
-  },
-  backButtonText: {
-    fontFamily: FONTS.semiBold,
-    fontSize: FONT_SIZES.lg,
-    color: COLORS.primary,
-    fontWeight: '600',
-  },
-  headerTitle: {
-    fontFamily: FONTS.bold,
-    fontSize: FONT_SIZES.xxl,
-    fontWeight: '700',
-    color: COLORS.text,
-    textAlign: 'center',
-  },
-  headerSpacer: {
-    width: 80,
+  containerHighContrast: {
+    backgroundColor: COLORS.highContrastBackground,
   },
   scrollView: {
     flex: 1,

@@ -1,11 +1,14 @@
 import type { ReactNode } from 'react';
 import type { ViewStyle } from 'react-native';
 import type { ButtonSize } from './settings.types';
-import type { IconDefinition } from './phrase.types';
+import type { IconDefinition, Phrase } from './phrase.types';
+import type { RootStackParamList } from './navigation.types';
 
 export interface BigButtonProps {
   title: string;
-  icon?: string;
+  icon?: string; // Emoji icon (deprecated, use iconName)
+  iconName?: string; // Ionicons icon name (e.g., 'restaurant', 'heart')
+  iconColor?: string; // Color for vector icon
   color: string;
   onPress: () => void;
   size?: ButtonSize;
@@ -63,15 +66,16 @@ export interface SectionHeaderProps {
 export interface BottomActionBarProps {
   children?: ReactNode;
   style?: ViewStyle;
-  currentScreen?: keyof any;
+  currentScreen?: keyof RootStackParamList;
   showBack?: boolean;
   showFavorites?: boolean;
 }
 
 export interface PhraseButtonProps {
-  phrase: any;
+  phrase: Phrase;
   onPress?: () => void;
   size?: ButtonSize;
   highContrast?: boolean;
   disabled?: boolean;
+  categoryColor?: string; // Override icon color with category color
 }

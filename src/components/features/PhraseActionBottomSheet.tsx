@@ -65,11 +65,16 @@ const PhraseActionBottomSheet = forwardRef<
           testID="bottom-sheet-backdrop"
           style={styles.backdrop}
           onPress={handleBackdropPress}
+          accessibilityLabel="إغلاق النافذة - Close modal"
+          accessibilityRole="button"
+          accessibilityHint="اضغط لإغلاق النافذة - Tap to close the modal"
         >
           <Pressable
             testID="bottom-sheet-content"
             style={[styles.modalContainer, { maxHeight: height * 0.7 }]}
             onPress={e => e.stopPropagation()}
+            accessibilityRole="none"
+            accessibilityViewIsModal={true}
           >
             <PhraseDisplayHeader icon={icon} />
             <PhraseActionButtons
