@@ -1,0 +1,26 @@
+appId: com.oul
+---
+# Test: Conversation Category Flow
+# Tests common conversation phrases
+
+- launchApp
+- tapOn: "محادثة" # Conversation
+
+# Verify conversation phrases loaded
+- assertVisible: "مَرْحَبَا" # Hello
+- assertVisible: "شُكْرًا" # Thank you
+- assertVisible: "إيه" # Yes
+- assertVisible: "لَا" # No
+
+# Test "Hello" phrase
+- tapOn:
+    text: "مَرْحَبَا"
+
+- assertVisible: "Hello"
+- assertVisible: "👋"
+
+# Close and navigate back
+- swipe:
+    direction: DOWN
+- back
+- assertVisible: "قول"

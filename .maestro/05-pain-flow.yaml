@@ -1,0 +1,29 @@
+appId: com.oul
+---
+# Test: Pain Location Category Flow
+# Tests pain location phrases and intensity selector
+
+- launchApp
+- tapOn: "ألم" # Pain
+
+# Verify pain category loaded
+- assertVisible: "رَاسِي بِيُوجَعْنِي" # My head hurts
+- assertVisible: "صَدْرِي بِيُوجَعْنِي" # My chest hurts
+- assertVisible: "مَعْدِتِي بِتُوجَعْنِي" # My stomach hurts
+
+# Test "Head" pain phrase
+- tapOn:
+    text: "رَاسِي بِيُوجَعْنِي"
+
+- assertVisible: "My head hurts"
+- assertVisible: "🧠"
+
+# If pain intensity selector is visible
+# - Verify slider or buttons present
+# - Could interact with intensity levels here
+
+# Close and navigate back
+- swipe:
+    direction: DOWN
+- back
+- assertVisible: "قول"

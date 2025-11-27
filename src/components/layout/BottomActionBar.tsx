@@ -53,6 +53,7 @@ const BottomActionBar: React.FC<BottomActionBarProps> = ({
         {/* Back Button */}
         {showBack && (
           <TouchableOpacity
+            testID="back-button"
             style={[
               styles.actionButton,
               !navigation.canGoBack() && styles.disabled,
@@ -72,6 +73,7 @@ const BottomActionBar: React.FC<BottomActionBarProps> = ({
 
         {/* Home Button */}
         <TouchableOpacity
+          testID="home-button"
           style={[
             styles.actionButton,
             styles.homeButton,
@@ -93,6 +95,7 @@ const BottomActionBar: React.FC<BottomActionBarProps> = ({
         {/* Favorites Button */}
         {showFavorites && (
           <TouchableOpacity
+            testID="favorites-button"
             style={[styles.actionButton]}
             onPress={handleFavorites}
             activeOpacity={0.7}

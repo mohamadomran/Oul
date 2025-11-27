@@ -1,0 +1,80 @@
+appId: com.oul
+---
+# Test: Audio Playback Monitoring
+# This test verifies that audio plays when the play button is clicked
+# While Maestro can't verify actual audio output, it monitors UI state changes
+# that indicate audio is playing (loading indicators, button state changes)
+
+- launchApp
+- assertVisible: "قول" # Home screen loaded
+
+# Navigate to Basic Needs category
+- tapOn: "احتياجات أساسية"
+- assertVisible: "أَحْتَاجُ مَاء" # Verify category loaded
+
+# Select "Water" phrase
+- tapOn:
+    text: "أَحْتَاجُ مَاء"
+
+# Bottom sheet should open - wait for animation
+- waitForAnimationToEnd:
+    timeout: 500
+
+# Verify Play button is present with Arabic text
+- assertVisible: "تشغيل الصوت" # "Play Audio" in Arabic
+- assertVisible: "إرسال واتساب" # "Send WhatsApp" in Arabic
+
+# Click Play button
+- tapOn:
+    id: "play-button"
+
+# Wait for audio to start playing
+# The button should show loading indicator briefly
+- waitForAnimationToEnd:
+    timeout: 1000
+
+# Audio should play for approximately 2-3 seconds
+# Wait for audio to complete
+- waitForAnimationToEnd:
+    timeout: 5000
+
+# After audio plays, button should return to normal state
+- assertVisible: "تشغيل الصوت"
+
+# Test another phrase to verify audio system works consistently
+- swipe:
+    direction: DOWN
+
+# Back on category screen
+- assertVisible: "أَحْتَاجُ مَاء"
+
+# Try a different phrase - "Food"
+- tapOn:
+    text: "أَحْتَاجُ طَعَام"
+
+# Wait for bottom sheet
+- waitForAnimationToEnd:
+    timeout: 500
+
+- assertVisible: "تشغيل الصوت"
+
+# Play this audio too
+- tapOn:
+    id: "play-button"
+
+- waitForAnimationToEnd:
+    timeout: 1000
+
+- waitForAnimationToEnd:
+    timeout: 5000
+
+# Verify button returned to normal
+- assertVisible: "تشغيل الصوت"
+
+# Close and verify we can navigate back
+- swipe:
+    direction: DOWN
+
+- back
+
+- assertVisible: "قول"

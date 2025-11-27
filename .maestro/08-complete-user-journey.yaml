@@ -1,0 +1,82 @@
+appId: com.oul
+---
+# Test: Complete User Journey
+# Simulates a real user interaction flow through multiple categories
+
+- launchApp
+- assertVisible: "قول"
+
+# Journey 1: Morning greeting
+- tapOn: "محادثة"
+- tapOn: "صَبَاح الخَيْر" # Good morning
+- assertVisible: "Good morning"
+- tapOn:
+    id: "play-button"
+- waitForAnimationToEnd:
+    timeout: 3000
+- swipe:
+    direction: DOWN
+- back
+
+# Journey 2: Express basic need
+- tapOn: "احتياجات أساسية"
+- tapOn: "أَحْتَاجُ مَاء" # I need water
+- assertVisible: "I need water"
+- tapOn:
+    id: "play-button"
+- waitForAnimationToEnd:
+    timeout: 3000
+- swipe:
+    direction: DOWN
+- back
+
+# Journey 3: Express emotion
+- tapOn: "مشاعر"
+- tapOn: "أَنَا مَبْسُوط" # I am happy
+- assertVisible: "I am happy"
+- tapOn:
+    id: "play-button"
+- waitForAnimationToEnd:
+    timeout: 3000
+- swipe:
+    direction: DOWN
+- back
+
+# Journey 4: Report pain
+- tapOn: "ألم"
+- tapOn: "رَاسِي بِيُوجَعْنِي" # My head hurts
+- assertVisible: "My head hurts"
+- tapOn:
+    id: "play-button"
+- waitForAnimationToEnd:
+    timeout: 3000
+- swipe:
+    direction: DOWN
+- back
+
+# Journey 5: Family phrase
+- tapOn: "عائلة"
+- tapOn: "بِحِبَّك" # I love you
+- assertVisible: "I love you"
+- tapOn:
+    id: "play-button"
+- waitForAnimationToEnd:
+    timeout: 3000
+- swipe:
+    direction: DOWN
+- back
+
+# Journey 6: Say goodbye
+- tapOn: "محادثة"
+- tapOn: "مَع السَّلَامَة" # Goodbye
+- assertVisible: "Goodbye"
+- tapOn:
+    id: "play-button"
+- waitForAnimationToEnd:
+    timeout: 3000
+- swipe:
+    direction: DOWN
+
+# End on home screen
+- back
+- assertVisible: "قول"

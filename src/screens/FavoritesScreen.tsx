@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -8,31 +8,73 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { COLORS, SPACING, FONT_SIZES } from '../constants';
-import { PhraseButton, BottomActionBar } from '../components';
+import {
+  PhraseButton,
+  BottomActionBar,
+  PhraseActionBottomSheet,
+  AudioPlaybackIndicator,
+} from '../components';
 import type { Phrase } from '../types/phrase.types';
+import type { PhraseActionBottomSheetRef } from '../types/ui.types';
 import { useButtonSize, useHighContrast } from '../contexts/SettingsContext';
+import {
+  useFavorites,
+  useSharePhrase,
+  useAudioPlayback,
+} from '../hooks';
+import JsonAudioService from '../services/JsonAudioService';
 
 const FavoritesScreen: React.FC = () => {
-  const [favorites, setFavorites] = useState<Phrase[]>([]);
-  const [loading, setLoading] = useState(true);
+  const bottomSheetRef = useRef<PhraseActionBottomSheetRef>(null);
+  const [selectedPhrase, setSelectedPhrase] = useState<Phrase | null>(null);
+
   const buttonSize = useButtonSize();
   const highContrast = useHighContrast();
 
-  useEffect(() => {
-    loadFavorites();
-  }, []);
+  const { loading, favorites, isFavorite, toggleFavorite } = useFavorites();
+  const { sharePhrase } = useSharePhrase();
+  // Use basic_needs as default category for audio - actual category stored in phrase
+  const { isPlaying } = useAudioPlayback('basic_needs');
 
-  const loadFavorites = async () => {
+  const handlePhrasePress = (phrase: Phrase) => {
+    setSelectedPhrase(phrase);
+    bottomSheetRef.current?.snapToIndex(0);
+  };
+
+  const handlePlay = async () => {
+    if (!selectedPhrase || !selectedPhrase.category) return;
     try {
-      // TODO: Load favorites from AsyncStorage
-      // For now, just show empty state
-      setFavorites([]);
+      // Get the category from the phrase (added by useFavorites hook)
+      const category = selectedPhrase.category;
+      if (category === 'custom') return; // Skip custom phrases for now
+
+      await JsonAudioService.play(
+        category as Exclude<typeof category, 'custom'>,
+        selectedPhrase.id,
+      );
     } catch (error) {
-      console.error('Error loading favorites:', error);
-    } finally {
-      setLoading(false);
+      console.error('[FavoritesScreen] Error playing audio:', error);
     }
   };
+
+  const handleShare = async () => {
+    if (!selectedPhrase) return;
+    await sharePhrase(selectedPhrase.arabicText, selectedPhrase.englishText);
+  };
+
+  const handleToggleFavorite = async () => {
+    if (!selectedPhrase || !selectedPhrase.category) return;
+    await toggleFavorite(selectedPhrase.category, selectedPhrase.id);
+  };
+
+  const handleClose = () => {
+    setSelectedPhrase(null);
+  };
+
+  const isSelectedFavorite =
+    selectedPhrase && selectedPhrase.category
+      ? isFavorite(selectedPhrase.category, selectedPhrase.id)
+      : false;
 
   if (loading) {
     return (
@@ -58,7 +100,7 @@ const FavoritesScreen: React.FC = () => {
         style={styles.scrollView}
         contentContainerStyle={[
           styles.content,
-          { paddingBottom: 100 }, // Space for bottom bar
+          { paddingBottom: 100 },
         ]}
         showsVerticalScrollIndicator={false}
       >
@@ -68,24 +110,41 @@ const FavoritesScreen: React.FC = () => {
             <Text style={styles.emptyTitle}>لا توجد عبارات مفضلة</Text>
             <Text style={styles.emptySubtitle}>
               No favorites yet{'\n'}
-              Tap the star icon when viewing a phrase to add it here
+              Tap the star button when viewing a phrase to add it here
             </Text>
           </View>
         ) : (
           <View style={styles.grid}>
             {favorites.map(phrase => (
-              <PhraseButton
-                key={phrase.id}
-                phrase={phrase}
-                size={buttonSize}
-                highContrast={highContrast}
-              />
+              <View key={`${phrase.category}-${phrase.id}`} style={styles.gridItem}>
+                <PhraseButton
+                  phrase={phrase}
+                  size={buttonSize}
+                  highContrast={highContrast}
+                  onPress={() => handlePhrasePress(phrase)}
+                />
+              </View>
             ))}
           </View>
         )}
       </ScrollView>
 
       <BottomActionBar currentScreen="Favorites" />
+
+      <PhraseActionBottomSheet
+        ref={bottomSheetRef}
+        arabicText={selectedPhrase?.arabicText || ''}
+        englishText={selectedPhrase?.englishText || ''}
+        icon={selectedPhrase?.icon}
+        onPlay={handlePlay}
+        onShare={handleShare}
+        onToggleFavorite={handleToggleFavorite}
+        onClose={handleClose}
+        isPlaying={isPlaying}
+        isFavorite={isSelectedFavorite}
+      />
+
+      <AudioPlaybackIndicator isPlaying={isPlaying} />
     </SafeAreaView>
   );
 };
@@ -125,7 +184,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: SPACING.md,
-    justifyContent: 'center',
+    justifyContent: 'space-between',
+  },
+  gridItem: {
+    width: '48%',
   },
   loadingContainer: {
     flex: 1,

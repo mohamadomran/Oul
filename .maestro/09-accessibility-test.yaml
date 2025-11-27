@@ -1,0 +1,45 @@
+appId: com.oul
+---
+# Test: Accessibility Features
+# Tests high contrast mode and large text settings
+
+- launchApp
+
+# Enable high contrast mode
+- tapOn:
+    id: "settings-button"
+- tapOn:
+    id: "high-contrast-toggle"
+- back
+
+# Navigate through categories with high contrast
+- tapOn: "احتياجات أساسية"
+- assertVisible: "أَحْتَاجُ مَاء"
+- back
+
+# Change to large font size
+- tapOn:
+    id: "settings-button"
+- tapOn:
+    text: "Large"
+- back
+
+# Verify large text is readable
+- tapOn: "محادثة"
+- assertVisible: "مَرْحَبَا"
+- tapOn: "مَرْحَبَا"
+- assertVisible: "Hello"
+- swipe:
+    direction: DOWN
+- back
+
+# Reset to defaults
+- tapOn:
+    id: "settings-button"
+- tapOn:
+    text: "Medium"
+- tapOn:
+    id: "high-contrast-toggle"
+- back
+
+- assertVisible: "قول"

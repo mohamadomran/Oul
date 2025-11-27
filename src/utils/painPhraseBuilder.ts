@@ -1,5 +1,11 @@
 import { PainIntensity } from '../types';
-import { PAIN_INTENSITY_OPTIONS } from '../data';
+import { COLORS } from '../constants';
+
+const INTENSITY_LABELS: Record<PainIntensity, { arabic: string; english: string; color: string; icon: string }> = {
+  light: { arabic: 'خفيف', english: 'light', color: COLORS.painLight, icon: '😐' },
+  moderate: { arabic: 'متوسط', english: 'moderate', color: COLORS.painModerate, icon: '😣' },
+  severe: { arabic: 'شديد', english: 'severe', color: COLORS.painSevere, icon: '😫' },
+};
 
 export const buildPainPhrase = (
   bodyPartArabic: string,
@@ -11,15 +17,12 @@ export const buildPainPhrase = (
     return `${basePart} ${bodyPartArabic}`;
   }
 
-  const intensityOption = PAIN_INTENSITY_OPTIONS.find(
-    option => option.level === intensity,
-  );
-
-  if (!intensityOption) {
+  const label = INTENSITY_LABELS[intensity]?.arabic;
+  if (!label) {
     return `${basePart} ${bodyPartArabic}`;
   }
 
-  return `${basePart} ${intensityOption.arabicLabel} ${bodyPartArabic}`;
+  return `${basePart} ${label} ${bodyPartArabic}`;
 };
 
 export const buildPainPhraseEnglish = (
@@ -32,27 +35,20 @@ export const buildPainPhraseEnglish = (
     return `${basePart} pain in my ${bodyPartEnglish.toLowerCase()}`;
   }
 
-  const intensityOption = PAIN_INTENSITY_OPTIONS.find(
-    option => option.level === intensity,
-  );
-
-  if (!intensityOption) {
+  const label = INTENSITY_LABELS[intensity]?.english;
+  if (!label) {
     return `${basePart} pain in my ${bodyPartEnglish.toLowerCase()}`;
   }
 
-  return `${basePart} ${intensityOption.englishLabel.toLowerCase()} pain in my ${bodyPartEnglish.toLowerCase()}`;
+  return `${basePart} ${label} pain in my ${bodyPartEnglish.toLowerCase()}`;
 };
 
 export const getPainIntensityColor = (intensity?: PainIntensity): string => {
   if (!intensity) {
-    return '#C9594C';
+    return COLORS.painSevere;
   }
 
-  const intensityOption = PAIN_INTENSITY_OPTIONS.find(
-    option => option.level === intensity,
-  );
-
-  return intensityOption?.color || '#C9594C';
+  return INTENSITY_LABELS[intensity]?.color || COLORS.painSevere;
 };
 
 export const getPainIntensityIcon = (intensity?: PainIntensity): string => {
@@ -60,9 +56,5 @@ export const getPainIntensityIcon = (intensity?: PainIntensity): string => {
     return '😐';
   }
 
-  const intensityOption = PAIN_INTENSITY_OPTIONS.find(
-    option => option.level === intensity,
-  );
-
-  return intensityOption?.icon || '😐';
+  return INTENSITY_LABELS[intensity]?.icon || '😐';
 };

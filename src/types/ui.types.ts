@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import type { ViewStyle } from 'react-native';
 import type { ButtonSize } from './settings.types';
+import type { IconDefinition } from './phrase.types';
 
 export interface BigButtonProps {
   title: string;
@@ -15,13 +16,15 @@ export interface BigButtonProps {
 export interface PhraseActionBottomSheetProps {
   arabicText: string;
   englishText: string;
-  icon?: string;
+  icon?: IconDefinition | string;
   onPlay: () => void;
   onShare: () => void;
+  onToggleFavorite?: () => void;
   onShareSMS?: () => void;
   onCopy?: () => void;
   onClose: () => void;
   isPlaying?: boolean;
+  isFavorite?: boolean;
 }
 
 export interface PhraseActionBottomSheetRef {

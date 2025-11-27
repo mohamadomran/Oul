@@ -1,14 +1,15 @@
-export interface AudioServiceInterface {
-  initialize(): Promise<void>;
-  play(audioFile: string): Promise<void>;
-  playSequence(audioFiles: string[]): Promise<void>;
-  stop(): Promise<void>;
-  preloadAudio(audioFiles: string[]): Promise<void>;
-  releaseAudio(audioFile: string): void;
-  releaseAll(): void;
-  isAvailable(): boolean;
-  getCacheSize(): number;
-}
+// Audio service interface - currently using JsonAudioService
+// export interface AudioServiceInterface {
+//   initialize(): Promise<void>;
+//   play(audioFile: string): Promise<void>;
+//   playSequence(audioFiles: string[]): Promise<void>;
+//   stop(): Promise<void>;
+//   preloadAudio(audioFiles: string[]): Promise<void>;
+//   releaseAudio(audioFile: string): void;
+//   releaseAll(): void;
+//   isAvailable(): boolean;
+//   getCacheSize(): number;
+// }
 
 export interface HapticServiceInterface {
   trigger(type: 'light' | 'medium' | 'heavy'): Promise<void>;

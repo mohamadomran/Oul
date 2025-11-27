@@ -1,0 +1,25 @@
+appId: com.oul
+---
+# Test: Family Category Flow
+# Tests family-related phrases
+
+- launchApp
+- tapOn: "عائلة" # Family
+
+# Verify family phrases loaded
+- assertVisible: "بِحِبَّك" # I love you
+- assertVisible: "اشتقتلكن" # I miss you
+- assertVisible: "كِيفُو بَابَا؟" # How is dad?
+
+# Test "I love you" phrase
+- tapOn:
+    text: "بِحِبَّك"
+
+- assertVisible: "I love you"
+- assertVisible: "❤️"
+
+# Close and navigate back
+- swipe:
+    direction: DOWN
+- back
+- assertVisible: "قول"

@@ -1,0 +1,26 @@
+appId: com.oul
+---
+# Test: Emotions Category Flow
+# Tests navigation to Emotions and phrase interaction
+
+- launchApp
+- tapOn: "مشاعر" # Emotions in Arabic
+
+# Verify emotions category loaded
+- assertVisible: "أَنَا مَبْسُوط" # I am happy
+- assertVisible: "أَنَا زَعْلَان" # I am sad
+- assertVisible: "أَنَا عَصَبِي" # I am angry
+
+# Test "Happy" phrase
+- tapOn:
+    text: "أَنَا مَبْسُوط"
+
+# Bottom sheet should appear
+- assertVisible: "I am happy"
+- assertVisible: "😊"
+
+# Close and go back
+- swipe:
+    direction: DOWN
+- back
+- assertVisible: "قول"

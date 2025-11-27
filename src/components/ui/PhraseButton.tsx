@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo, useCallback } from 'react';
 import {
   TouchableOpacity,
   Text,
@@ -9,6 +9,7 @@ import {
 import { COLORS, CATEGORY_COLORS, FONTS } from '../../constants';
 import { BUTTON_SIZES } from '../../constants';
 import HapticService from '../../services/HapticService';
+import { DynamicIcon } from './DynamicIcon';
 import type { PhraseButtonProps } from '../../types/ui.types';
 
 const PhraseButton: React.FC<PhraseButtonProps> = ({
@@ -18,12 +19,12 @@ const PhraseButton: React.FC<PhraseButtonProps> = ({
   highContrast = false,
   disabled = false,
 }) => {
-  const handlePress = async () => {
+  const handlePress = useCallback(async () => {
     if (disabled) return;
 
     await HapticService.trigger('medium');
     onPress?.();
-  };
+  }, [disabled, onPress]);
 
   const buttonSize = BUTTON_SIZES[size];
   const buttonColor = phrase.color
@@ -39,7 +40,7 @@ const PhraseButton: React.FC<PhraseButtonProps> = ({
       ? COLORS.highContrastButton
       : buttonColor,
     height: buttonSize.height,
-    width: buttonSize.minWidth,
+    width: '100%', // Full width of grid container
     borderRadius: 12,
     justifyContent: 'center',
     alignItems: 'center',
@@ -68,11 +69,16 @@ const PhraseButton: React.FC<PhraseButtonProps> = ({
     lineHeight: buttonSize.fontSize * 1.4,
   };
 
-  const iconStyle: TextStyle = {
-    fontSize: buttonSize.iconSize,
-    marginBottom: 8,
-    textAlign: 'center',
-  };
+  const iconColor = disabled
+    ? COLORS.disabledText
+    : highContrast
+    ? COLORS.highContrastText
+    : COLORS.white;
+
+  // Get icon accessibility label
+  const iconLabel = typeof phrase.icon === 'string'
+    ? phrase.icon
+    : phrase.icon?.fallback || '';
 
   return (
     <TouchableOpacity
@@ -80,7 +86,7 @@ const PhraseButton: React.FC<PhraseButtonProps> = ({
       onPress={handlePress}
       disabled={disabled}
       activeOpacity={1}
-      accessibilityLabel={`${phrase.icon ? phrase.icon + ' ' : ''}${
+      accessibilityLabel={`${iconLabel ? iconLabel + ' ' : ''}${
         phrase.arabicText
       }`}
       accessibilityRole="button"
@@ -89,7 +95,27 @@ const PhraseButton: React.FC<PhraseButtonProps> = ({
         disabled ? 'Button is disabled' : `Play ${phrase.arabicText}`
       }
     >
-      <Text style={iconStyle}>{phrase.icon}</Text>
+      {phrase.icon && (
+        typeof phrase.icon === 'string' ? (
+          // Legacy emoji format
+          <DynamicIcon
+            library="MaterialCommunityIcons"
+            name="emoticon"
+            size={buttonSize.iconSize}
+            color={iconColor}
+            fallback={phrase.icon}
+          />
+        ) : (
+          // New icon library format
+          <DynamicIcon
+            library={phrase.icon.library}
+            name={phrase.icon.name}
+            size={buttonSize.iconSize}
+            color={iconColor}
+            fallback={phrase.icon.fallback}
+          />
+        )
+      )}
       <Text style={textStyle} numberOfLines={2} adjustsFontSizeToFit>
         {phrase.arabicText}
       </Text>
@@ -101,4 +127,5 @@ const styles = StyleSheet.create({
   button: {},
 });
 
-export default PhraseButton;
+// Memoize component to prevent re-renders when props haven't changed
+export default memo(PhraseButton);

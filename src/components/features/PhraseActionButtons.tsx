@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import {
   View,
   TouchableOpacity,
@@ -11,47 +11,80 @@ import { COLORS, SPACING, FONT_SIZES } from '../../constants';
 interface PhraseActionButtonsProps {
   onPlay: () => void;
   onShare: () => void;
+  onToggleFavorite?: () => void;
   isPlaying?: boolean;
+  isFavorite?: boolean;
 }
 
 const PhraseActionButtons: React.FC<PhraseActionButtonsProps> = ({
   onPlay,
   onShare,
+  onToggleFavorite,
   isPlaying = false,
+  isFavorite = false,
 }) => {
   return (
-    <View style={styles.twoButtonContainer}>
-      <TouchableOpacity
-        style={[styles.actionButton, styles.playButton, styles.halfWidth]}
-        onPress={onPlay}
-        disabled={isPlaying}
-        activeOpacity={0.7}
-        accessibilityLabel="Play audio"
-        accessibilityRole="button"
-        accessibilityHint="Plays the audio message"
-      >
-        {isPlaying ? (
-          <ActivityIndicator size="large" color={COLORS.white} />
-        ) : (
-          <Text style={styles.actionButtonText}>تشغيل الصوت</Text>
-        )}
-      </TouchableOpacity>
+    <View style={styles.container}>
+      {/* Top row: Play and Share buttons */}
+      <View style={styles.twoButtonContainer}>
+        <TouchableOpacity
+          testID="play-button"
+          style={[styles.actionButton, styles.playButton, styles.halfWidth]}
+          onPress={onPlay}
+          disabled={isPlaying}
+          activeOpacity={0.7}
+          accessibilityLabel="Play audio"
+          accessibilityRole="button"
+          accessibilityHint="Plays the audio message"
+        >
+          {isPlaying ? (
+            <ActivityIndicator size="large" color={COLORS.white} />
+          ) : (
+            <Text style={styles.actionButtonText}>تشغيل الصوت</Text>
+          )}
+        </TouchableOpacity>
 
-      <TouchableOpacity
-        style={[styles.actionButton, styles.shareButton, styles.halfWidth]}
-        onPress={onShare}
-        activeOpacity={0.7}
-        accessibilityLabel="Share via WhatsApp"
-        accessibilityRole="button"
-        accessibilityHint="Opens WhatsApp to share this message"
-      >
-        <Text style={styles.actionButtonText}>إرسال واتساب</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          testID="share-button"
+          style={[styles.actionButton, styles.shareButton, styles.halfWidth]}
+          onPress={onShare}
+          activeOpacity={0.7}
+          accessibilityLabel="Share via WhatsApp"
+          accessibilityRole="button"
+          accessibilityHint="Opens WhatsApp to share this message"
+        >
+          <Text style={styles.actionButtonText}>إرسال واتساب</Text>
+        </TouchableOpacity>
+      </View>
+
+      {/* Favorite button */}
+      {onToggleFavorite && (
+        <TouchableOpacity
+          testID="favorite-button"
+          style={[
+            styles.actionButton,
+            styles.favoriteButton,
+            isFavorite && styles.favoriteButtonActive,
+          ]}
+          onPress={onToggleFavorite}
+          activeOpacity={0.7}
+          accessibilityLabel={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+          accessibilityRole="button"
+          accessibilityState={{ selected: isFavorite }}
+        >
+          <Text style={styles.favoriteButtonText}>
+            {isFavorite ? '⭐ إزالة من المفضلة' : '☆ إضافة للمفضلة'}
+          </Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    gap: SPACING.md,
+  },
   twoButtonContainer: {
     flexDirection: 'row',
     gap: SPACING.md,
@@ -84,6 +117,23 @@ const styles = StyleSheet.create({
   shareButton: {
     backgroundColor: '#25D366',
   },
+  favoriteButton: {
+    backgroundColor: COLORS.surface,
+    borderWidth: 2,
+    borderColor: '#FFB800',
+    minHeight: 60,
+  },
+  favoriteButtonActive: {
+    backgroundColor: '#FFF8E1',
+    borderColor: '#FFB800',
+  },
+  favoriteButtonText: {
+    fontSize: FONT_SIZES.md,
+    fontWeight: '600',
+    color: '#B8860B',
+    textAlign: 'center',
+  },
 });
 
-export default PhraseActionButtons;
+// Memoize to prevent re-renders when props haven't changed
+export default memo(PhraseActionButtons);

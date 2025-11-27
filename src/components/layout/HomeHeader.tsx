@@ -7,8 +7,6 @@ const HomeHeader: React.FC = () => {
     <View style={styles.headerContainer}>
       <View style={styles.titleRow}>
         <Text style={styles.arabicTitle}>قول</Text>
-        <View style={styles.divider} />
-        <Text style={styles.englishTitle}>Oul</Text>
       </View>
       <Text style={styles.tagline}>Say what you need</Text>
     </View>
@@ -28,7 +26,7 @@ const styles = StyleSheet.create({
     marginBottom: SPACING.xs,
   },
   arabicTitle: {
-    fontFamily: FONTS.bold,
+    fontFamily: 'sans-serif', // Use system font temporarily
     fontSize: FONT_SIZES.xxl,
     fontWeight: '700',
     color: COLORS.text,

@@ -1,0 +1,21 @@
+appId: com.oul
+---
+# Test Audio Playback Indicator - Manual Verification Guide
+# This test helps verify the audio playback indicator manually
+
+- launchApp
+
+# Wait for app to load
+- waitForAnimationToEnd
+
+# Manual Test Steps:
+# 1. Tap on the first blue button (Basic Needs)
+# 2. Tap on any phrase (e.g., water)
+# 3. In the bottom sheet, tap the play button
+# 4. Verify that a blue indicator appears in the top-right with "Playing..." text
+# 5. Wait for audio to finish and verify the indicator disappears
+
+# The test will wait for you to perform these steps manually
+- extendedWaitUntil:
+    visible: false
+    timeout: 30000

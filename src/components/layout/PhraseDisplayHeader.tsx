@@ -1,15 +1,37 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { COLORS, SPACING } from '../../constants';
+import { DynamicIcon } from '../ui/DynamicIcon';
+import type { IconDefinition } from '../../types/phrase.types';
 
 interface PhraseDisplayHeaderProps {
-  icon?: string;
+  icon?: IconDefinition | string; // Support both new and legacy format during migration
 }
 
 const PhraseDisplayHeader: React.FC<PhraseDisplayHeaderProps> = ({ icon }) => {
   return (
     <View style={styles.header}>
-      {icon && <Text style={styles.icon}>{icon}</Text>}
+      {icon && (
+        typeof icon === 'string' ? (
+          // Legacy emoji fallback
+          <DynamicIcon
+            library="MaterialCommunityIcons"
+            name="emoticon"
+            size={64}
+            color={COLORS.text}
+            fallback={icon}
+          />
+        ) : (
+          // New icon library format
+          <DynamicIcon
+            library={icon.library}
+            name={icon.name}
+            size={64}
+            color={COLORS.text}
+            fallback={icon.fallback}
+          />
+        )
+      )}
     </View>
   );
 };

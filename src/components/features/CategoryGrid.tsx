@@ -50,6 +50,17 @@ const CategoryGrid: React.FC = () => {
           highContrast={highContrast}
         />
       </View>
+
+      <View style={styles.buttonRowCentered}>
+        <BigButton
+          title="عائلة"
+          icon="❤️"
+          color={COLORS.family}
+          onPress={() => navigation.navigate('Family')}
+          size={buttonSize}
+          highContrast={highContrast}
+        />
+      </View>
     </View>
   );
 };
@@ -66,6 +77,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
     gap: SPACING.lg,
+  },
+  buttonRowCentered: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
   },
 });
 

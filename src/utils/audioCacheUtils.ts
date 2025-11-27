@@ -1,14 +1,12 @@
-import Sound from 'react-native-sound';
-
 export class AudioCacheManager {
-  private cache: Map<string, Sound> = new Map();
+  private cache: Map<string, any> = new Map();
 
-  get(audioFile: string): Sound | undefined {
+  get(audioFile: string): any | undefined {
     return this.cache.get(audioFile);
   }
 
-  set(audioFile: string, sound: Sound): void {
-    this.cache.set(audioFile, sound);
+  set(audioFile: string, track: any): void {
+    this.cache.set(audioFile, track);
   }
 
   has(audioFile: string): boolean {
@@ -20,10 +18,8 @@ export class AudioCacheManager {
   }
 
   clear(): void {
-    this.cache.forEach(sound => {
-      sound.release();
-    });
     this.cache.clear();
+    // TrackPlayer handles caching automatically
   }
 
   size(): number {
@@ -31,10 +27,8 @@ export class AudioCacheManager {
   }
 
   releaseAll(): void {
-    this.cache.forEach(sound => {
-      sound.release();
-    });
     this.cache.clear();
+    // TrackPlayer handles caching automatically
   }
 }
 

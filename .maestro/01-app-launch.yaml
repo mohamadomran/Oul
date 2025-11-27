@@ -1,0 +1,13 @@
+appId: com.oul
+---
+# Test: App Launch and Home Screen
+# Verifies that the app launches successfully and displays all category buttons
+
+- launchApp
+- assertVisible: "قول" # App title/logo
+- assertVisible: "احتياجات أساسية" # Basic Needs in Arabic
+- assertVisible: "Basic Needs" # Basic Needs in English
+- assertVisible: "مشاعر" # Emotions
+- assertVisible: "محادثة" # Conversation
+- assertVisible: "ألم" # Pain
+- assertVisible: "عائلة" # Family (if visible on home screen)

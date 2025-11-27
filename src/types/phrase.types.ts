@@ -1,23 +1,30 @@
 export type Language = 'ar' | 'en' | 'fr';
 
 export type PhraseCategory =
-  | 'BasicNeeds'
-  | 'Pain'
-  | 'Emotions'
-  | 'Conversation'
-  | 'Custom';
+  | 'basic_needs'
+  | 'pain'
+  | 'emotions'
+  | 'conversation'
+  | 'family'
+  | 'custom';
 
 export type PainIntensity = 'light' | 'moderate' | 'severe';
+
+export interface IconDefinition {
+  library: 'Ionicons' | 'MaterialCommunityIcons' | 'FontAwesome5' | 'MaterialIcons';
+  name: string;
+  fallback: string;
+}
 
 export interface Phrase {
   id: string;
   arabicText: string;
-  englishText?: string;
-  icon: string;
+  englishText: string;
+  icon: IconDefinition;
   color: string;
   audioFile: string;
-  language: Language;
-  category: PhraseCategory;
+  category?: PhraseCategory;
+  language?: Language;
   subcategory?: string;
 }
 

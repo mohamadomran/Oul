@@ -9,6 +9,7 @@ export const COLORS = {
   pain: '#C9594C', // Soft coral-red - easier on eyes
   emotions: '#F39C12', // Orange - warm, friendly
   conversation: '#27AE60', // Green - positive, encouraging
+  family: '#E91E63', // Pink - warm, loving
   custom: '#9B59B6', // Purple - creative
   settings: '#34495E', // Dark gray - neutral
 
@@ -58,6 +59,7 @@ export const CATEGORY_COLORS = {
   Pain: COLORS.pain,
   Emotions: COLORS.emotions,
   Conversation: COLORS.conversation,
+  Family: COLORS.family,
   Custom: COLORS.custom,
 } as const;
 

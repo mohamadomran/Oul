@@ -15,56 +15,76 @@ import { PhraseActionButtons, PhraseDisplayHeader } from '../index';
 const PhraseActionBottomSheet = forwardRef<
   PhraseActionBottomSheetRef,
   PhraseActionBottomSheetProps
->(({ icon, onPlay, onShare, onClose, isPlaying = false }, ref) => {
-  const [visible, setVisible] = useState(false);
+>(
+  (
+    {
+      icon,
+      onPlay,
+      onShare,
+      onToggleFavorite,
+      onClose,
+      isPlaying = false,
+      isFavorite = false,
+    },
+    ref,
+  ) => {
+    const [visible, setVisible] = useState(false);
 
-  const snapToIndex = useCallback((index: number) => {
-    if (index >= 0) {
-      setVisible(true);
-    } else {
+    const snapToIndex = useCallback((index: number) => {
+      if (index >= 0) {
+        setVisible(true);
+      } else {
+        setVisible(false);
+      }
+    }, []);
+
+    const close = useCallback(() => {
       setVisible(false);
-    }
-  }, []);
+      onClose();
+    }, [onClose]);
 
-  const close = useCallback(() => {
-    setVisible(false);
-    onClose();
-  }, [onClose]);
+    useImperativeHandle(ref, () => ({
+      snapToIndex,
+      close,
+    }));
 
-  useImperativeHandle(ref, () => ({
-    snapToIndex,
-    close,
-  }));
+    const handleBackdropPress = useCallback(() => {
+      close();
+    }, [close]);
 
-  const handleBackdropPress = useCallback(() => {
-    close();
-  }, [close]);
+    const { height } = Dimensions.get('window');
 
-  const { height } = Dimensions.get('window');
-
-  return (
-    <Modal
-      visible={visible}
-      transparent={true}
-      animationType="slide"
-      onRequestClose={close}
-    >
-      <Pressable style={styles.backdrop} onPress={handleBackdropPress}>
+    return (
+      <Modal
+        visible={visible}
+        transparent={true}
+        animationType="slide"
+        onRequestClose={close}
+      >
         <Pressable
-          style={[styles.modalContainer, { maxHeight: height * 0.7 }]}
-          onPress={e => e.stopPropagation()}
+          testID="bottom-sheet-backdrop"
+          style={styles.backdrop}
+          onPress={handleBackdropPress}
         >
-          <PhraseDisplayHeader icon={icon} />
-          <PhraseActionButtons
-            onPlay={onPlay}
-            onShare={onShare}
-            isPlaying={isPlaying}
-          />
+          <Pressable
+            testID="bottom-sheet-content"
+            style={[styles.modalContainer, { maxHeight: height * 0.7 }]}
+            onPress={e => e.stopPropagation()}
+          >
+            <PhraseDisplayHeader icon={icon} />
+            <PhraseActionButtons
+              onPlay={onPlay}
+              onShare={onShare}
+              onToggleFavorite={onToggleFavorite}
+              isPlaying={isPlaying}
+              isFavorite={isFavorite}
+            />
+          </Pressable>
         </Pressable>
-      </Pressable>
-    </Modal>
-  );
-});
+      </Modal>
+    );
+  },
+);
 
 PhraseActionBottomSheet.displayName = 'PhraseActionBottomSheet';
 

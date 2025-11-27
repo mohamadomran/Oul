@@ -6,6 +6,7 @@ export type RootStackParamList = {
   PainLocation: undefined;
   Emotions: undefined;
   Conversation: undefined;
+  Family: undefined;
   CustomPhrases: undefined;
   Settings: undefined;
   Favorites: undefined;
@@ -30,6 +31,10 @@ export type EmotionsScreenProps = NativeStackScreenProps<
 export type ConversationScreenProps = NativeStackScreenProps<
   RootStackParamList,
   'Conversation'
+>;
+export type FamilyScreenProps = NativeStackScreenProps<
+  RootStackParamList,
+  'Family'
 >;
 export type CustomPhrasesScreenProps = NativeStackScreenProps<
   RootStackParamList,

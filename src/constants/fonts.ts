@@ -11,10 +11,10 @@ export const FONTS = {
   medium: 'IBMPlexSansArabic-Medium',
   semiBold: 'IBMPlexSansArabic-SemiBold',
   bold: 'IBMPlexSansArabic-Bold',
-
-  // Font family name for fontFamily property
-  family: 'IBMPlexSansArabic',
 } as const;
+
+// Font family name for fontFamily property
+export const FONT_FAMILY = 'IBMPlexSansArabic';
 
 /**
  * Font weight mapping for IBM Plex Sans Arabic font
@@ -33,6 +33,6 @@ export const FONT_WEIGHTS = {
  * @returns Font style object with fontFamily and fontWeight
  */
 export const getFontStyle = (weight: keyof typeof FONTS = 'regular') => ({
-  fontFamily: FONTS[weight],
+  fontFamily: FONT_FAMILY,
   fontWeight: FONT_WEIGHTS[weight],
 });

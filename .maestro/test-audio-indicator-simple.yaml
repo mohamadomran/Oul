@@ -1,0 +1,35 @@
+appId: com.oul
+---
+# Test Audio Playback Indicator - Simplified
+# This test verifies that the audio playback indicator appears
+
+- launchApp
+
+# Wait for app to load
+- waitForAnimationToEnd
+
+# Navigate to Basic Needs screen (using Arabic text)
+- tapOn: 'احتياجات أساسية'
+- waitForAnimationToEnd
+
+# Tap on first phrase (water)
+- tapOn: 'أَحْتَاجُ مَاء'
+- waitForAnimationToEnd
+
+# Wait for bottom sheet to appear
+- assertVisible: 'I need water'
+
+# Verify play button is visible
+- assertVisible:
+    id: 'play-button'
+
+# Tap play button to start audio playback
+- tapOn:
+    id: 'play-button'
+
+# Verify audio playback indicator appears
+- assertVisible:
+    id: 'audio-playback-indicator'
+
+# Test completed successfully if indicator is visible
+- waitForAnimationToEnd

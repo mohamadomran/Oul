@@ -24,7 +24,6 @@ export type {
 
 // Service types
 export type {
-  AudioServiceInterface,
   HapticServiceInterface,
   StorageServiceInterface,
   ShareServiceInterface,

@@ -1,0 +1,27 @@
+# Maestro Configuration for Oul App
+# Global settings that apply to all test flows
+
+# App identifier
+appId: com.oul
+
+# Default platform (can be overridden per test)
+platform: ANDROID
+
+# Global environment variables
+env:
+  APP_NAME: "Oul"
+  TEST_TIMEOUT: 30000
+
+# Flow execution settings
+flowSettings:
+  # Fail fast on first error
+  failFast: false
+
+  # Continue on non-critical errors
+  continueOnFailure: false
+
+  # Default timeout for assertions (milliseconds)
+  defaultTimeout: 10000
+
+  # Screenshot on failure
+  screenshotOnFailure: true

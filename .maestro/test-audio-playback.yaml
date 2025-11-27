@@ -1,0 +1,77 @@
+appId: com.oul
+---
+# Test Audio Playback Indicator
+# This test verifies that audio playback indicator appears and disappears correctly
+
+- launchApp
+
+# Navigate to Basic Needs screen
+- tapOn: 'احتياجات أساسية'
+- waitForAnimationToEnd
+
+# Wait for the screen to load
+- assertVisible: 'أَحْتَاجُ مَاء'
+
+# Tap on first phrase (water)
+- tapOn:
+    text: 'أَحْتَاجُ مَاء'
+- waitForAnimationToEnd
+
+# Wait for bottom sheet to appear
+- assertVisible: 'I need water'
+- assertVisible: '💧'
+
+# Verify play button is visible
+- assertVisible:
+    id: 'play-button'
+
+# Tap play button to start audio playback
+- tapOn:
+    id: 'play-button'
+
+# Verify audio playback indicator appears
+- assertVisible:
+    id: 'audio-playback-indicator'
+
+# Wait a moment for indicator to be fully visible
+- waitForAnimationToEnd
+
+# Verify the "Playing..." text is visible
+- assertVisible: 'Playing...'
+
+# Wait for audio to finish by pressing back to close bottom sheet
+- pressKey: 'back'
+- waitForAnimationToEnd
+
+# Verify we're back to the main screen
+- assertVisible: 'أَحْتَاجُ مَاء'
+
+# Tap on the first phrase (water)
+- tapOn: 'ماء'
+- waitForAnimationToEnd
+
+# Wait for bottom sheet to appear
+- assertVisible: 'ماء'
+- assertVisible: 'Water'
+
+# Verify the play button is visible
+- assertVisible: 'play-button'
+
+# Tap the play button to start audio playback
+- tapOn: 'play-button'
+
+# Verify the audio playback indicator appears
+- assertVisible: 'audio-playback-indicator'
+
+# Wait a moment for the indicator to be fully visible
+- waitForAnimationToEnd
+
+# Verify the "Playing..." text is visible
+- assertVisible: 'Playing...'
+
+# Wait for audio to finish by pressing back to close bottom sheet
+- pressKey: 'back'
+- waitForAnimationToEnd
+
+# Verify we're back to the main screen
+- assertVisible: 'احتياجات أساسية'

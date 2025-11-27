@@ -3,7 +3,7 @@ import { View, ScrollView, StyleSheet, Alert, StatusBar, TouchableOpacity, Text 
 import type { SettingsScreenProps } from '../types';
 import { COLORS, SPACING, FONT_SIZES, FONTS } from '../constants';
 import type { FontSize, ButtonSize, ShareMethod } from '../types/settings.types';
-import AudioService from '../services/AudioService';
+import JsonAudioService from '../services/JsonAudioService';
 import HapticService from '../services/HapticService';
 import { useSettings } from '../contexts/SettingsContext';
 import {
@@ -49,26 +49,12 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
   };
 
   const handleClearAudioCache = () => {
-    const cacheSize = AudioService.getCacheSize();
+    const cacheSize = JsonAudioService.getCacheSize();
 
     Alert.alert(
-      'Clear Audio Cache',
-      `This will clear ${cacheSize} cached audio file${cacheSize !== 1 ? 's' : ''}. Audio may take longer to load next time.`,
-      [
-        { text: 'Cancel', style: 'cancel' },
-        {
-          text: 'Clear',
-          onPress: () => {
-            try {
-              AudioService.releaseAll();
-              Alert.alert('Success', 'Audio cache cleared successfully');
-            } catch (error) {
-              console.error('Error clearing audio cache:', error);
-              Alert.alert('Error', 'Failed to clear audio cache');
-            }
-          },
-        },
-      ]
+      'Audio Cache Info',
+      `Currently caching ${cacheSize} audio file${cacheSize !== 1 ? 's' : ''}. Cache is managed automatically and cleared when app restarts.`,
+      [{ text: 'OK' }]
     );
   };
 

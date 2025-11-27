@@ -1,0 +1,47 @@
+appId: com.oul
+---
+# Test: Basic Needs Category Flow
+# Tests navigation to Basic Needs and phrase interaction
+
+- launchApp
+- tapOn: "احتياجات أساسية" # Basic Needs in Arabic
+
+# Verify category screen loaded
+- assertVisible: "أَحْتَاجُ مَاء" # I need water
+- assertVisible: "أَحْتَاجُ طَعَام" # I need food
+- assertVisible: "بِدِّي رُوح عَ الحَمَّام" # I need bathroom
+
+# Test phrase interaction - tap on "Water"
+- tapOn:
+    text: "أَحْتَاجُ مَاء"
+
+# Bottom sheet should appear
+- assertVisible: "I need water" # English translation
+- assertVisible: "💧" # Water icon/emoji
+
+# Test Play button (if visible by text or accessibility)
+# Note: Audio playback can't be verified by Maestro, but we can verify button press
+- tapOn:
+    id: "play-button" # Assuming you have testID on play button
+
+# Wait for audio to play
+- waitForAnimationToEnd
+
+# Test Share button
+- tapOn:
+    id: "share-button" # Assuming you have testID on share button
+
+# Close bottom sheet by tapping outside or close button
+- tapOn:
+    id: "close-button"
+
+# Or swipe down to close if using swipeable bottom sheet
+- swipe:
+    direction: DOWN
+
+# Verify back on category screen
+- assertVisible: "أَحْتَاجُ مَاء"
+
+# Navigate back to home
+- back
+- assertVisible: "قول"

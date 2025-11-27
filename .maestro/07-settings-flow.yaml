@@ -1,0 +1,54 @@
+appId: com.oul
+---
+# Test: Settings Screen Flow
+# Tests settings navigation and preference changes
+
+- launchApp
+
+# Navigate to Settings (assuming there's a settings icon/button)
+# You may need to adjust this based on actual UI implementation
+- tapOn:
+    id: "settings-button"
+    # Or use text: "Settings" / "إعدادات" if it's a text button
+
+# Verify settings screen loaded
+- assertVisible: "Font Size" # English labels
+- assertVisible: "Button Size"
+- assertVisible: "Haptic Feedback"
+- assertVisible: "High Contrast Mode"
+
+# Test font size changes
+- tapOn:
+    text: "Small"
+- assertVisible: "Small" # Verify selection
+
+- tapOn:
+    text: "Medium"
+- assertVisible: "Medium"
+
+- tapOn:
+    text: "Large"
+- assertVisible: "Large"
+
+# Test button size changes
+# Similar pattern for button size options
+
+# Test haptic feedback toggle
+- tapOn:
+    id: "haptic-feedback-toggle"
+
+# Test high contrast mode toggle
+- tapOn:
+    id: "high-contrast-toggle"
+
+# Navigate back to home
+- back
+- assertVisible: "قول"
+
+# Verify settings persisted by going back to settings
+- tapOn:
+    id: "settings-button"
+# Could verify that Large font size is still selected
+- assertVisible: "Large"
+
+- back

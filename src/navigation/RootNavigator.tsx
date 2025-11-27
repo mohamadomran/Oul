@@ -8,6 +8,7 @@ import {
   PainLocationScreen,
   EmotionsScreen,
   ConversationScreen,
+  FamilyScreen,
   CustomPhrasesScreen,
   SettingsScreen,
   FavoritesScreen,
@@ -68,6 +69,14 @@ const RootNavigator: React.FC = () => {
         <Stack.Screen
           name="Conversation"
           component={ConversationScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+
+        <Stack.Screen
+          name="Family"
+          component={FamilyScreen}
           options={{
             headerShown: false,
           }}
